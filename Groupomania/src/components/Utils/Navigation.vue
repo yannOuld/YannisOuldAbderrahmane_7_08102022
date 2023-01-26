@@ -35,8 +35,9 @@ import { useRouter } from "vue-router";
 export default {
   name: "NavigationLinks",
   setup() {
-    // store and router
+    //call store data and router
     const { userData } = useAuthStore();
+    const { user } = userData;
     const { logout } = useAuthStore();
     const router = useRouter();
 
@@ -49,7 +50,7 @@ export default {
     const profil = () => {
       router.push({
         name: "ProfilView",
-        params: { uuid: userData.user.uuid },
+        params: { uuid: user.uuid },
       });
     };
 

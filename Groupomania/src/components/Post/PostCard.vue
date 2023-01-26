@@ -55,8 +55,10 @@ const { user } = userData;
 let identification = ref(null);
 identification.value = user.uuid;
 
-// router link for Post view
+// call router 
 const router = useRouter();
+
+// router link 
 const postPage = () => {
   router.push({
     name: "PostView",
@@ -64,8 +66,10 @@ const postPage = () => {
   });
 };
 
-// deleting the post functionnality
+// call post store 
 const { deletePost } = usePostStore();
+
+// delete post function
 const deleteOnePost = async (uuid) => {
   return await deletePost(uuid);
 };

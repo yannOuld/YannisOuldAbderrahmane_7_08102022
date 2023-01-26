@@ -7,9 +7,9 @@ import Plugin from './utils/Plugin';
 
 import { library } from '@fortawesome/fontawesome-svg-core';
 import { FontAwesomeIcon } from '@fortawesome/vue-fontawesome';
-import { faPenToSquare, faHouse, faUser, faArrowRightFromBracket, faKey, faGear, faCircleXmark, faThumbsUp, faMessage, faCamera } from '@fortawesome/free-solid-svg-icons';
+import { faPenToSquare, faHouse, faUser, faArrowRightFromBracket, faKey, faGear, faCircleXmark, faThumbsUp, faMessage, faCamera, faHeart } from '@fortawesome/free-solid-svg-icons';
 
-library.add(faPenToSquare, faCamera, faHouse, faUser, faArrowRightFromBracket, faKey, faGear, faCircleXmark, faThumbsUp, faMessage);
+library.add(faPenToSquare, faCamera, faHouse, faUser, faArrowRightFromBracket, faKey, faGear, faCircleXmark, faThumbsUp, faMessage, faHeart);
 
 const pinia = createPinia();
 pinia.use(createPersistedState({ storage: sessionStorage, }));

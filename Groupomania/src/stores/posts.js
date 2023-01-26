@@ -2,7 +2,6 @@ import router from "../router/index.js";
 import { defineStore } from 'pinia';
 import { fetchWrapper } from '../utils/fetchWrapp';
 
-//import myfetch from '@/utils/fetch';
 
 export const usePostStore = defineStore({
     id: 'post',

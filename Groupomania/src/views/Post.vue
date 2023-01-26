@@ -35,6 +35,8 @@
         :createdAt="post?.createdAt"
         :likesCounter="post?.likesCounter"
       />
+      <like-modal :uuid="post?.uuid" :user_id="user?.id" />
+
       <div v-if="mode.state == 'modify'">
         <post-modify :uuid="uuid" />
       </div>
@@ -45,20 +47,24 @@
 </template>
 
 <script>
+import Comments from "../components/Comment/Comments.vue";
+import CommentForm from "../components/Comment/CommentForm.vue";
+import PostModify from "../components/Post/PostModify.vue";
 import { useRoute } from "vue-router";
 import { reactive, defineAsyncComponent } from "vue";
 import { storeToRefs } from "pinia";
 import { usePostStore } from "../stores/posts";
 import { useAuthStore } from "../stores/auth";
-import CommentForm from "../components/Comment/CommentForm.vue";
-import Comments from "../components/Comment/Comments.vue";
-import PostModify from "../components/Post/PostModify.vue";
 
 export default {
   name: "PostView",
   components: {
     PostCard: defineAsyncComponent({
       loader: () => import("../components/Post/PostCard.vue"),
+      delay: 1000,
+    }),
+    LikeModal: defineAsyncComponent({
+      loader: () => import("../components/Like/LikeModal.vue"),
       delay: 1000,
     }),
     Comments,
