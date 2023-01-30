@@ -1,36 +1,33 @@
 <template>
-  <form
-    enctype="multipart/form-data"
-    @submit.prevent="submit()"
-    class="paper flex column"
-  >
-    <h1 v-once>Modifier le profil</h1>
+  <form enctype="multipart/form-data" @submit.prevent="submit()" class=".form">
+    <div class="form-group">
+      <h2 v-once>Modifier le profil</h2>
+      <div class="form-group">
+        <base-input
+          label="image"
+          type="file"
+          name="profil-img"
+          id="profil-img"
+          accept="image/png, image/jpeg, image/bmp, image/gif"
+          @change="handleFileUpload"
+        ></base-input>
+      </div>
 
-    <div class="form-group profil-pic">
-      <label for="img"> choisir une image de profil</label>
-      <input
-        type="file"
-        name="profil-pic"
-        id="profil-pic"
-        accept="image/png, image/jpeg, image/bmp, image/gif, image/jpg"
-        @change="handleFileUpload"
-      />
+      <div class="form-group">
+        <base-textarea
+          label="votre biographie"
+          v-model="biography"
+          placeholder="Ecrivez quelque chose"
+          rows="5"
+          cols="55"
+          maxlength="500"
+          id="biography"
+          name="biography"
+        ></base-textarea>
+      </div>
+
+      <button class="btn" aria-label="bouton Enregistrer">Enregistrer</button>
     </div>
-
-    <div class="form-group biography">
-      <label for="biography">Bio</label>
-      <textarea
-        v-model="biography"
-        placeholder="Ecrivez quelque chose"
-        rows="5"
-        cols="55"
-        maxlength="500"
-        id="biography"
-        name="biography"
-      ></textarea>
-    </div>
-
-    <button class="btn" aria-label="bouton Enregistrer">Enregistrer</button>
 
     <div class="modal" v-if="isOpen">
       <p class="error">{{ msgErr }}</p>
@@ -119,47 +116,15 @@ export default {
 </script>
 
 <style scoped>
-.flex {
-  display: flex;
-}
-textarea {
-  width: 300px;
-  resize: none;
-}
-.column {
-  flex-direction: column;
+.form {
+  @apply flex  border-none flex-col justify-center items-center mx-auto text-white w-11/12 hover:shadow-2xl hover:shadow-red-900;
 }
 
-form {
-  width: 400px;
-}
-.paper {
-  background-color: antiquewhite;
-  align-items: center;
-  border-radius: 15px;
-  font-size: 20px;
-  width: 80vw;
-  height: 80vh;
-  position: relative;
-  padding: auto;
-  margin: auto;
-}
-.profil-pic {
-  width: 250px;
-  border-radius: 100%;
-}
-
-input {
-  margin: 5px 0;
-}
 .form-group {
-  display: flex;
-  margin: 5px auto;
-  flex-direction: column;
+  @apply flex flex-col mt-2 mx-auto;
 }
 
-img {
-  width: 250px;
-  height: 250px;
+.btn {
+  @apply mx-auto my-5 py-1 px-2 rounded-md bg-white font-bold text-base cursor-pointer hover:-translate-y-1 hover:scale-90 hover:bg-gray-300 duration-300;
 }
 </style>

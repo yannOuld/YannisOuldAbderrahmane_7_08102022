@@ -1,17 +1,24 @@
 <template>
-  <div class="root">
-    <button @click="isOpen = true">Likes</button>
-    <div @click="sendLike">
-      <font-awesome-icon icon="fa-solid fa-heart" />
+  <div class="relative">
+    <div class="likes">
+      <button class="likes--show" @click="isOpen = true">
+        Likes utilisateurs
+      </button>
+      <div class="likes--btn" @click="sendLike">
+        <p>
+          cliquez ici pour liker !
+          <font-awesome-icon icon="fa-solid fa-heart" />
+        </p>
+      </div>
     </div>
     <teleport to="body">
       <div class="modal" v-if="isOpen">
         <div class="modal--content">
           <h2>Personnes qui ont aimés le post.</h2>
-          <div v-for="like in likes.value" :key="like">
-            <p>{{ like.user.firstName }}</p>
+          <div v-for="like in likes" :key="like">
+            <p>{{ like.user.firstName }} {{ like.user.lastName }}</p>
           </div>
-          <button @click="isOpen = false">quitter</button>
+          <button class="modal--btn" @click="isOpen = false">quitter</button>
         </div>
       </div>
     </teleport>
@@ -20,7 +27,7 @@
 
 <script setup>
 import { storeToRefs } from "pinia";
-import { ref, defineProps } from "vue";
+import { ref, defineProps, onMounted } from "vue";
 import { useLikeStore } from "../../stores/like";
 
 // props from parent component
@@ -44,9 +51,13 @@ const isOpen = ref(false);
 const { getLikes, LikePost } = useLikeStore();
 
 // getting users who liked the post
-getLikes(props.uuid);
+onMounted(() => {
+  getLikes(props.uuid);
+});
+
 const { likes } = storeToRefs(useLikeStore());
-console.log(likes);
+console.log(likes.value);
+
 const data = {
   user_id: props.user_id,
 };
@@ -58,25 +69,22 @@ const sendLike = async () => {
 </script>
 
 <style scoped>
-.root {
-  position: relative;
-}
 .modal {
-  position: absolute;
-  top: 0;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  display: flex;
-  background-color: rgba(0, 0, 0, 0.1);
-  width: 100%;
-  height: 200vh;
-  justify-content: center;
-  align-items: center;
+  @apply absolute top-0 left-0 right-0 bottom-0 flex justify-center items-center w-screen h-screen bg-slate-400 bg-opacity-50;
 }
 .modal--content {
-  background-color: #fff;
-  padding: 50px;
-  border-radius: 10px;
+  @apply flex flex-col justify-center items-center mx-auto bg-white p-12 rounded-xl blur-0;
+}
+.modal--btn {
+  @apply w-36;
+}
+.likes {
+  @apply flex justify-evenly items-center mx-auto w-2/4;
+}
+.likes--show {
+  @apply flex justify-center items-center  cursor-pointer hover:-translate-y-1 hover:scale-90 hover:bg-gray-300 duration-300;
+}
+.likes--btn {
+  @apply cursor-pointer hover:-translate-y-1 hover:scale-125 hover:text-red-600 duration-300;
 }
 </style>

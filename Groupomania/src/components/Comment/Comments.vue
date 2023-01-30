@@ -1,6 +1,6 @@
 <template>
   <section>
-    <h2>Commentaires</h2>
+    <h2 class="text-center">Commentaires</h2>
     <div v-for="comment in comments" :key="comment">
       <CommentCard :comment="comment" />
     </div>
@@ -11,6 +11,7 @@
 import { useRoute } from "vue-router";
 import { storeToRefs } from "pinia";
 import { useCommentStore } from "../../stores/comment.js";
+import { onMounted } from "vue";
 import CommentCard from "./Comment.vue";
 
 // finding uuid of the post
@@ -19,14 +20,10 @@ const uuid = route.params.uuid;
 
 // fetch API corresponding comments to the store
 const { fetchComments } = useCommentStore();
-fetchComments(uuid);
+onMounted(() => {
+  fetchComments(uuid);
+});
 
 // retrieving comments data from the store
 const { comments } = storeToRefs(useCommentStore());
 </script>
-
-<style scoped>
-h2 {
-  text-align: center;
-}
-</style>

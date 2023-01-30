@@ -1,9 +1,9 @@
 <template>
   <div>
-    <header class="navigation">
-      <navigation-links></navigation-links>
-    </header>
+    <navigation-links></navigation-links>
+
     <main class="container">
+      <!-- Post component -->
       <post-card
         :uuid="post?.uuid"
         :content="post?.content"
@@ -13,7 +13,10 @@
         :createdAt="post?.createdAt"
         :likesCounter="post?.likesCounter"
       />
+      <like-modal :uuid="post?.uuid" :user_id="user?.id" />
+
       <div class="post-utils" v-if="user?.uuid == post?.owner.uuid">
+        <!--show modifyPost form button -->
         <button
           v-if="mode.state == 'read'"
           @click="switchModify()"
@@ -23,21 +26,24 @@
           <span class="btn-txt"> modifier le post </span>
           <font-awesome-icon icon="fa-solid fa-pen-to-square" />
         </button>
-        <button @click="suppPost()" class="delete" aria-label="supprimer">
-          <span class="btn-txt"> supprimer le post </span>
-          <font-awesome-icon icon="fa-solid fa-circle-xmark" />
-        </button>
 
+        <!-- Hide modifyPost form button -->
         <button
           v-if="mode.state == 'modify'"
           @click="switchRead()"
           class="modify"
           aria-label="retour modifications"
         >
-          <font-awesome-icon icon="fa-solid fa-pen-to-square" />
+          fermer
         </button>
-        <like-modal :uuid="post?.uuid" :user_id="user?.id" />
+
+        <!-- delete post button -->
+        <button @click="suppPost()" class="delete" aria-label="supprimer">
+          <span class="btn-txt"> supprimer le post </span>
+          <font-awesome-icon icon="fa-solid fa-circle-xmark" />
+        </button>
       </div>
+      <!-- like component -->
 
       <div v-if="mode.state == 'modify'">
         <post-modify :uuid="uuid" />
@@ -121,16 +127,16 @@ export default {
 
 <style scoped>
 .post-utils {
-  @apply bg-red-600 rounded-lg mx-auto my-5 w-3/4 flex flex-row justify-evenly items-center;
+  @apply rounded-lg mx-auto my-5 w-3/4 p-4 flex flex-row justify-evenly items-center bg-slate-600 bg-opacity-80 shadow-md shadow-black;
 }
 
 .delete,
 .modify {
-  @apply cursor-pointer border-transparent text-lg bg-white;
+  @apply flex cursor-pointer border-transparent justify-center  bg-white w-6 sm:w-60 h-4 text-base items-center;
 }
 
 .btn-txt {
-  @apply hidden sm:flex sm:flex-row;
+  @apply hidden sm:flex sm:flex-row sm:mr-2;
 }
 .delete {
   @apply text-red-600;

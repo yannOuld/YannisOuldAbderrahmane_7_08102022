@@ -5,22 +5,22 @@
         v-if="comment?.owner.imageUrl == null"
         src="../../assets/images/icon.webP"
         alt="image de l'auteur"
-        class="user-img"
+        class="user--img"
       />
       <img
         v-if="comment.owner.imageUrl != null"
         :src="comment.owner.imageUrl"
         alt="image de l'auteur"
-        class="user-img"
+        class="user--img"
       />
-      <h2 class="owner">
+      <h2 class="user--name">
         {{ comment?.owner.firstName }} {{ comment?.owner.lastName }}
       </h2>
     </div>
-    <p class="content">{{ comment?.content }}</p>
-    <p class="date">{{ comment?.createdAt }}</p>
+    <p class="comment--content">{{ comment?.content }}</p>
+    <p class="comment--date">{{ comment?.createdAt }}</p>
     <div v-if="(comment.owner.uuid = user.uuid)">
-      <button class="delete-btn" @click="suppComment()">
+      <button class="comment--delete-btn" @click="suppComment()">
         <font-awesome-icon icon="fa-solid fa-circle-xmark" />
       </button>
     </div>
@@ -39,13 +39,14 @@ export default {
   setup(props) {
     const { comment } = props;
     const uuid = comment.uuid;
+    const id = comment.id;
 
     const { userData } = useAuthStore();
     const { user } = userData;
+
     const { deleteComment } = useCommentStore();
 
     const suppComment = async (uuid, user) => {
-      const id = user.id;
       try {
         await deleteComment(uuid, id);
       } catch (err) {
@@ -68,20 +69,20 @@ export default {
 .user {
   @apply font-bold text-base text-left flex;
 }
-.user-img {
+.user--img {
   @apply w-20 rounded-full border-solid border-black border-4 mr-1;
 }
-.owner {
+.user--name {
   @apply text-lg text-white;
 }
-.content,
-.date {
+.comment--content,
+.comment--date {
   @apply bg-white rounded-2xl p-5;
 }
-.delete-btn {
+.comment--delete-btn {
   @apply absolute bg-white text-red-600 py-1 px-2 rounded-full top-2 right-2 cursor-pointer hover:brightness-50;
 }
-.date {
+.comment--date {
   @apply w-1/3 font-bold m-0 self-end text-center;
 }
 </style>

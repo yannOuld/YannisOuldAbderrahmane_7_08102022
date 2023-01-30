@@ -3,11 +3,17 @@ import { fetchWrapper } from '../utils/fetchWrapp';
 
 
 
+
 export const useLikeStore = defineStore({
     id: 'like',
     state: () => ({
         likes: [],
     }),
+    getters: {
+        mapLikes() {
+            this.likes.map((like) => like + 'hello')
+        },
+    },
 
     actions: {
         async LikePost(uuid, user_uuid) {

@@ -55,7 +55,7 @@ exports.getLikes = async (req, res, next) => {
             post_uuid,
             include: 'user'
         })
-        return res.status(200).json({ likes })
+        return res.status(200).json(likes)
     } catch (err) {
         return res.status(400).json({ err })
     }

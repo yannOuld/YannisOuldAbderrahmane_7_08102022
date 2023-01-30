@@ -64,33 +64,14 @@ export default {
 
 <style scoped>
 .infos {
-  display: flex;
-  flex-direction: column;
-  margin: 60px auto 10px;
-  background-color: antiquewhite;
-  align-items: center;
-  border-radius: 15px;
-  font-size: 20px;
-  width: 80vw;
-  height: 80vh;
-  position: relative;
-  padding: auto;
-  margin: auto;
+  @apply flex flex-col mt-10 mb-16 mx-auto items-center text-base w-10/12 bg-orange-100 rounded-2xl relative;
 }
 
-img {
-  width: 250px;
-  height: 250px;
-  border-radius: 20px;
-}
 h2 {
-  text-align: left;
+  @apply text-left;
 }
 
 .switch-btn {
-  position: absolute;
-  right: 10px;
-  top: 10px;
-  z-index: 2;
+  @apply absolute right-3 top-3 z-20;
 }
 </style>

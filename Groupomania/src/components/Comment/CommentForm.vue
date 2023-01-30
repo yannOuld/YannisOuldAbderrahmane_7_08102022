@@ -57,7 +57,7 @@ export default {
 
 <style scoped>
 .comment-form {
-  @apply bg-red-600 font-extrabold text-white border-transparent flex flex-col justify-center items-center my-3 mx-auto rounded-2xl py-3 w-3/4;
+  @apply bg-red-600 font-extrabold text-white border-transparent flex flex-col justify-center items-center my-3 mx-auto rounded-2xl py-3 w-3/4 shadow-black shadow-lg;
 }
 .btn {
   @apply mx-auto my-5 py-1 px-2 rounded-md bg-white font-bold text-base cursor-pointer hover:-translate-y-1 hover:scale-90 hover:bg-gray-300 duration-300;

@@ -26,6 +26,7 @@
       <div>
         <p>{{ content }}</p>
       </div>
+      <p class="likes--counter">likes: {{ likesCounter }}</p>
     </div>
   </div>
 </template>
@@ -75,7 +76,7 @@ const deleteOnePost = async (uuid) => {
 
 <style scoped>
 .container {
-  @apply bg-red-300 relative rounded-lg p-4 my-8 w-9/12 shadow-lg shadow-red-900;
+  @apply bg-red-300 relative rounded-lg p-4 my-8 w-9/12 shadow-lg shadow-black;
 }
 .post {
   @apply cursor-pointer bg-white relative flex flex-col items-center rounded p-4 w-10/12 mx-auto my-3;
@@ -109,7 +110,14 @@ const deleteOnePost = async (uuid) => {
 .utils {
   @apply absolute bottom-5 right-7;
 }
+.date,
+.likes--counter {
+  @apply font-bold py-0 px-1 rounded bg-white;
+}
 .date {
-  @apply w-1/3 font-bold py-0 px-1 rounded bg-white;
+  @apply w-1/3;
+}
+.likes--counter {
+  @apply w-20 absolute bottom-1 right-3;
 }
 </style>

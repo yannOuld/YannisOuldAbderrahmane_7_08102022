@@ -1,24 +1,31 @@
 <template>
-  <div class="infos">
-    <h1>Profil</h1>
-    <p>{{ author.firstName }} {{ author.lastName }}</p>
+  <div class="profil">
+    <div class="profil-user">
+      <p class="profil-name">{{ author.firstName }} {{ author.lastName }}</p>
 
-    <img
-      v-if="!author.imageUrl"
-      src="../../assets/images/icon.webP"
-      alt="image de profil"
-    />
+      <img
+        v-if="!author.imageUrl"
+        src="../../assets/images/icon.webP"
+        class="profil-img"
+        alt="image de profil"
+      />
 
-    <img v-if="author.imageUrl" :src="author.imageUrl" alt="image de profil" />
+      <img
+        class="profil-img"
+        v-if="author.imageUrl"
+        :src="author.imageUrl"
+        alt="image de profil"
+      />
 
-    <div>
-      <h2 v-once>email:</h2>
-      <p>{{ author.email }}</p>
-    </div>
+      <div>
+        <h2 v-once>email:</h2>
+        <p>{{ author.email }}</p>
+      </div>
 
-    <div>
-      <h2 v-once>Bio:</h2>
-      <p class="description">{{ author.biography }}</p>
+      <div>
+        <h2 v-once>Bio:</h2>
+        <p class="description">{{ author.biography }}</p>
+      </div>
     </div>
   </div>
 </template>
@@ -39,47 +46,16 @@ export default {
 </script>
 
 <style scoped>
-.flex {
-  display: flex;
+.profil {
+  @apply flex flex-col;
 }
-textarea {
-  width: 300px;
-  resize: none;
+.profil-user {
+  @apply py-10;
 }
-.column {
-  flex-direction: column;
+.profil-name {
+  @apply uppercase font-extrabold;
 }
-
-form {
-  width: 400px;
-}
-.paper {
-  background-color: antiquewhite;
-  align-items: center;
-  border-radius: 15px;
-  font-size: 20px;
-  width: 80vw;
-  height: 80vh;
-  position: relative;
-  padding: auto;
-  margin: auto;
-}
-.profil-pic {
-  width: 250px;
-  border-radius: 100%;
-}
-
-input {
-  margin: 5px 0;
-}
-.form-group {
-  display: flex;
-  margin: 5px auto;
-  flex-direction: column;
-}
-
-img {
-  width: 250px;
-  height: 250px;
+.profil-img {
+  @apply w-64 h-64;
 }
 </style>
