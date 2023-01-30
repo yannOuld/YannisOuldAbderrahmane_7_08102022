@@ -36,7 +36,7 @@ exports.getAllComment = async (req, res, next) => {
     const options = {
         where: { post_uuid },
         include: ['owner'],
-        order: [['createdAt', 'ASC']],
+        order: [['createdAt']],
     }
 
     // retrouver tout les commmentaires d'un post avec les options en parametres 

@@ -77,7 +77,7 @@ exports.deletePost = async (req, res, next) => {
         const uuid = req.params.uuid
 
         // retrouver le Post 
-        const post = await Post.findOne({ where: uuid })
+        const post = await Post.findOne({ where: { uuid } })
 
         // supprimé le post
         await post.destroy()
@@ -92,11 +92,7 @@ exports.deletePost = async (req, res, next) => {
 exports.modifyPost = async (req, res, next) => {
     let uuid = req.params.uuid
     const object = JSON.stringify(req.body);
-    const { content, title, owner_id } = JSON.parse(object);
-
-    // vérifier si l'identifiant correspond à un admin 
-    if (owner_id != req.reqdata.user_id) throw new Error('Wrong user');
-
+    const { content, title } = JSON.parse(object);
 
     Post.findOne({ where: { uuid } }).then(
         post => {

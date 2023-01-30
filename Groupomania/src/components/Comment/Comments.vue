@@ -1,7 +1,7 @@
 <template>
   <section>
     <h2>Commentaires</h2>
-    <div v-for="comment in comments" v-bind:key="comment">
+    <div v-for="comment in comments" :key="comment">
       <CommentCard :comment="comment" />
     </div>
   </section>
@@ -13,7 +13,7 @@ import { storeToRefs } from "pinia";
 import { useCommentStore } from "../../stores/comment.js";
 import CommentCard from "./Comment.vue";
 
-// finding uuid of the post 
+// finding uuid of the post
 const route = useRoute();
 const uuid = route.params.uuid;
 

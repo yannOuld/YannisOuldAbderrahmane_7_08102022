@@ -1,15 +1,13 @@
 <template>
-  <form class="form" @submit.prevent="submit()">
+  <form class="comment-form" @submit.prevent="submit()">
     <base-textarea
       label="Commenter le post:"
       v-model="formData.content"
-      rows="6"
-      cols="80"
       maxlength="500"
       id="comment"
       name="comment"
     ></base-textarea>
-    <button>Envoyer</button>
+    <button class="btn">Envoyer</button>
   </form>
 </template>
 
@@ -58,28 +56,10 @@ export default {
 </script>
 
 <style scoped>
-form {
-  text-shadow: -1px 1px 0 #000, 1px 1px 0 #000, 1px -1px 0 #000,
-    -1px -1px 0 #000;
-  color: white;
-  border: 1px solid transparent;
-  background-color: #fd2d01;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
-  margin: 10px auto 0;
-  border-radius: 15px;
-  padding: 10px auto;
+.comment-form {
+  @apply bg-red-600 font-extrabold text-white border-transparent flex flex-col justify-center items-center my-3 mx-auto rounded-2xl py-3 w-3/4;
 }
-
-button {
-  margin: 20px auto;
-  padding: 5px 10px;
-  border-radius: 5px;
-  background-color: white;
-  font-weight: 700;
-  font-size: 15px;
-  cursor: pointer;
+.btn {
+  @apply mx-auto my-5 py-1 px-2 rounded-md bg-white font-bold text-base cursor-pointer hover:-translate-y-1 hover:scale-90 hover:bg-gray-300 duration-300;
 }
 </style>

@@ -1,10 +1,8 @@
 <template>
   <div>
-    <header class="navigation">
-      <navigation-links v-once></navigation-links>
-    </header>
+    <navigation-links v-once></navigation-links>
 
-    <main v-if="mode.state == 'read'">
+    <main class="infos" v-if="mode.state == 'read'">
       <button class="switch-btn" @click="switchModify()">
         modifier <font-awesome-icon icon="fa-solid fa-gear" />
       </button>
@@ -65,12 +63,6 @@ export default {
 </script>
 
 <style scoped>
-.navigation {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
-
 .infos {
   display: flex;
   flex-direction: column;

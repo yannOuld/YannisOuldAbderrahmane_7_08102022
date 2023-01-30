@@ -67,6 +67,7 @@
         <div class="form-group">
           <base-input
             label="confirm password "
+            id="confirm"
             type="password"
             v-model="formData.confirmPassword"
             name="confirm"

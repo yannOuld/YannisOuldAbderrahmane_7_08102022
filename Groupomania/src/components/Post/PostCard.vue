@@ -4,7 +4,7 @@
       <p class="date" aria-labelledby="date">{{ createdAt }}</p>
     </div>
     <div class="post" @click="postPage()">
-      <div class="author">
+      <div class="user">
         <img
           v-if="owner?.imageUrl == null"
           src="../../assets/images/icon.webP"
@@ -19,9 +19,7 @@
         />
         <p class="post-owner">{{ owner?.firstName }} {{ owner?.lastName }}</p>
       </div>
-      <div class="header">
-        <h1>{{ title }}</h1>
-      </div>
+      <h2 class="post-title">{{ title }}</h2>
       <div v-if="imageUrl">
         <img :src="imageUrl" alt="image du post" class="post-img" />
       </div>
@@ -55,10 +53,10 @@ const { user } = userData;
 let identification = ref(null);
 identification.value = user.uuid;
 
-// call router 
+// call router
 const router = useRouter();
 
-// router link 
+// router link
 const postPage = () => {
   router.push({
     name: "PostView",
@@ -66,7 +64,7 @@ const postPage = () => {
   });
 };
 
-// call post store 
+// call post store
 const { deletePost } = usePostStore();
 
 // delete post function
@@ -76,91 +74,42 @@ const deleteOnePost = async (uuid) => {
 </script>
 
 <style scoped>
-h1 {
-  margin: 100px auto 15px;
-}
 .container {
-  background-color: #faa1a1;
-  position: relative;
-  border-radius: 15px;
-  padding: 10px;
-  margin: 20px 0;
-  width: 80vw;
+  @apply bg-red-300 relative rounded-lg p-4 my-8 w-9/12 shadow-lg shadow-red-900;
 }
 .post {
-  cursor: pointer;
-  background-color: white;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  border-radius: 15px;
-  padding: 10px;
-  width: 60vw;
-  margin: 10px auto;
+  @apply cursor-pointer bg-white relative flex flex-col items-center rounded p-4 w-10/12 mx-auto my-3;
 }
-.header {
-  display: flex;
-  justify-content: space-between;
-}
-.author {
-  position: absolute;
-  left: 15px;
-  top: 10px;
-  font-weight: 700;
-  font-size: 18px;
-  text-align: left;
-  display: flex;
-}
-.post-owner {
-  display: flex;
-  align-items: center;
-}
-.user-img {
-  width: 75px;
-  border-radius: 50px;
-  border: 5px solid #faa1a1;
-  margin-right: 5px;
+.post-title {
+  @apply mx-auto mt-8 mb-5 sm:mt-20;
 }
 .post-img {
-  object-fit: fill;
-  border: 1px solid black;
-  width: 700px;
-  height: 450px;
-  width: 550px;
+  @apply object-fill border-black w-40 h-40 sm:w-72 sm:h-72 md:w-96 md:h-72;
+}
+.user {
+  @apply flex absolute left-5 top-2 sm:top-8 h-14 items-center;
+}
+.post-owner {
+  @apply text-sm flex items-center sm:text-base;
+}
+.user-img {
+  @apply w-8 h-8 sm:w-20 sm:h-20 border-solid border-4 border-red-400 rounded-full mr-2;
 }
 .delete,
 .likes {
-  cursor: pointer;
-  border-radius: 100px;
-  padding: 3px 5px;
+  @apply cursor-pointer rounded-full py-1 px-2;
 }
 .delete {
-  color: red;
-  font-size: 40px;
-  position: absolute;
-  top: 30px;
-  right: 40px;
-  background-color: white;
-  border: white 1px solid;
+  @apply text-red-600 absolute top-7 right-9 bg-white border-solid border-white;
 }
+
 .likes {
-  color: black;
-  background: transparent;
-  border: 3px solid black;
-  font-size: 18px;
-  margin: 0 10px;
+  @apply text-black bg-transparent border-solid border-black text-lg my-0 mx-3;
 }
 .utils {
-  position: absolute;
-  bottom: 20px;
-  right: 30px;
+  @apply absolute bottom-5 right-7;
 }
 .date {
-  width: 300px;
-  font-weight: 900;
-  background: white;
-  padding: 1px 5px;
-  border-radius: 10px;
+  @apply w-1/3 font-bold py-0 px-1 rounded bg-white;
 }
 </style>

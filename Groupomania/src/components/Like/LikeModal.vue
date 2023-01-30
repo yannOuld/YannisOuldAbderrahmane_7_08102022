@@ -8,8 +8,8 @@
       <div class="modal" v-if="isOpen">
         <div class="modal--content">
           <h2>Personnes qui ont aimés le post.</h2>
-          <div v-for="like in likes" :key="like.user">
-            <p>{{ like.user }}</p>
+          <div v-for="like in likes.value" :key="like">
+            <p>{{ like.user.firstName }}</p>
           </div>
           <button @click="isOpen = false">quitter</button>
         </div>
@@ -42,11 +42,11 @@ const isOpen = ref(false);
 
 // like store
 const { getLikes, LikePost } = useLikeStore();
-const { likes } = storeToRefs(useLikeStore());
 
 // getting users who liked the post
 getLikes(props.uuid);
-
+const { likes } = storeToRefs(useLikeStore());
+console.log(likes);
 const data = {
   user_id: props.user_id,
 };
@@ -70,7 +70,7 @@ const sendLike = async () => {
   display: flex;
   background-color: rgba(0, 0, 0, 0.1);
   width: 100%;
-  height: 100%;
+  height: 200vh;
   justify-content: center;
   align-items: center;
 }

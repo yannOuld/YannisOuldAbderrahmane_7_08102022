@@ -1,8 +1,7 @@
 <template>
   <div>
-    <header class="navigation">
-      <navigation-links></navigation-links>
-    </header>
+    <navigation-links></navigation-links>
+    <h1>Bienvenue chez Groupomania.</h1>
     <img
       src="../assets/images/icon.webP"
       class="img"
@@ -64,17 +63,8 @@ export default {
 </script>
 
 <style scoped>
-.navigation {
-  width: 100%;
-  display: flex;
-  justify-content: center;
-}
 .img {
-  width: 300px;
-  height: 300px;
-  margin: 0 auto;
-  display: flex;
-  align-items: center;
+  @apply hidden sm:flex mx-auto my-3 w-96;
 }
 h1 {
   text-align: center;

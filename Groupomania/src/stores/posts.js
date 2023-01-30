@@ -48,8 +48,6 @@ export const usePostStore = defineStore({
                 await fetchWrapper.postfile('http://localhost:3000/api/post/', formData)
             } catch (error) {
                 this.error = error
-            } finally {
-                router.replace("/home")
             }
         },
         async deletePost(uuid) {
@@ -58,13 +56,11 @@ export const usePostStore = defineStore({
                 this.post = await fetchWrapper.delete(`http://localhost:3000/api/post/${uuid}`)
             } catch (error) {
                 this.error = error
-            } finally {
-                router.replace("/home")
             }
         },
         async modifyPost(uuid, formData) {
             try {
-                await fetchWrapper.patch(`http://localhost:3000/api/post/${uuid}`, formData)
+                await fetchWrapper.patchfile(`http://localhost:3000/api/post/${uuid}`, formData)
             } catch (error) {
                 console.log(error.message)
             }

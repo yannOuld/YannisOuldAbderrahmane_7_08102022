@@ -6,21 +6,21 @@
       alt="logo groupomania"
     />
     <nav class="nav">
-      <button @click="home()">
-        <span>
+      <button class="btn" @click="home()">
+        <span class="icon">
           <font-awesome-icon icon="fa-solid fa-house" />
         </span>
         Home
       </button>
-      <button @click="profil()">
-        <span>
+      <button class="btn" @click="profil()">
+        <span class="icon">
           <font-awesome-icon icon="fa-solid fa-user" />
         </span>
         Profil
       </button>
 
-      <button class="btn-alert" @click="logOut()">
-        <span>
+      <button class="btn" @click="logOut()">
+        <span class="icon">
           <font-awesome-icon icon="fa-solid fa-arrow-right-from-bracket" />
         </span>
         deconnection
@@ -70,51 +70,22 @@ export default {
 </script>
 
 <style scoped>
-div {
-  text-align: center;
-  display: flex;
+.bar {
+  @apply p-0 flex flex-col items-center md:flex-row md:px-16 md:py-24 justify-between;
 }
 .logo {
-  width: 250px;
-  height: 100px;
-  object-fit: cover;
-}
-
-.bar {
-  width: 100%;
-  height: 100px;
-  margin: auto 100px;
-  display: flex;
-  justify-content: space-between;
+  @apply w-64 mx-auto flex flex-row h-24 object-cover lg:w-72 md:mx-0;
 }
 
 .nav {
-  margin: auto 0;
-  border: 1px solid transparent;
-  border-radius: 15px;
-  background-color: transparent;
-  z-index: 2;
+  @apply mx-auto flex flex-row  my-0 w-96 justify-center sm:justify-end md:justify-end md:mx-3;
 }
 
-button {
-  mix-blend-mode: difference;
-  font-weight: 700;
-  padding: 15px 15px;
-  background-color: #fd2d01;
-  color: rgb(255, 255, 255);
-  border: none;
-  border-radius: 10px;
-  margin: 10px;
-  cursor: pointer;
-  filter: contrast(1.2);
-  font-size: 14px;
+.btn {
+  @apply text-white font-bold border-0 rounded m-1 cursor-pointer contrast-125 bg-red-600 p-3 h-12 transition ease-in-out delay-150  hover:-translate-y-1 hover:scale-110 hover:bg-orange-500 duration-300;
 }
 
-button:hover {
-  filter: brightness(1.2);
-}
-span {
-  width: 15px;
-  margin: 0 15px 0 0;
+.icon {
+  @apply w-4 mr-2;
 }
 </style>

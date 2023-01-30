@@ -4,15 +4,15 @@ import { fetchWrapper } from '../utils/fetchWrapp';
 export const useUsersStore = defineStore({
     id: 'author',
     state: () => ({
-        authors: [],
+        users: [],
         author: null,
         error: null
     }),
 
     actions: {
-        async fetchAuthors() {
+        async fetchUsers() {
 
-            this.authors = await fetchWrapper.get(`http://localhost:3000/api/user/`)
+            this.users = await fetchWrapper.get(`http://localhost:3000/api/user/`)
         },
 
         async fetchOneAuthor(uuid) {

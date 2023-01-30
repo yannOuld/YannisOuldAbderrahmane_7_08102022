@@ -39,23 +39,13 @@ defineProps({
 </script>
 
 <style scoped>
+div {
+  @apply flex flex-col;
+}
 input {
-  margin: 5px 10px;
+  @apply w-3/4 my-1 mx-auto file:rounded-full file:bg-white file:py-2 file:px-6 file:cursor-pointer file:font-bold;
 }
-input[type="file"] {
-  font-size: 14px;
-  width: 150px;
-  background: white;
-  border-radius: 50px;
-  outline: none;
-  position: absolute;
-  right: -200px;
-  height: 15px;
-  color: black;
-  padding: 10px;
-  align-items: center;
-}
-::-webkit-file-upload-button {
-  display: none;
+label {
+  @apply mx-auto;
 }
 </style>

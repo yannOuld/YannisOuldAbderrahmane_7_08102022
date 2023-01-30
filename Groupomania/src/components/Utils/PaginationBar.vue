@@ -184,26 +184,22 @@ export default {
 
 <style>
 .container {
-  display: flex;
-  flex-direction: column;
-  margin: 10px auto;
+  @apply flex flex-col my-3 mx-auto;
 }
-.posts,
-.post {
-  margin: auto;
-}
+
 .pagination-item {
-  display: inline-block;
-  margin-bottom: 50px;
+  @apply inline-block mb-10  rounded;
 }
 .pagination {
-  text-align: center;
+  @apply text-center rounded content-center;
 }
 ul {
-  list-style-type: none;
+  @apply list-none p-0 m-0;
+}
+button {
+  @apply font-extrabold p-2 mx-1 rounded border-gray-500;
 }
 .active {
-  background-color: #4aae9b;
-  color: #ffffff;
+  @apply bg-gray-300 px-3 rounded-2xl;
 }
 </style>

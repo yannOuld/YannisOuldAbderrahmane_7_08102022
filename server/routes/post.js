@@ -9,6 +9,7 @@ router.get('/', auth, postCtrl.getAllPosts);
 router.get('/:uuid', auth, postCtrl.getOnePost);
 router.post('/', auth, multer, postCtrl.createPost);
 router.patch('/:uuid', auth, authAdmin, multer, postCtrl.modifyPost);
-router.delete('/:uuid', auth, postCtrl.deletePost);
+router.delete('/:uuid', auth, authAdmin, postCtrl.deletePost);
+
 
 module.exports = router;

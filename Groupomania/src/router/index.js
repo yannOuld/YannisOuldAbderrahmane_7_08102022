@@ -5,18 +5,22 @@ import SignView from '../views/Sign.vue';
 import ProfilView from '../views/Profil.vue';
 import PostView from '../views/Post.vue';
 import HomeView from '../views/Home.vue';
-import NotFound from '../views/NotFound.vue'
+import NotFound from '../views/NotFound.vue';
+import AdminView from '../views/Admin.vue';
 
+// path to the components
 const routes = [
+    // Public Page
     {
         path: '/',
         name: 'SignView',
         component: SignView,
+
         meta: {
             title: 'Inscription'
         }
     },
-
+    // Home component
     {
         path: '/home',
         name: HomeView,
@@ -27,7 +31,7 @@ const routes = [
             description: 'page des posts'
         }
     },
-
+    // Profil component
     {
         path: '/profil/:uuid',
         name: 'ProfilView',
@@ -38,7 +42,7 @@ const routes = [
             description: 'page de profil'
         }
     },
-
+    // Post component
     {
         path: '/post/:uuid',
         name: 'PostView',
@@ -49,7 +53,13 @@ const routes = [
             description: 'page de post'
         }
     },
-
+    // Admin DashBoard
+    {
+        path: '/admin',
+        name: 'AdminView',
+        component: AdminView
+    },
+    // Out of Boundaries 
     {
         path: '/:pathMatch(.*)',
         name: 'NotFound',
@@ -58,33 +68,31 @@ const routes = [
             title: 'not found',
             description: 'page non trouvée'
         }
-    }
-
-
-
+    },
 ]
 
-// creation du router 
+//  router creation
 const router = createRouter({
-
     history: createWebHistory(import.meta.env.BASE_URL),
     linkActiveClass: 'active',
     routes
 })
 
 
-// mise en place des pages publique et redirections en cas de non connection 
+//Guardian redirection and public pages 
 router.beforeEach(async (to) => {
-    // page publique (signview)
+    // public page (signview)
     const publicPages = ['/'];
-    // pages non publiques
+
+    // not public page 
     const authRequired = !publicPages.includes(to.path);
-    // store pinia 
+
+    // pinia store auth 
     const auth = useAuthStore();
 
-    // si la page est non publique et que le user est non connecté
+    // if not in public page and auth data missing
     if (authRequired && !auth.userData) {
-        // retour sur SignView la page login / inscription
+        // return to public page
         auth.returnUrl = to.fullPath;
         return '/';
     }

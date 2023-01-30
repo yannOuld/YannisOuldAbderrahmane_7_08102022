@@ -13,7 +13,7 @@
         alt="image de l'auteur"
         class="user-img"
       />
-      <h2 class="author">
+      <h2 class="owner">
         {{ comment?.owner.firstName }} {{ comment?.owner.lastName }}
       </h2>
     </div>
@@ -63,59 +63,25 @@ export default {
 
 <style scoped>
 .comment {
-  width: 50vw;
-  border-radius: 25px;
-  margin: 10px auto;
-  background: #4e5166;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  padding: 15px;
+  @apply w-3/4 mx-auto my-2 rounded-3xl relative bg-gray-700 flex flex-col p-4;
 }
 .user {
-  font-weight: 700;
-  font-size: 15px;
-  text-align: left;
-  display: flex;
+  @apply font-bold text-base text-left flex;
 }
 .user-img {
-  width: 75px;
-  width: 75px;
-  border-radius: 50px;
-  border: 5px solid black;
-  margin-right: 5px;
+  @apply w-20 rounded-full border-solid border-black border-4 mr-1;
 }
-.author {
-  font-size: 18px;
-  color: white;
+.owner {
+  @apply text-lg text-white;
 }
 .content,
 .date {
-  background: white;
-  border-radius: 15px;
-  padding: 20px;
+  @apply bg-white rounded-2xl p-5;
 }
 .delete-btn {
-  position: absolute;
-  background: white;
-  color: red;
-  padding: 5px 6px;
-  border-radius: 50px;
-  top: 10px;
-  right: 10px;
-  text-shadow: black;
-  cursor: pointer;
-}
-.delete-btn:hover {
-  filter: brightness(0.5);
+  @apply absolute bg-white text-red-600 py-1 px-2 rounded-full top-2 right-2 cursor-pointer hover:brightness-50;
 }
 .date {
-  width: 200px;
-  margin: 0;
-  padding: 10px 7px;
-  height: 10px;
-  align-self: flex-end;
-  font-weight: 600;
-  text-align: center;
+  @apply w-1/3 font-bold m-0 self-end text-center;
 }
 </style>

@@ -3,29 +3,7 @@
     <header class="navigation">
       <navigation-links></navigation-links>
     </header>
-
     <main class="container">
-      <div v-if="user?.uuid == post?.owner.uuid">
-        <button class="delete" aria-label="supprimer">
-          <font-awesome-icon icon="fa-solid fa-circle-xmark" />
-        </button>
-        <button
-          v-if="mode.state == 'read'"
-          @click="switchModify()"
-          class="modify"
-          aria-label="modifier"
-        >
-          <font-awesome-icon icon="fa-solid fa-pen-to-square" />
-        </button>
-        <button
-          v-if="mode.state == 'modify'"
-          @click="switchRead()"
-          class="modify"
-          aria-label="retour modifications"
-        >
-          <font-awesome-icon icon="fa-solid fa-pen-to-square" />
-        </button>
-      </div>
       <post-card
         :uuid="post?.uuid"
         :content="post?.content"
@@ -35,20 +13,44 @@
         :createdAt="post?.createdAt"
         :likesCounter="post?.likesCounter"
       />
-      <like-modal :uuid="post?.uuid" :user_id="user?.id" />
+      <div class="post-utils" v-if="user?.uuid == post?.owner.uuid">
+        <button
+          v-if="mode.state == 'read'"
+          @click="switchModify()"
+          class="modify"
+          aria-label="modifier"
+        >
+          <span class="btn-txt"> modifier le post </span>
+          <font-awesome-icon icon="fa-solid fa-pen-to-square" />
+        </button>
+        <button @click="suppPost()" class="delete" aria-label="supprimer">
+          <span class="btn-txt"> supprimer le post </span>
+          <font-awesome-icon icon="fa-solid fa-circle-xmark" />
+        </button>
+
+        <button
+          v-if="mode.state == 'modify'"
+          @click="switchRead()"
+          class="modify"
+          aria-label="retour modifications"
+        >
+          <font-awesome-icon icon="fa-solid fa-pen-to-square" />
+        </button>
+        <like-modal :uuid="post?.uuid" :user_id="user?.id" />
+      </div>
 
       <div v-if="mode.state == 'modify'">
         <post-modify :uuid="uuid" />
       </div>
-      <comment-form />
     </main>
-    <comments />
+    <comment-form />
+    <comments-wrapper />
   </div>
 </template>
 
 <script>
-import Comments from "../components/Comment/Comments.vue";
-import CommentForm from "../components/Comment/CommentForm.vue";
+import router from "../router/index.js";
+import PostCard from "../components/Post/PostCard.vue";
 import PostModify from "../components/Post/PostModify.vue";
 import { useRoute } from "vue-router";
 import { reactive, defineAsyncComponent } from "vue";
@@ -59,16 +61,11 @@ import { useAuthStore } from "../stores/auth";
 export default {
   name: "PostView",
   components: {
-    PostCard: defineAsyncComponent({
-      loader: () => import("../components/Post/PostCard.vue"),
-      delay: 1000,
-    }),
+    PostCard,
     LikeModal: defineAsyncComponent({
       loader: () => import("../components/Like/LikeModal.vue"),
       delay: 1000,
     }),
-    Comments,
-    CommentForm,
     PostModify,
   },
 
@@ -77,9 +74,12 @@ export default {
     const route = useRoute();
     const uuid = route.params.uuid;
 
+    console.log(uuid);
+
     // fetch and find post data from the store
-    const { fetchOnePost } = usePostStore();
+    const { fetchOnePost, deletePost } = usePostStore();
     fetchOnePost(uuid);
+
     const { post } = storeToRefs(usePostStore());
     console.log(post);
 
@@ -102,88 +102,37 @@ export default {
       mode.state = "modify";
     };
 
+    const suppPost = async () => {
+      await deletePost(uuid).then(router.replace("/home"));
+    };
+
     return {
+      mode,
       user,
       uuid,
       post,
       switchModify,
       switchRead,
-      mode,
+      suppPost,
     };
   },
 };
 </script>
 
 <style scoped>
-.navigation {
-  width: 100%;
-  display: flex;
-  justify-content: center;
+.post-utils {
+  @apply bg-red-600 rounded-lg mx-auto my-5 w-3/4 flex flex-row justify-evenly items-center;
 }
-.container {
-  background-color: #faa1a1;
-  position: relative;
-  border-radius: 15px;
-  padding: 10px;
-  margin: 20px 0;
-}
-.post {
-  background-color: white;
-  position: relative;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  width: 70vw;
-  border-radius: 15px;
-  padding: 10px;
-  margin: 10px auto;
-}
-.likes {
-  cursor: pointer;
-  background: #310e96;
-  color: white;
-  font-size: 15px;
-}
+
 .delete,
 .modify {
-  cursor: pointer;
-  position: absolute;
-  font-size: 25px;
-  right: 20px;
-  background-color: white;
+  @apply cursor-pointer border-transparent text-lg bg-white;
+}
+
+.btn-txt {
+  @apply hidden sm:flex sm:flex-row;
 }
 .delete {
-  border: white 1px solid;
-  color: red;
-  top: 20px;
-}
-.modify {
-  border: transparent;
-  color: #4e5166;
-  top: 80px;
-}
-.image {
-  width: 300px;
-}
-.form {
-  color: white;
-  background-color: #4e5166;
-  display: flex;
-  flex-direction: column;
-  border-radius: 25px;
-  padding: 20px;
-}
-.form-control {
-  margin: 10px;
-}
-.form-control > input {
-  margin-left: 15px;
-}
-.form-content {
-  flex-direction: column;
-}
-.form-btn {
-  width: 150px;
-  margin: auto;
+  @apply text-red-600;
 }
 </style>

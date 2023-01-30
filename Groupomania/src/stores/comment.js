@@ -13,7 +13,9 @@ export const useCommentStore = defineStore({
         async fetchComments(uuid) {
             this.comments = []
             try {
-                this.comments = await fetchWrapper.get(`http://localhost:3000/api/post/${uuid}/comments/`)
+                this.comments = await fetchWrapper.get(`http://localhost:3000/api/post/${uuid}/comments/`).then((response) => {
+                    return response.reverse()
+                })
             } catch (error) {
                 this.error = error
             }

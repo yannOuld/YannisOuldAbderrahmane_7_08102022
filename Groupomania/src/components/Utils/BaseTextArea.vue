@@ -9,7 +9,7 @@
       :value="modelValue"
       :id="id"
       v-bind="$attrs"
-      @textarea="$emit('update:modelValue', $event.target.value)"
+      @input="$emit('update:modelValue', $event.target.value)"
     />
   </div>
 </template>
@@ -49,10 +49,12 @@ defineProps({
 
 <style scoped>
 div {
-  display: flex;
-  flex-direction: column;
+  @apply flex flex-col;
 }
 textarea {
-  resize: none;
+  @apply resize-none w-3/4 mx-auto text-center;
+}
+label {
+  @apply mx-auto;
 }
 </style>
