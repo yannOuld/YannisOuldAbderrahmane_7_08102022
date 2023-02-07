@@ -41,7 +41,7 @@ import { usePostStore } from "../../stores/posts";
 
 //parent props
 const props = defineProps({
-  update: { type: Number, required: true },
+  update: { type: Number },
   uuid: { type: String, required: true },
   owner: { type: Object, required: true },
   title: { type: String, required: true },

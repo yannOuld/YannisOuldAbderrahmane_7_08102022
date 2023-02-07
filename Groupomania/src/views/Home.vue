@@ -15,7 +15,6 @@
     <div class="home-container">
       <h1 v-once>Les derniers Posts</h1>
       <pagination-bar
-        :key="refresh"
         :currentPage="currentPage"
         :maxVisibleButtons="3"
         :posts="posts"

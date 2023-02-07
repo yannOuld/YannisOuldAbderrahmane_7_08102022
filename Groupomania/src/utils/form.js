@@ -36,8 +36,8 @@ export function multiPartForm() {
         if (owner_id.value != null) {
             formData.append("owner_id", owner_id.value);
         }
-
         return formData;
     }
+
     return { formData, handleFileUpload, fileTarget, biography, title, content, handleData }
 }

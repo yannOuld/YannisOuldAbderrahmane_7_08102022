@@ -1,39 +1,50 @@
 <template>
   <div>
-    <ul v-for="user in users" :key="user.uuid">
-      <li>
-        <span>
-          <strong> uuid:</strong> {{ user.uuid }} <strong> id:</strong>
-          {{ user.id }}</span
-        >
-        <div v-if="user.imageUrl">
-          <img :src="user.imageUrl" alt="image utilisateur" />
+    <ul class="admin-list" v-for="user in users" :key="user">
+      <li class="admin-list_item">
+        <span class="admin-list_id">
+          <strong> uuid:</strong> {{ user.uuid }} <br />
+          <strong> id:</strong>
+          {{ user.id }}
+        </span>
+        <div class="admin-list_data">
+          <div v-if="user.imageUrl">
+            <img
+              class="admin-list_img"
+              :src="user.imageUrl"
+              alt="image utilisateur"
+            />
+          </div>
+          <div class="admin-list_content">
+            <p>
+              {{ user.firstName }}
+              <br />
+              {{ user.lastName }}
+              <br />
+              bio: <br />
+              {{ user.biography }}
+            </p>
+          </div>
         </div>
-        <div class="user--infos">
-          <p>Nom: {{ user.firstName }} {{ user.lastName }}</p>
-          <p>Biographie: {{ user.biography }}</p>
-        </div>
-        <div>
-          <button @click="suppUser(user.uuid)">delete</button>
-          <button @click="isOpen = true">modifier</button>
+        <div class="flex-row">
+          <button class="btn" @click="suppUser(user.uuid)">supprimer</button>
+          <button class="btn" @click="OpenTarget(user.uuid)">modifier</button>
         </div>
       </li>
-      <teleport to="body">
-        <div class="likes-modal_bg" v-if="isOpen">
-          <button @click="isOpen = false">quitter</button>
-          <profil-modify :uuid="user.uuid" />
-        </div>
-      </teleport>
     </ul>
+    <teleport to="body">
+      <div class="likes-modal_bg" v-if="isOpen">
+        <button @click="isOpen = false">quitter</button>
+        <user-admin :uuid="targetUuid" />
+      </div>
+    </teleport>
   </div>
 </template>
 
 <script setup>
 import { defineProps, ref } from "vue";
 import { useAdminStore } from "../../stores/admin";
-import ProfilModify from "../../components/Profil/ProfilModify.vue";
-
-const isOpen = ref(false);
+import UserAdmin from "./UserAdmin.vue";
 
 defineProps({
   users: {
@@ -42,37 +53,17 @@ defineProps({
   },
 });
 
-const { deleteUser, modifyUser } = useAdminStore();
+const isOpen = ref(false);
+const targetUuid = ref(null);
+
+const OpenTarget = (uuid) => {
+  isOpen.value = true;
+  targetUuid.value = uuid;
+};
+
+const { deleteUser } = useAdminStore();
 
 const suppUser = async (uuid) => {
   await deleteUser(uuid);
 };
 </script>
-
-<style scoped>
-main {
-  width: 100vw;
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  margin: auto;
-}
-img {
-  width: 200px;
-}
-li {
-  position: relative;
-  width: 80vw;
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  border-radius: 15px;
-  background: rgba(211, 209, 209, 0.342);
-  padding: 30px 20px 20px;
-}
-span {
-  position: absolute;
-  top: 5px;
-}
-</style>

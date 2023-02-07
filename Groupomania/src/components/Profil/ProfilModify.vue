@@ -48,7 +48,8 @@
 </template>
 
 <script setup>
-import { ref } from "vue";
+import { modal } from "../../utils/modal.js";
+import { multiPartForm } from "../../utils/form.js";
 import { useAuthStore } from "../../stores/auth";
 import { storeToRefs } from "pinia";
 
@@ -56,50 +57,19 @@ import { storeToRefs } from "pinia";
 const { userData } = storeToRefs(useAuthStore());
 const uuid = userData.value.user.uuid;
 
-// form input refs
-const fileTarget = ref(null);
-const biography = ref(null);
+// composable form
+let { title, fileTarget, handleFileUpload, biography, handleData, formData } =
+  multiPartForm();
 
-// file input handling
-const handleFileUpload = (event) => {
-  fileTarget.value = event.target.files[0];
-  console.log(fileTarget.value);
-};
-
-// modal variables
-let closePopup;
-let isOpen = ref(false);
-let msgErr = ref("");
-let msgSucces = ref("");
-
-// modal display
-const showPopup = () => {
-  {
-    isOpen.value = true;
-    clearTimeout(closePopup);
-
-    closePopup = setTimeout(() => {
-      msgErr.value = "";
-      msgSucces.value = "";
-      isOpen.value = false;
-    }, 2000);
-  }
-};
+// compasable modal
+let { isOpen, msgErr, msgSucces, showPopup } = modal();
 
 // form submit to modify user
 const { modify } = useAuthStore();
 
 const submit = async () => {
+  handleData();
   try {
-    const formData = new FormData();
-
-    if (fileTarget.value != null) {
-      formData.append("image", fileTarget.value, fileTarget.value.name);
-    }
-
-    if (biography.value != null) {
-      formData.append("biography", biography.value);
-    }
     await modify(uuid, formData);
     msgSucces.value = "Votre profil à été mis à jour !";
     return showPopup();

@@ -86,11 +86,11 @@
   </div>
 </template>
 
-<script>
+<script setup>
+import { modal } from "../../utils/modal.js";
 import { myfetch } from "../../utils/fetchWrapp";
 import { reactive } from "vue";
-import { ref, computed } from "vue";
-
+import { computed } from "vue";
 import useVuelidate from "@vuelidate/core";
 import {
   required,
@@ -100,86 +100,56 @@ import {
   helpers,
 } from "@vuelidate/validators";
 
-export default {
-  name: "SignIn",
-  setup() {
-    // reactive form inputs
-    const formData = reactive({
-      firstName: "",
-      lastName: "",
-      email: "",
-      password: "",
-      confirmPassword: "",
-    });
+// compasable modal
+let { isOpen, msgErr, msgSucces, showPopup } = modal();
 
-    // vuelidate rules and regex helper
-    const regex = helpers.regex(
-      /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/
-    );
-    const rules = computed(() => {
-      return {
-        firstName: { required, minLength: minLength(2) },
-        lastName: { required, minLength: minLength(2) },
-        email: { required, email },
-        password: { required, helpers: regex },
-        confirmPassword: { required, sameAs: sameAs(formData.password) },
-      };
-    });
+// reactive form inputs
+const formData = reactive({
+  firstName: "",
+  lastName: "",
+  email: "",
+  password: "",
+  confirmPassword: "",
+});
 
-    // modal variables
-    let isOpen = ref(false);
-    let msgErr = ref("");
-    let msgSucces = ref("");
-    let closePopup;
+// vuelidate rules and regex helper
+const regex = helpers.regex(
+  /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/
+);
 
-    // modal display
-    const showPopup = () => {
-      {
-        isOpen.value = true;
-        clearTimeout(closePopup);
+const rules = computed(() => {
+  return {
+    firstName: { required, minLength: minLength(2) },
+    lastName: { required, minLength: minLength(2) },
+    email: { required, email },
+    password: { required, helpers: regex },
+    confirmPassword: { required, sameAs: sameAs(formData.password) },
+  };
+});
 
-        closePopup = setTimeout(() => {
-          msgErr.value = "";
-          msgSucces.value = "";
-          isOpen.value = false;
-        }, 2000);
-      }
-    };
+// vuelidate
+const v$ = useVuelidate(rules, formData);
 
-    // vuelidate
-    const v$ = useVuelidate(rules, formData);
+//form submit
+const submit = async () => {
+  // vuelidate inputs validation
+  const validation = await v$._value.$validate();
 
-    //form submit
-    const submit = async () => {
-      // vuelidate inputs validation
-      const validation = await v$._value.$validate();
+  if (!validation) {
+    msgErr.value = "Veuillez verifier les champs.";
+    return showPopup();
+  }
 
-      if (!validation) {
-        msgErr.value = "Veuillez verifier les champs.";
-        return showPopup();
-      }
+  // fetch
+  const response = await myfetch("POST", "/user/signup", formData);
 
-      // fetch
-      const response = await myfetch("POST", "/user/signup", formData);
-
-      // modal handling
-      if (response.uuid) {
-        msgSucces.value = "compte créée avec succes.";
-        return showPopup();
-      } else {
-        msgErr.value = "Adresse mail déja utilisée.";
-        return showPopup();
-      }
-    };
-
-    return {
-      v$,
-      isOpen,
-      formData,
-      msgSucces,
-      msgErr,
-      submit,
-    };
-  },
+  // modal handling
+  if (response.uuid) {
+    msgSucces.value = "compte créée avec succes.";
+    return showPopup();
+  } else {
+    msgErr.value = "Echec de l'inscription.";
+    return showPopup();
+  }
 };
 </script>

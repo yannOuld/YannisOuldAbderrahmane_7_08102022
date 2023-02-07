@@ -22,7 +22,8 @@
     @apply mx-auto;
   }
   form,
-  div {
+  div,
+  ul {
     @apply flex flex-col justify-center items-center;
   }
   div {
@@ -49,6 +50,65 @@
   }
 }
 @layer components {
+  .admin,
+  .home-container,
+  .post,
+  .pagination-bar,
+  .pagination-posts,
+  .pagination-posts_card {
+    @apply w-full;
+  }
+  .post-utils,
+  .sign-form--btn,
+  .postcard-container {
+    @apply rounded-lg;
+  }
+  .admin-list,
+  .admin-list_data,
+  .navigation,
+  .sign-form_display {
+    @apply justify-between;
+  }
+  .admin-list_id,
+  .profil-btn_switch,
+  .postcard-likes_counter,
+  .comment-btn_delete,
+  .likes-modal_bg {
+    @apply absolute;
+  }
+  .postcard-user,
+  .pagination-bar,
+  .navigation-nav,
+  .navigation-logo,
+  .post-utils {
+    @apply flex-row;
+  }
+  .comment-form,
+  .profil-form_modify,
+  .post-form_create,
+  .post-form_modify {
+    @apply border-none text-white;
+  }
+  .profil-form_modify,
+  .post-form_create,
+  .post-form_modify {
+    @apply w-11/12;
+  }
+  .admin-list {
+    @apply relative w-80 sm:w-9/12 rounded-xl bg-slate-200 bg-opacity-80 my-2 py-8 px-2;
+  }
+  .admin-list_id {
+    @apply top-1;
+  }
+  .admin-list_item {
+    @apply w-11/12 mt-4;
+  }
+  .admin-list_data {
+    @apply my-4 mx-0 flex-row;
+  }
+  .admin-list_img {
+    @apply w-20 sm:w-52;
+  }
   .nofound-title {
     @apply text-2xl font-extrabold;
   }
@@ -61,11 +121,6 @@
   .nofound-txt {
     @apply text-xl font-bold;
   }
-
-  .admin {
-    @apply w-full;
-  }
-
   .sign-logo {
     @apply w-4/12 my-3 mx-auto;
   }
@@ -75,19 +130,11 @@
   .sign-btn_blue {
     @apply text-blue-500 font-bold;
   }
-
-  .home-container {
-    @apply w-full;
-  }
   .home-img {
     @apply hidden sm:flex mx-auto my-3 w-96 h-96;
   }
-
-  .post {
-    @apply w-full;
-  }
   .post-utils {
-    @apply rounded-lg my-5 w-3/4 p-4 flex-row justify-evenly  bg-slate-600 bg-opacity-80 shadow-md shadow-black;
+    @apply my-5 w-3/4 p-4 justify-evenly  bg-slate-600 bg-opacity-80 shadow-md shadow-black;
   }
   .post-btn_delete,
   .post-btn_modify {
@@ -99,36 +146,30 @@
   .post-btn_delete {
     @apply text-red-600;
   }
-
   .profil {
     @apply mt-10 mb-16  text-base w-10/12 bg-orange-100 rounded-2xl relative;
   }
   .profil-btn_switch {
-    @apply absolute right-3 top-3 z-20;
+    @apply right-3 top-3 z-20;
   }
-
   .navigation {
-    @apply p-0 md:flex-row md:px-16 md:py-24 justify-between;
+    @apply p-0 md:flex-row md:px-16 md:py-24;
   }
   .navigation-logo {
-    @apply w-64 mx-auto flex flex-row h-24 object-cover lg:w-72 md:mx-0;
+    @apply w-64 mx-auto flex h-24 object-cover lg:w-72 md:mx-0;
   }
-
   .navigation-nav {
-    @apply mx-auto flex flex-row  my-0 w-10/12 sm:w-96 justify-center sm:justify-end md:justify-end md:mx-3;
+    @apply mx-auto flex my-0 w-10/12 sm:w-96 justify-center sm:justify-end md:justify-end md:mx-3;
   }
-
   .navigation-btn {
     @apply text-white border-0 rounded m-1 contrast-125 bg-red-600 py-1 px-3 h-12 transition ease-in-out delay-150;
   }
-
   .navigation-btn_icon {
     @apply w-4 mr-2;
   }
   .sign {
     @apply w-11/12;
   }
-
   .sign_border {
     @apply w-11/12 sm:w-3/4 md:w-7/12 border-black border-solid border-4 rounded-3xl p-3 text-base bg-white;
   }
@@ -136,21 +177,10 @@
     @apply justify-center w-fit;
   }
   .sign-form_display {
-    @apply mx-auto justify-between w-fit;
+    @apply mx-auto w-fit;
   }
   .sign-form--btn {
-    @apply bg-blue-400 font-bold border-hidden rounded-lg cursor-pointer text-white p-3 my-3 mx-auto;
-  }
-  .comment-form,
-  .profil-form_modify,
-  .post-form_create,
-  .post-form_modify {
-    @apply border-none text-white;
-  }
-  .profil-form_modify,
-  .post-form_create,
-  .post-form_modify {
-    @apply w-11/12;
+    @apply bg-blue-400 font-bold border-hidden   text-white p-3 my-3 mx-auto;
   }
   .comment-form {
     @apply w-3/4 my-3 py-3 rounded-2xl font-extrabold;
@@ -168,7 +198,6 @@
   .btn {
     @apply my-5 py-1 px-2 rounded-md bg-white;
   }
-
   .error,
   .succes {
     @apply text-center font-bold;
@@ -179,7 +208,6 @@
   .succes {
     @apply text-green-500;
   }
-
   .pagination {
     @apply my-3;
   }
@@ -187,35 +215,34 @@
     @apply inline-block mb-10  rounded;
   }
   .pagination-bar {
-    @apply text-center rounded content-center w-full;
+    @apply text-center rounded content-center;
   }
   .pagination-btn {
-    @apply flex font-extrabold w-fit p-2 mx-1 rounded border-gray-500;
+    @apply flex font-extrabold w-fit p-1 sm:p-2 mx-0 sm:mx-1 rounded border-gray-500;
   }
   .pagination-posts {
-    @apply w-full flex flex-col items-center justify-center;
+    @apply flex flex-col items-center justify-center;
   }
   .pagination-posts_card {
-    @apply w-full sm:w-10/12;
+    @apply sm:w-10/12;
   }
   .active {
     @apply bg-gray-300 px-3 rounded-2xl;
   }
-
   .postcard-container {
-    @apply bg-red-300 relative rounded-lg p-4 my-8 mx-auto w-10/12 sm:w-full shadow-lg shadow-black;
+    @apply bg-red-300 relative  p-4 mb-8 mx-auto  shadow-lg shadow-black;
   }
   .postcard {
-    @apply cursor-pointer relative bg-white  mx-auto rounded p-4 w-11/12   my-3;
+    @apply cursor-pointer relative bg-white  mx-auto rounded p-4 w-11/12   my-0 sm:my-3;
   }
   .postcard-title {
-    @apply mt-8 mb-5 sm:mt-2;
+    @apply my-0  sm:mt-8 mb-5;
   }
   .postcard-img {
     @apply object-fill border-black w-60 h-60 sm:w-72 sm:h-72 md:w-96 md:h-72;
   }
   .postcard-user {
-    @apply justify-start mt-4  mb-2 flex-row  h-14;
+    @apply justify-start mt-4  mb-2 h-14;
   }
   .postcard-user_name {
     @apply text-sm  sm:text-base;
@@ -234,9 +261,8 @@
     @apply w-1/3;
   }
   .postcard-likes_counter {
-    @apply w-20 absolute bottom-0 right-3 text-right;
+    @apply w-20  bottom-0 right-3 text-right;
   }
-
   .comment {
     @apply w-3/4 my-2 p-4 rounded-3xl relative bg-gray-700;
   }
@@ -254,12 +280,11 @@
     @apply bg-white rounded-2xl p-5;
   }
   .comment-btn_delete {
-    @apply absolute bg-white text-red-600 py-1 px-2 rounded-full top-2 right-2;
+    @apply bg-white text-red-600 py-1 px-2 rounded-full top-2 right-2;
   }
   .comment_date {
     @apply w-1/3 font-bold m-0 self-end text-center;
   }
-
   .profil-user {
     @apply py-10;
   }
@@ -269,9 +294,8 @@
   .profil-user_img {
     @apply w-64 h-64;
   }
-
   .likes-modal_bg {
-    @apply absolute top-0 left-0 right-0 bottom-0 w-screen h-screen bg-slate-400 bg-opacity-50;
+    @apply top-0 left-0 right-0 bottom-0 w-screen h-screen bg-slate-400 bg-opacity-50;
   }
   .likes-modal_content {
     @apply bg-white p-12 rounded-xl blur-0;
@@ -284,8 +308,5 @@
   }
   .likes-btn_show {
     @apply flex justify-center items-center;
-  }
-  .likes_send {
-    @apply cursor-pointer;
   }
 }

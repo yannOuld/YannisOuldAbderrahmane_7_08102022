@@ -18,38 +18,34 @@ export const useAdminStore = defineStore({
 
 
     actions: {
-
         async fetchUsers() {
-
-            this.users = await fetchWrapper.get(`http://localhost:3000/api/user/`)
+            this.users = []
+            try {
+                this.users = await fetchWrapper.get(`http://localhost:3000/api/user/`)
+            } catch (error) {
+                console.log(error.message)
+            }
         },
-        // fonction pour modifier les infos users
-        async modifyUser(uuid, formData) {
 
+        async modifyUser(uuid, formData) {
             try {
                 await fetchWrapper.patchfile(`http://localhost:3000/api/user/${uuid}/admin`, formData);
-
             } catch (error) {
                 console.log(error.message);
-
-            } finally {
-                router.push(`/home`)
             }
         },
 
         async deleteUser(uuid) {
             try {
                 await fetchWrapper.delete(`http://localhost:3000/api/user/${uuid}/admin`)
+                this.users = this.users.filter(user => user.uuid != uuid)
             } catch (error) {
                 console.log(error.message);
-            } finally {
-                this.userData = null
             }
         },
 
         async fetchPosts() {
             this.posts = []
-            this.loading = true
             try {
                 this.posts = await fetchWrapper.get(`http://localhost:3000/api/post/`).then((response) => {
                     return response.reverse()
@@ -63,7 +59,7 @@ export const useAdminStore = defineStore({
 
         async modifyPost(uuid, formData) {
             try {
-                await fetchWrapper.patch(`http://localhost:3000/api/post/${uuid}/admin`, formData)
+                await fetchWrapper.patchfile(`http://localhost:3000/api/post/${uuid}/admin`, formData)
             } catch (error) {
                 console.log(error.message)
             }
@@ -73,11 +69,11 @@ export const useAdminStore = defineStore({
             this.post = null
             try {
                 this.post = await fetchWrapper.delete(`http://localhost:3000/api/post/${uuid}/admin`)
+                this.posts = this.posts.filter(post => post.uuid != uuid)
             } catch (error) {
                 this.error = error
             }
         },
-
     },
 
 })

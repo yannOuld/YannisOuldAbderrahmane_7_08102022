@@ -19,7 +19,6 @@ const update = ref(0);
 const props = defineProps({
   forceUpdate: {
     type: Number,
-    required: true,
   },
 });
 

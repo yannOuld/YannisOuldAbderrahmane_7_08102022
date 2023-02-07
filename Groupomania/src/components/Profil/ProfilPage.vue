@@ -2,31 +2,31 @@
   <div class="profil">
     <div class="profil-user">
       <p class="profil-user_name">
-        {{ author.firstName }} {{ author.lastName }}
+        {{ author?.firstName }} {{ author?.lastName }}
       </p>
 
       <img
         class="profil-user_img"
-        v-if="!author.imageUrl"
+        v-if="!author?.imageUrl"
         src="../../assets/images/icon.webP"
         alt="image de profil"
       />
 
       <img
         class="profil-user_img"
-        v-if="author.imageUrl"
-        :src="author.imageUrl"
+        v-if="author?.imageUrl"
+        :src="author?.imageUrl"
         alt="image de profil"
       />
 
       <div>
         <h2 v-once>email:</h2>
-        <p>{{ author.email }}</p>
+        <p>{{ author?.email }}</p>
       </div>
 
       <div>
         <h2 v-once>Bio:</h2>
-        <p class="profil-user_description">{{ author.biography }}</p>
+        <p class="profil-user_description">{{ author?.biography }}</p>
       </div>
     </div>
   </div>
@@ -35,6 +35,7 @@
 <script setup>
 import { useUsersStore } from "../../stores/users";
 import { storeToRefs } from "pinia";
-
-const { author } = storeToRefs(useUsersStore());
+defineProps({
+  author: { type: Object, required: true },
+});
 </script>

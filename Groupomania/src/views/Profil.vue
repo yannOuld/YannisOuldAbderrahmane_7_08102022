@@ -24,7 +24,7 @@
 import { useRoute } from "vue-router";
 import { useUsersStore } from "../stores/users";
 import { storeToRefs } from "pinia";
-import { reactive, defineAsyncComponent } from "vue";
+import { reactive } from "vue";
 import ProfilModify from "../components/Profil/ProfilModify.vue";
 import ProfilPage from "../components/Profil/ProfilPage.vue";
 

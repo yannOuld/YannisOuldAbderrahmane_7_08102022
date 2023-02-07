@@ -48,8 +48,6 @@ export const useAuthStore = defineStore({
             } catch (error) {
                 console.log(error.message);
 
-            } finally {
-                router.push(`/home`)
             }
         },
 
