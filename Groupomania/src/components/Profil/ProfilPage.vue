@@ -1,17 +1,19 @@
 <template>
   <div class="profil">
     <div class="profil-user">
-      <p class="profil-name">{{ author.firstName }} {{ author.lastName }}</p>
+      <p class="profil-user_name">
+        {{ author.firstName }} {{ author.lastName }}
+      </p>
 
       <img
+        class="profil-user_img"
         v-if="!author.imageUrl"
         src="../../assets/images/icon.webP"
-        class="profil-img"
         alt="image de profil"
       />
 
       <img
-        class="profil-img"
+        class="profil-user_img"
         v-if="author.imageUrl"
         :src="author.imageUrl"
         alt="image de profil"
@@ -24,38 +26,15 @@
 
       <div>
         <h2 v-once>Bio:</h2>
-        <p class="description">{{ author.biography }}</p>
+        <p class="profil-user_description">{{ author.biography }}</p>
       </div>
     </div>
   </div>
 </template>
 
-<script>
+<script setup>
 import { useUsersStore } from "../../stores/users";
 import { storeToRefs } from "pinia";
 
-export default {
-  name: "ProfilPage",
-  setup() {
-    const { author } = storeToRefs(useUsersStore());
-    return {
-      author,
-    };
-  },
-};
+const { author } = storeToRefs(useUsersStore());
 </script>
-
-<style scoped>
-.profil {
-  @apply flex flex-col;
-}
-.profil-user {
-  @apply py-10;
-}
-.profil-name {
-  @apply uppercase font-extrabold;
-}
-.profil-img {
-  @apply w-64 h-64;
-}
-</style>

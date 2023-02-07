@@ -14,6 +14,12 @@ export const useAuthStore = defineStore({
         returnUrl: null
     }),
 
+    getters: {
+        authAdmin() {
+            if (this.userData.user.role != 'user') return true
+        },
+    },
+
     actions: {
 
         // fonction de connection
@@ -52,6 +58,16 @@ export const useAuthStore = defineStore({
             this.userData = null;
             router.push("/");
         },
+
+        async deleteUser(uuid) {
+            try {
+                await fetchWrapper.delete(`http://localhost:3000/api/user/${uuid}`)
+            } catch (error) {
+                console.log(error.message);
+            } finally {
+                this.userData = null
+            }
+        }
     },
 
 })

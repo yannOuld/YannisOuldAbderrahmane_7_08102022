@@ -1,18 +1,27 @@
 <template>
-  <section>
-    <h2 class="text-center">Commentaires</h2>
-    <div v-for="comment in comments" :key="comment">
-      <CommentCard :comment="comment" />
+  <div>
+    <h2>Commentaires</h2>
+    <div v-for="(comment, update) in comments" :key="update">
+      <CommentCard @onDelete="onCommentDelete(id)" :comment="comment" />
     </div>
-  </section>
+  </div>
 </template>
 
 <script setup>
 import { useRoute } from "vue-router";
 import { storeToRefs } from "pinia";
 import { useCommentStore } from "../../stores/comment.js";
-import { onMounted } from "vue";
-import CommentCard from "./Comment.vue";
+import { onMounted, defineProps, ref } from "vue";
+import CommentCard from "./CommentCard.vue";
+
+const update = ref(0);
+
+const props = defineProps({
+  forceUpdate: {
+    type: Number,
+    required: true,
+  },
+});
 
 // finding uuid of the post
 const route = useRoute();
@@ -20,10 +29,13 @@ const uuid = route.params.uuid;
 
 // fetch API corresponding comments to the store
 const { fetchComments } = useCommentStore();
-onMounted(() => {
-  fetchComments(uuid);
-});
+fetchComments(uuid);
 
 // retrieving comments data from the store
 const { comments } = storeToRefs(useCommentStore());
+
+const onCommentDelete = () => {
+  //comments.value.filter((comment) => (comment.id = id));
+  props.forceUpdate += 1;
+};
 </script>

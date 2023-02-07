@@ -31,13 +31,14 @@ export const useCommentStore = defineStore({
         },
 
         async deleteComment(uuid, id) {
-            this.commentData = null
             try {
-                this.commentData = await fetchWrapper.delete(`http://localhost:3000/api/post/${uuid}/comments/${id}`)
+                await fetchWrapper.delete(`http://localhost:3000/api/post/${uuid}/comments/${id}`)
+
+                console.log(this.comments)
             } catch (error) {
                 this.error = error
             }
-
+            this.comments = this.comments.filter(comment => comment.id != id)
         }
     }
 })

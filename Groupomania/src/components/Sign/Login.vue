@@ -1,44 +1,43 @@
 <template>
-  <div class="bloc">
+  <div class="sign_border">
     <h1>Connexion</h1>
-    <form @submit.prevent="submit()" autocomplete="on">
-      <div class="form-row">
+    <form @submit.prevent="submit()" autocomplete="on" class="sign-form">
+      <div class="sign-form_display">
         <!-- Email -->
-        <div class="form-group">
-          <base-input
-            v-model="formData.email"
-            label="email"
-            placeholder="email@groupomania.com"
-            name="email"
-            id="email"
-            type="email"
-          ></base-input>
-          <p v-if="v$.email.$error">une adresse email valide est requise</p>
-        </div>
+        <base-input
+          v-model="formData.email"
+          label="email"
+          placeholder="email@groupomania.com"
+          name="email"
+          id="email"
+          type="email"
+        ></base-input>
+        <p class="error" v-if="v$.email.$error">
+          une adresse email valide est requise
+        </p>
+
         <!-- Password -->
-        <div class="form-group">
-          <base-input
-            label="mot de passe"
-            type="password"
-            v-model="formData.password"
-            name="password"
-            id="password"
-            placeholder="votre mot de passe"
-            class="form-control"
-            autocomplete="on"
-          ></base-input>
-          <p v-if="v$.password.$error">le mot de passe est requis</p>
-        </div>
+        <base-input
+          label="mot de passe"
+          type="password"
+          v-model="formData.password"
+          name="password"
+          id="password"
+          placeholder="votre mot de passe"
+          class="form-control"
+          autocomplete="on"
+        ></base-input>
+        <p class="error" v-if="v$.password.$error">
+          le mot de passe est requis
+        </p>
+
         <!-- Form Submit Button -->
-        <div class="text-center">
-          <button class="btn">Se connecter</button>
-        </div>
+        <button class="sign-form--btn">Se connecter</button>
       </div>
     </form>
     <!-- Pop Up -->
     <div class="modal" v-if="isOpen">
       <p class="error">{{ msgErr }}</p>
-      <p class="succes">{{ msgSucces }}</p>
     </div>
   </div>
 </template>
@@ -127,80 +126,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-h1 {
-  font-weight: 700;
-}
-
-p {
-  color: red;
-  padding: 0;
-  margin: 0;
-}
-
-.form {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-}
-.form-row {
-  display: flex;
-  flex-direction: column;
-  align-items: flex-end;
-  width: 400px;
-}
-.bloc {
-  text-align: center;
-  margin: auto;
-  border: solid 2px;
-  border-radius: 15px;
-  padding: 10px;
-  width: 500px;
-  font-size: 16px;
-  background-color: white;
-}
-
-.form-control {
-  width: 200px;
-}
-
-input {
-  margin: 10px;
-}
-
-.link {
-  color: cornflowerblue;
-  cursor: pointer;
-  font-weight: 700;
-}
-
-.logo {
-  width: 300px;
-  background-color: transparent;
-  color: brown;
-  margin: 0 20px;
-}
-
-.btn {
-  background-color: #0787f7;
-  color: aliceblue;
-  font-weight: 700;
-  padding: 10px;
-  font-size: 14px;
-  border-style: hidden;
-  border-radius: 10px;
-  margin: 10px;
-  cursor: pointer;
-}
-
-.disabled {
-  background-color: grey;
-  cursor: not-allowed;
-}
-
-.alert {
-  color: red;
-  font-weight: 900;
-}
-</style>

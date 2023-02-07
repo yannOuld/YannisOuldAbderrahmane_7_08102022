@@ -1,7 +1,7 @@
 <template>
-  <div class="container">
-    <ul class="posts">
-      <li class="post">
+  <div class="pagination">
+    <ul class="pagination-posts">
+      <li class="pagination-posts_card">
         <post-card
           v-for="post in paginatedPosts"
           :key="post.uuid"
@@ -15,9 +15,10 @@
         />
       </li>
     </ul>
-    <ul class="pagination">
+    <ul class="pagination-bar">
       <li class="pagination-item">
         <button
+          class="pagination-btn"
           type="button"
           @click="onClickFirstPage"
           :disabled="isInFirstPage"
@@ -28,6 +29,7 @@
 
       <li class="pagination-item">
         <button
+          class="pagination-btn"
           type="button"
           @click="onClickPreviousPage"
           :disabled="isInFirstPage"
@@ -40,6 +42,7 @@
 
       <li v-for="page in pages" :key="page.number" class="pagination-item">
         <button
+          class="pagination-btn"
           type="button"
           @click="onClickPage(page.number)"
           :disabled="page.isDisabled"
@@ -52,13 +55,23 @@
       <!-- Visible Buttons End -->
 
       <li class="pagination-item">
-        <button type="button" @click="onClickNextPage" :disabled="isInLastPage">
+        <button
+          class="pagination-btn"
+          type="button"
+          @click="onClickNextPage"
+          :disabled="isInLastPage"
+        >
           Next
         </button>
       </li>
 
       <li class="pagination-item">
-        <button type="button" @click="onClickLastPage" :disabled="isInLastPage">
+        <button
+          class="pagination-btn"
+          type="button"
+          @click="onClickLastPage"
+          :disabled="isInLastPage"
+        >
           Last
         </button>
       </li>
@@ -67,12 +80,12 @@
 </template>
 
 <script>
-import { defineAsyncComponent } from "vue";
+import PostCard from "../Post/PostCard.vue";
 
 export default {
   name: "PaginationBar",
   components: {
-    PostCard: defineAsyncComponent(() => import("../Post/PostCard.vue")),
+    PostCard,
   },
   props: {
     posts: {
@@ -182,24 +195,3 @@ export default {
 };
 </script>
 
-<style>
-.container {
-  @apply flex flex-col my-3 mx-auto;
-}
-
-.pagination-item {
-  @apply inline-block mb-10  rounded;
-}
-.pagination {
-  @apply text-center rounded content-center;
-}
-ul {
-  @apply list-none p-0 m-0;
-}
-button {
-  @apply font-extrabold p-2 mx-1 rounded border-gray-500;
-}
-.active {
-  @apply bg-gray-300 px-3 rounded-2xl;
-}
-</style>

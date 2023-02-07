@@ -8,8 +8,12 @@ const multer = require('../middleware/multer-config.js');
 router.get('/', auth, postCtrl.getAllPosts);
 router.get('/:uuid', auth, postCtrl.getOnePost);
 router.post('/', auth, multer, postCtrl.createPost);
-router.patch('/:uuid', auth, authAdmin, multer, postCtrl.modifyPost);
-router.delete('/:uuid', auth, authAdmin, postCtrl.deletePost);
+router.patch('/:uuid', auth, multer, postCtrl.modifyPost);
+router.delete('/:uuid', auth, postCtrl.deletePost);
+
+router.get('/', auth, authAdmin, postCtrl.getAllPosts);
+router.patch('/:uuid/admin', auth, authAdmin, multer, postCtrl.modifyPost);
+router.delete('/:uuid/admin', auth, authAdmin, postCtrl.deletePost);
 
 
 module.exports = router;

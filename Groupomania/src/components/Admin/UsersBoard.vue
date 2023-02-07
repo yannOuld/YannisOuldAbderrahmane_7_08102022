@@ -9,20 +9,31 @@
         <div v-if="user.imageUrl">
           <img :src="user.imageUrl" alt="image utilisateur" />
         </div>
-        <h2>{{ user.firstName }} {{ user.lastName }}</h2>
-        <p>{{ user.email }}</p>
-        <p>{{ user.biography }}</p>
+        <div class="user--infos">
+          <p>Nom: {{ user.firstName }} {{ user.lastName }}</p>
+          <p>Biographie: {{ user.biography }}</p>
+        </div>
         <div>
-          <button>delete</button>
-          <button>give admin rights</button>
+          <button @click="suppUser(user.uuid)">delete</button>
+          <button @click="isOpen = true">modifier</button>
         </div>
       </li>
+      <teleport to="body">
+        <div class="likes-modal_bg" v-if="isOpen">
+          <button @click="isOpen = false">quitter</button>
+          <profil-modify :uuid="user.uuid" />
+        </div>
+      </teleport>
     </ul>
   </div>
 </template>
 
 <script setup>
-import { defineProps } from "vue";
+import { defineProps, ref } from "vue";
+import { useAdminStore } from "../../stores/admin";
+import ProfilModify from "../../components/Profil/ProfilModify.vue";
+
+const isOpen = ref(false);
 
 defineProps({
   users: {
@@ -30,6 +41,12 @@ defineProps({
     required: true,
   },
 });
+
+const { deleteUser, modifyUser } = useAdminStore();
+
+const suppUser = async (uuid) => {
+  await deleteUser(uuid);
+};
 </script>
 
 <style scoped>

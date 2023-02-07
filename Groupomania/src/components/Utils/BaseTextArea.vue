@@ -46,15 +46,3 @@ defineProps({
   },
 });
 </script>
-
-<style scoped>
-div {
-  @apply flex flex-col;
-}
-textarea {
-  @apply resize-none w-3/4 mx-auto text-center;
-}
-label {
-  @apply mx-auto;
-}
-</style>

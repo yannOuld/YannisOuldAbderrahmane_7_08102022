@@ -7,7 +7,7 @@ export const usePostStore = defineStore({
     id: 'post',
     state: () => ({
         posts: [],
-        post: null,
+        post: {},
         loading: false,
         error: null
     }),
@@ -16,12 +16,15 @@ export const usePostStore = defineStore({
         postsNumber() {
             return this.posts.length
         },
+        getOwner() {
+            return this.post.owner
+        },
     },
 
     actions: {
         async fetchPosts() {
-            this.posts = []
-            this.loading = true
+            this.posts = [];
+            this.loading = true;
             try {
                 this.posts = await fetchWrapper.get(`http://localhost:3000/api/post/`).then((response) => {
                     return response.reverse()
@@ -39,16 +42,16 @@ export const usePostStore = defineStore({
 
             } catch (error) {
                 this.error = error
-                console.log('fuck it')
             }
         },
         async sendPost(formData) {
             this.post = null;
             try {
-                await fetchWrapper.postfile('http://localhost:3000/api/post/', formData)
+                this.post = await fetchWrapper.postfile('http://localhost:3000/api/post/', formData)
             } catch (error) {
                 this.error = error
             }
+            this.posts.unshift(this.post)
         },
         async deletePost(uuid) {
             this.post = null
@@ -59,8 +62,9 @@ export const usePostStore = defineStore({
             }
         },
         async modifyPost(uuid, formData) {
+            this.post = null
             try {
-                await fetchWrapper.patchfile(`http://localhost:3000/api/post/${uuid}`, formData)
+                this.post = await fetchWrapper.patch(`http://localhost:3000/api/post/${uuid}`, formData)
             } catch (error) {
                 console.log(error.message)
             }

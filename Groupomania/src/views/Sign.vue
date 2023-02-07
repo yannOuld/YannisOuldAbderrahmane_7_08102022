@@ -1,25 +1,26 @@
 <template>
-  <main class="view">
+  <div class="sign">
     <img
-      class="logo"
+      class="sign-logo"
       alt="Groupamania logo"
       src="../assets/images/icon-left-font-monochrome-black.png"
     />
 
-    <div v-if="mode.state == 'login'">
+    <div class="sign" v-if="mode.state == 'login'">
       <logg-in />
-      <button @click="switchRegister()">
-        Vous n'avez pas de compte ? <span>S'inscrire.</span>
+      <button class="sign-btn_switch" @click="switchRegister()">
+        Vous n'avez pas de compte ?
+        <span class="sign-btn_blue">S'inscrire.</span>
       </button>
     </div>
 
-    <div v-if="mode.state == 'register'">
+    <div class="sign" v-if="mode.state == 'register'">
       <sign-in />
-      <button @click="switchLogin()">
-        Déja inscrit ? <span> Se connecter.</span>
+      <button class="sign-btn_switch" @click="switchLogin()">
+        Déja inscrit ? <span class="sign-btn_blue"> Se connecter.</span>
       </button>
     </div>
-  </main>
+  </div>
 </template>
 
 <script>
@@ -56,27 +57,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-div {
-  display: flex;
-  flex-direction: column;
-}
-.logo {
-  width: 300px;
-  text-align: none;
-  margin: 10px 40px;
-}
-button {
-  border: none;
-  background-color: transparent;
-  font-size: 15px;
-  margin: 10px 0;
-  text-align: center;
-  cursor: pointer;
-}
-span {
-  color: blue;
-  font-weight: 900;
-}
-</style>

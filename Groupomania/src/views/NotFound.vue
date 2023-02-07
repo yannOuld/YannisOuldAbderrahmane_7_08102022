@@ -1,15 +1,19 @@
 <template>
-  <main>
-    <h1>Not Found</h1>
+  <div>
+    <h1 class="nofound-title">Not Found</h1>
 
     <div>
-      <img src="../assets/images/matrix.jpg" alt="photo de l'agent smith" />
-      <p>
+      <img
+        class="nofound-img"
+        src="../assets/images/matrix.jpg"
+        alt="photo de l'agent smith"
+      />
+      <p class="nofound-txt">
         Désolée Neo ! Il est trop tot pour pouvoir quitter la matrice du site !
       </p>
-      <button @click="home">Revenir à l'Accueil</button>
+      <button class="nofound-btn" @click="home">Revenir à l'Accueil</button>
     </div>
-  </main>
+  </div>
 </template>
 
 <script>
@@ -27,30 +31,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-h1 {
-  font-size: 25px;
-  font-weight: 900;
-  justify-content: center;
-}
-img {
-  width: 500px;
-  justify-content: center;
-  border-radius: 10px;
-}
-button {
-  color: white;
-  background-color: green;
-  font-size: 18px;
-}
-div {
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-}
-p {
-  font-size: 18px;
-  font-weight: 700;
-}
-</style>

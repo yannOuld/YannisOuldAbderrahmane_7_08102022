@@ -7,8 +7,6 @@ const asyncHandler = require("express-async-handler")
 
 // crée un Post
 exports.createPost = async (req, res, next) => {
-
-
     // recupération du body de la requete 
     const object = JSON.stringify(req.body);
     const { title, content, owner_id } = JSON.parse(object);
@@ -91,20 +89,18 @@ exports.deletePost = async (req, res, next) => {
 
 exports.modifyPost = async (req, res, next) => {
     let uuid = req.params.uuid
-    const object = JSON.stringify(req.body);
-    const { content, title } = JSON.parse(object);
 
-    Post.findOne({ where: { uuid } }).then(
+    const { content, title } = req.body;
+
+    Post.findOne({ where: { uuid }, include: 'owner' }).then(
         post => {
             if (!post) throw new Error('post not found')
             post.title = title
             post.content = content;
-
             post.save()
-                .then(() => res.status(201).json({ message: 'post updated !' }))
+                .then(() => res.status(201).json(post))
                 .catch((err) => res.status(500).json(err.message))
-        }
-    )
+        })
 
-    return res.status(200).json({ message: 'post updated !' })
+
 }

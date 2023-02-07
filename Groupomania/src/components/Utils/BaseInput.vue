@@ -37,15 +37,3 @@ defineProps({
   },
 });
 </script>
-
-<style scoped>
-div {
-  @apply flex flex-col;
-}
-input {
-  @apply w-3/4 my-1 mx-auto file:rounded-full file:bg-white file:py-2 file:px-6 file:cursor-pointer file:font-bold;
-}
-label {
-  @apply mx-auto;
-}
-</style>

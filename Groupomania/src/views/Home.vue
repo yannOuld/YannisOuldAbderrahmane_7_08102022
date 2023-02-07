@@ -1,19 +1,21 @@
 <template>
   <div>
-    <navigation-links></navigation-links>
-    <h1>Bienvenue chez Groupomania.</h1>
+    <navigation-links v-once></navigation-links>
+    <h1 v-once>Bienvenue chez Groupomania.</h1>
     <img
+      v-once
       src="../assets/images/icon.webP"
-      class="img"
+      class="home-img"
       alt="logo groupomania"
       rel="preload"
     />
-    <div>
-      <post-form />
-    </div>
-    <main class="post-container">
+
+    <post-form v-once />
+
+    <div class="home-container">
       <h1 v-once>Les derniers Posts</h1>
       <pagination-bar
+        :key="refresh"
         :currentPage="currentPage"
         :maxVisibleButtons="3"
         :posts="posts"
@@ -21,13 +23,13 @@
         :totalPages="Math.ceil(postsNumber / 7)"
         @pagechanged="onPageChange"
       />
-    </main>
+    </div>
   </div>
 </template>
 
 <script>
+import { defineAsyncComponent } from "vue";
 import PostForm from "../components/Post/PostForm.vue";
-import PaginationBar from "../components/Utils/PaginationBar.vue";
 import { usePostStore } from "../stores/posts";
 import { mapState } from "pinia";
 
@@ -35,7 +37,10 @@ export default {
   name: "HomeView",
   components: {
     PostForm,
-    PaginationBar,
+    PaginationBar: defineAsyncComponent({
+      loader: () => import("../components/Utils/PaginationBar.vue"),
+      delay: 1000,
+    }),
   },
 
   data() {
@@ -61,12 +66,3 @@ export default {
   },
 };
 </script>
-
-<style scoped>
-.img {
-  @apply hidden sm:flex mx-auto my-3 w-96;
-}
-h1 {
-  text-align: center;
-}
-</style>

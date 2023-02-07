@@ -10,6 +10,8 @@ router.get('/', auth, authAdmin, userCtrl.getAllUsers);
 router.post('/signup', userCtrl.signup);
 router.post('/login', userCtrl.login);
 router.patch('/:uuid', auth, multer, userCtrl.modifyUser);
-router.delete('/:uuid', auth, authAdmin, userCtrl.deleteUser);
+
+router.patch('/:uuid/admin', auth, multer, userCtrl.modifyUser);
+router.delete('/:uuid/admin', auth, authAdmin, userCtrl.deleteUser);
 
 module.exports = router;

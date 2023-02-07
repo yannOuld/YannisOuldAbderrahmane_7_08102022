@@ -13,15 +13,23 @@
           <h2>{{ post.title }}</h2>
           <p>{{ post.content }}</p>
         </div>
-        <button @click="postSupp(post.uuid)">delete</button>
+        <div>
+          <button @click="postSupp(post.uuid)">delete</button>
+          <button @click="isOpen = true">modifier</button>
+        </div>
+        <teleport to="body">
+          <div class="likes-modal_bg" v-if="isOpen">
+            <button @click="isOpen = false">quitter</button>
+          </div>
+        </teleport>
       </li>
     </ul>
   </div>
 </template>
 
 <script setup>
-import { defineProps } from "vue";
-import { usePostStore } from "../../stores/posts";
+import { defineProps, ref } from "vue";
+import { useAdminStore } from "../../stores/admin";
 
 defineProps({
   posts: {
@@ -29,10 +37,47 @@ defineProps({
   },
 });
 
-const { deletePost } = usePostStore();
+const isOpen = ref(false);
+
+const title = ref(null);
+const content = ref(null);
+const fileTarget = ref(null);
+
+const handleFileUpload = (event) => {
+  fileTarget.value = event.target.files[0];
+  console.log(fileTarget.value);
+};
+
+const { deletePost, modifyPost } = useAdminStore();
+
+const submit = async (uuid) => {
+  const formData = new FormData();
+  if (fileTarget.value != null) {
+    formData.append("image", fileTarget.value, fileTarget.value.name);
+  }
+  if (content.value != null) {
+    formData.append("content", content.value);
+  }
+  if (title.value != null) {
+    formData.append("title", title.value);
+  }
+  try {
+    await modifyPost(uuid, formData);
+    alert("le post à été modifié !");
+  } catch (error) {
+    console.log(error);
+    alert("une erreur est survenue");
+  }
+};
 
 const postSupp = async (uuid) => {
-  await deletePost(uuid);
+  try {
+    await deletePost(uuid);
+    alert("post supprimé !");
+  } catch (error) {
+    console.log(error);
+    alert("un probleme est survenu !");
+  }
 };
 </script>
 
