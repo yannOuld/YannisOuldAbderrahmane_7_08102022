@@ -95,7 +95,7 @@
     @apply w-11/12;
   }
   .admin-list {
-    @apply relative w-80 sm:w-9/12 rounded-xl bg-slate-200 bg-opacity-80 my-2 py-8 px-2;
+    @apply relative w-80 sm:w-9/12 rounded-xl bg-tertiarygroup bg-opacity-50 my-2 py-8 px-2;
   }
   .admin-list_id {
     @apply top-1;
@@ -134,7 +134,7 @@
     @apply hidden sm:flex mx-auto my-3 w-96 h-96;
   }
   .post-utils {
-    @apply my-5 w-3/4 p-4 justify-evenly  bg-slate-600 bg-opacity-80 shadow-md shadow-black;
+    @apply my-5 w-3/4 p-4 justify-evenly  bg-tertiarygroup bg-opacity-80 shadow-md shadow-black;
   }
   .post-btn_delete,
   .post-btn_modify {
@@ -162,7 +162,7 @@
     @apply mx-auto flex my-0 w-10/12 sm:w-96 justify-center sm:justify-end md:justify-end md:mx-3;
   }
   .navigation-btn {
-    @apply text-white border-0 rounded m-1 contrast-125 bg-red-600 py-1 px-3 h-12 transition ease-in-out delay-150;
+    @apply text-white border-0 rounded m-1 contrast-125 bg-primarygroup py-1 px-3 h-12 transition ease-in-out delay-150;
   }
   .navigation-btn_icon {
     @apply w-4 mr-2;
@@ -186,11 +186,11 @@
     @apply w-3/4 my-3 py-3 rounded-2xl font-extrabold;
   }
   .post-form_modify {
-    @apply bg-gray-600;
+    @apply bg-tertiarygroup;
   }
   .post-form_create,
   .comment-form {
-    @apply bg-red-600;
+    @apply bg-primarygroup;
   }
   .form-control {
     @apply mt-2;
@@ -227,10 +227,10 @@
     @apply sm:w-10/12;
   }
   .active {
-    @apply bg-gray-300 px-3 rounded-2xl;
+    @apply bg-tertiarygroup px-3 rounded-2xl;
   }
   .postcard-container {
-    @apply bg-red-300 relative  p-4 mb-8 mx-auto  shadow-lg shadow-black;
+    @apply bg-secondgroup relative  p-4 mb-8 mx-auto  shadow-lg shadow-black;
   }
   .postcard {
     @apply cursor-pointer relative bg-white  mx-auto rounded p-4 w-11/12   my-0 sm:my-3;
@@ -264,7 +264,7 @@
     @apply w-20  bottom-0 right-3 text-right;
   }
   .comment {
-    @apply w-3/4 my-2 p-4 rounded-3xl relative bg-gray-700;
+    @apply w-3/4 my-2 p-4 rounded-3xl relative bg-tertiarygroup;
   }
   .comment-user {
     @apply font-bold text-base text-left flex-row;
@@ -307,6 +307,9 @@
     @apply justify-evenly w-2/4;
   }
   .likes-btn_show {
-    @apply flex justify-center items-center;
+    @apply w-72 flex justify-center items-center;
+  }
+  .liked {
+    @apply text-red-600;
   }
 }

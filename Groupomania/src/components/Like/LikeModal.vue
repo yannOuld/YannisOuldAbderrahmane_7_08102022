@@ -1,6 +1,6 @@
 <template>
   <div class="relative">
-    <div class="likes">
+    <div class="likes flex-row">
       <button
         class="likes-btn_show hover:-translate-y-1 hover:scale-90 hover:bg-gray-300 duration-300"
         @click="isOpen = true"
@@ -8,12 +8,12 @@
         Likes utilisateurs
       </button>
       <div
-        class="likes_send hover:-translate-y-1 hover:scale-125 hover:text-red-600 duration-300"
-        @click="sendLike"
+        class="text-xl hover:-translate-y-1 hover:scale-125 duration-300"
+        @click="sendLike().then($emit('onLiked'))"
       >
-        <p>
+        <span :class="{ liked: userLiked() }">
           <font-awesome-icon icon="fa-solid fa-heart" />
-        </p>
+        </span>
       </div>
     </div>
     <teleport to="body">
@@ -34,8 +34,10 @@
 
 <script setup>
 import { storeToRefs } from "pinia";
-import { ref, defineProps, onMounted } from "vue";
+import { ref, defineProps, onMounted, watchEffect } from "vue";
 import { useLikeStore } from "../../stores/like";
+
+const emit = defineEmits(["onLiked"]);
 
 // props from parent component
 const props = defineProps({
@@ -53,7 +55,7 @@ const props = defineProps({
 const isOpen = ref(false);
 
 // like store
-const { getLikes, LikePost } = useLikeStore();
+const { getLikes, LikePost, findLike } = useLikeStore();
 
 // getting users who liked the post
 onMounted(() => {
@@ -70,4 +72,11 @@ const data = {
 const sendLike = async () => {
   await LikePost(props.uuid, data);
 };
+const userLiked = () => {
+  const liked = likes.value.find((like) => like.user_id == props.user_id);
+  if (liked != undefined) return true;
+};
+watchEffect(() => {
+  userLiked;
+});
 </script>

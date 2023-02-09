@@ -9,6 +9,11 @@ module.exports = {
     extend: {
       fontFamily: {
         lato: "'Lato', sans-serif"
+      },
+      backgroundColor: {
+        primarygroup: '#FD2D01',
+        secondgroup: '#FFD7D7',
+        tertiarygroup: '#4E5166',
       }
     },
   },

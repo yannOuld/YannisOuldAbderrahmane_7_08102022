@@ -30,7 +30,6 @@ exports.signup = async (req, res) => {
 
     // conditions de création du user 
     try {
-        console.log(req.body);
         // tests par regex et envoie de messages d'erreurs en cas d'échecs
         if (!nameRegex.test(firstName)) throw new Error('Invalid name');
         if (!nameRegex.test(lastName)) throw new Error('Invalid name');

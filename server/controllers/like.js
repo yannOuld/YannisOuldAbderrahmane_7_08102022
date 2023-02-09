@@ -23,7 +23,7 @@ exports.addLike = async (req, res, next) => {
             let newLike = await Like.create({ user_id, post_uuid: uuid })
             if (!newLike) throw new Error('Something went wrong')
 
-            console.log(newLike)
+
             await post.increment('likesCounter', { by: 1 })
 
             await post.save()

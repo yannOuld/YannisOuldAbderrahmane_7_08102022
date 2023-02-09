@@ -46,7 +46,6 @@ const submit = async () => {
   formData.owner_id = user.id;
   try {
     await sendComment(uuid, formData);
-    console.log(formData);
   } catch (error) {
     console.log("un probleme est survenu");
   }

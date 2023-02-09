@@ -58,7 +58,7 @@ const { userData } = storeToRefs(useAuthStore());
 const uuid = userData.value.user.uuid;
 
 // composable form
-let { title, fileTarget, handleFileUpload, biography, handleData, formData } =
+let { fileTarget, handleFileUpload, biography, handleData, formData } =
   multiPartForm();
 
 // compasable modal

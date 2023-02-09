@@ -33,9 +33,7 @@
 </template>
 
 <script setup>
-import { useUsersStore } from "../../stores/users";
-import { storeToRefs } from "pinia";
 defineProps({
-  author: { type: Object, required: true },
+  author: { type: Object },
 });
 </script>

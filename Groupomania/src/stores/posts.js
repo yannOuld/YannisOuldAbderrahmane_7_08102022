@@ -16,9 +16,6 @@ export const usePostStore = defineStore({
         postsNumber() {
             return this.posts.length
         },
-        getOwner() {
-            return this.post.owner
-        },
     },
 
     actions: {

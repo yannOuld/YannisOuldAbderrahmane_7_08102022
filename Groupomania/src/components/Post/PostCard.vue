@@ -42,13 +42,13 @@ import { usePostStore } from "../../stores/posts";
 //parent props
 const props = defineProps({
   update: { type: Number },
-  uuid: { type: String, required: true },
-  owner: { type: Object, required: true },
-  title: { type: String, required: true },
-  content: { type: String, required: true },
-  imageUrl: { type: String, required: true },
-  likesCounter: { type: Number, required: true },
-  createdAt: { type: String, required: true },
+  uuid: { type: String },
+  owner: { type: Object },
+  title: { type: String },
+  content: { type: String },
+  imageUrl: { type: String },
+  likesCounter: { type: Number },
+  createdAt: { type: String },
 });
 
 //user uuid data

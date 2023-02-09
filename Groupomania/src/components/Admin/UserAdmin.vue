@@ -48,7 +48,6 @@ const props = defineProps({
   uuid: { type: String },
 });
 
-console.log(props.uuid);
 // composable form
 let { biography, fileTarget, handleFileUpload, handleData, formData } =
   multiPartForm();

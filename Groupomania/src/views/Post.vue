@@ -1,7 +1,6 @@
 <template>
   <div class="post">
     <navigation-links></navigation-links>
-
     <div>
       <!-- Post component -->
       <post-card
@@ -15,12 +14,15 @@
         :likesCounter="post?.likesCounter"
       />
       <!-- like component -->
-      <like-modal :uuid="post?.uuid" :user_id="user?.id" />
-
+      <like-modal
+        @onLiked="updatePost"
+        :uuid="post?.uuid"
+        :user_id="user?.id"
+      />
       <post-utils v-if="user?.uuid == post?.owner.uuid" />
     </div>
     <comment-form @onCommentSubmit="updateComments" />
-    <comments-wrapper :key="forceUpdate" />
+    <comments :key="forceUpdate" />
   </div>
 </template>
 
@@ -47,27 +49,22 @@ export default {
       loader: () => import("../components/Post/PostUtils.vue"),
       delay: 1000,
     }),
+    Comments: defineAsyncComponent({
+      loader: () => import("../components/Comment/Comments.vue"),
+      delay: 1000,
+    }),
   },
 
   setup() {
     const update = ref(0);
     const forceUpdate = ref(0);
 
-    const updateComments = () => {
-      forceUpdate.value += 1;
-    };
-
-    const updatePost = () => {
-      console.log("render");
-      update.value += 1;
-    };
-
     // post uuid from the params
     const route = useRoute();
     const uuid = route.params.uuid;
 
     // fetch and find post data from the store
-    const { fetchOnePost, getOwner } = usePostStore();
+    const { fetchOnePost } = usePostStore();
     fetchOnePost(uuid);
     const { post } = storeToRefs(usePostStore());
 
@@ -75,6 +72,13 @@ export default {
     const { userData } = useAuthStore();
     const { user } = userData;
 
+    const updateComments = () => {
+      forceUpdate.value += 1;
+    };
+
+    const updatePost = () => {
+      update.value += 1;
+    };
     return {
       user,
       uuid,
