@@ -9,7 +9,7 @@ export const useAuthStore = defineStore({
 
   // States pinia user du localStorage et url de retour en cas de clear du localStorage
   state: () => ({
-    userData: useLocalStorage("userData", {}),
+    userData: useLocalStorage("userData", null),
     returnUrl: null,
   }),
 

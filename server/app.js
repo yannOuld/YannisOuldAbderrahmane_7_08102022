@@ -20,19 +20,21 @@ const apiLimiter = rateLimit({
   max: 100,
 });
 
-app.use("/images", express.static(path.join(__dirname, "images")));
-app.use("/api", apiLimiter, routes);
-
 // morgan logger for developpement
 app.use(morgan("combined"));
 app.use(morgan("combined", { immediate: true }));
 
+app.use("/images", express.static(path.join(__dirname, "images")));
+app.use("/api", apiLimiter, routes);
+
 // renvoie des messages d'erreurs en cas de problemes
 app.use((err, req, res, next) => {
-  console.error(err);
-  res.status(500).json({
-    error: err.message,
-  });
+  if (err instanceof Error) {
+    res.status(500).json({
+      error: err.message,
+    });
+
+  }
 });
 
 module.exports = app;

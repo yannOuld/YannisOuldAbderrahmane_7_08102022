@@ -2,7 +2,7 @@ const db = require("../models");
 const { User } = db.sequelize.models;
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
-const { SECRET_KEY } = process.env;
+const { JWT_SECRET } = process.env;
 
 // regex de vérification des inputs du formulaire
 
@@ -21,7 +21,7 @@ const newToken = (user) => {
       lastName: user.lastName,
       imageUrl: user.imageUrl,
     },
-    SECRET_KEY,
+    JWT_SECRET,
     {
       expiresIn: "24h",
     }
@@ -145,9 +145,8 @@ exports.modifyUser = async (req, res, next) => {
   let imageUrl;
 
   if (req.file) {
-    imageUrl = `${req.protocol}://${req.get("host")}/images/${
-      req.file.filename
-    }`;
+    imageUrl = `${req.protocol}://${req.get("host")}/images/${req.file.filename
+      }`;
   }
 
   User.findOne({ where: { uuid } }).then((user) => {
