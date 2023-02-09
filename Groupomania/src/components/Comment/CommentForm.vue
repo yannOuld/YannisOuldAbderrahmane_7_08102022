@@ -19,35 +19,35 @@
 </template>
 
 <script setup>
-import { useAuthStore } from "../../stores/auth";
-import { useRoute } from "vue-router";
-import { useCommentStore } from "../../stores/comment";
-import { reactive, defineEmits } from "vue";
+  import { useAuthStore } from "../../stores/auth";
+  import { useRoute } from "vue-router";
+  import { useCommentStore } from "../../stores/comment";
+  import { reactive, defineEmits } from "vue";
 
-const emit = defineEmits(["onCommentSubmit"]);
+  const emit = defineEmits(["onCommentSubmit"]);
 
-// post uuid from the params
-const route = useRoute();
-const uuid = route.params.uuid;
+  // post uuid from the params
+  const route = useRoute();
+  const uuid = route.params.uuid;
 
-//user data from the store
-const { userData } = useAuthStore();
-const { user } = userData;
+  //user data from the store
+  const { userData } = useAuthStore();
+  const { user } = userData;
 
-// reactive form input and user id
-const formData = reactive({
-  content: "",
-  owner_id: null,
-});
+  // reactive form input and user id
+  const formData = reactive({
+    content: "",
+    owner_id: null,
+  });
 
-// sending a comment
-const { sendComment } = useCommentStore();
-const submit = async () => {
-  formData.owner_id = user.id;
-  try {
-    await sendComment(uuid, formData);
-  } catch (error) {
-    console.log("un probleme est survenu");
-  }
-};
+  // sending a comment
+  const { sendComment } = useCommentStore();
+  const submit = async () => {
+    formData.owner_id = user.id;
+    try {
+      await sendComment(uuid, formData);
+    } catch (error) {
+      console.log("un probleme est survenu");
+    }
+  };
 </script>

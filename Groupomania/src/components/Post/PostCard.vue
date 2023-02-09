@@ -34,45 +34,45 @@
 </template>
 
 <script setup>
-import { useRouter } from "vue-router";
-import { ref, defineProps } from "vue";
-import { useAuthStore } from "../../stores/auth";
-import { usePostStore } from "../../stores/posts";
+  import { useRouter } from "vue-router";
+  import { ref, defineProps } from "vue";
+  import { useAuthStore } from "../../stores/auth";
+  import { usePostStore } from "../../stores/posts";
 
-//parent props
-const props = defineProps({
-  update: { type: Number },
-  uuid: { type: String },
-  owner: { type: Object },
-  title: { type: String },
-  content: { type: String },
-  imageUrl: { type: String },
-  likesCounter: { type: Number },
-  createdAt: { type: String },
-});
-
-//user uuid data
-const { userData } = useAuthStore();
-const { user } = userData;
-let identification = ref(null);
-identification.value = user.uuid;
-
-// call router
-const router = useRouter();
-
-// router link
-const postPage = () => {
-  router.push({
-    name: "PostView",
-    params: { uuid: props.uuid },
+  //parent props
+  const props = defineProps({
+    update: { type: Number },
+    uuid: { type: String },
+    owner: { type: Object },
+    title: { type: String },
+    content: { type: String },
+    imageUrl: { type: String },
+    likesCounter: { type: Number },
+    createdAt: { type: String },
   });
-};
 
-// call post store
-const { deletePost } = usePostStore();
+  //user uuid data
+  const { userData } = useAuthStore();
+  const { user } = userData;
+  let identification = ref(null);
+  identification.value = user.uuid;
 
-// delete post function
-const deleteOnePost = async (uuid) => {
-  return await deletePost(uuid);
-};
+  // call router
+  const router = useRouter();
+
+  // router link
+  const postPage = () => {
+    router.push({
+      name: "PostView",
+      params: { uuid: props.uuid },
+    });
+  };
+
+  // call post store
+  const { deletePost } = usePostStore();
+
+  // delete post function
+  const deleteOnePost = async (uuid) => {
+    return await deletePost(uuid);
+  };
 </script>

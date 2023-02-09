@@ -31,36 +31,36 @@
 </template>
 
 <script setup>
-import { useAuthStore } from "../../stores/auth";
-import { useCommentStore } from "../../stores/comment";
-import { defineEmits, defineProps } from "vue";
+  import { useAuthStore } from "../../stores/auth";
+  import { useCommentStore } from "../../stores/comment";
+  import { defineEmits, defineProps } from "vue";
 
-const props = defineProps({
-  comment: { type: Object },
-  owner: { type: Object },
-});
+  const props = defineProps({
+    comment: { type: Object },
+    owner: { type: Object },
+  });
 
-const emit = defineEmits(["onDelete"]);
+  const emit = defineEmits(["onDelete"]);
 
-const comment = props.comment;
-const owner = props.owner;
-const uuid = comment.uuid;
-const id = comment.id;
+  const comment = props.comment;
+  const owner = props.owner;
+  const uuid = comment.uuid;
+  const id = comment.id;
 
-const { userData } = useAuthStore();
-const { user } = userData;
+  const { userData } = useAuthStore();
+  const { user } = userData;
 
-const { deleteComment } = useCommentStore();
+  const { deleteComment } = useCommentStore();
 
-const suppComment = async (uuid, user) => {
-  try {
-    await deleteComment(uuid, id);
-  } catch (err) {
-    console.log(err);
-  }
-};
+  const suppComment = async (uuid, user) => {
+    try {
+      await deleteComment(uuid, id);
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
-const emitCommentId = () => {
-  emit("onDelete", comment.id);
-};
+  const emitCommentId = () => {
+    emit("onDelete", comment.id);
+  };
 </script>

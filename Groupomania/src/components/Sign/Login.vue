@@ -43,55 +43,55 @@
 </template>
 
 <script setup>
-import { modal } from "../../utils/modal.js";
-import { reactive, computed, ref } from "vue";
-import { useRouter } from "vue-router";
-import useVuelidate from "@vuelidate/core";
-import { required, email } from "@vuelidate/validators";
-import { useAuthStore } from "../../stores/auth";
+  import { modal } from "../../utils/modal.js";
+  import { reactive, computed, ref } from "vue";
+  import { useRouter } from "vue-router";
+  import useVuelidate from "@vuelidate/core";
+  import { required, email } from "@vuelidate/validators";
+  import { useAuthStore } from "../../stores/auth";
 
-let { isOpen, msgErr, showPopup } = modal();
+  let { isOpen, msgErr, showPopup } = modal();
 
-// auth store
-const { login } = useAuthStore();
+  // auth store
+  const { login } = useAuthStore();
 
-// reactive inputs
-const formData = reactive({
-  email: "",
-  password: "",
-});
+  // reactive inputs
+  const formData = reactive({
+    email: "",
+    password: "",
+  });
 
-// vuelidate rules
-const rules = computed(() => {
-  return {
-    email: { required, email },
-    password: { required },
-  };
-});
+  // vuelidate rules
+  const rules = computed(() => {
+    return {
+      email: { required, email },
+      password: { required },
+    };
+  });
 
-// router
-const router = useRouter();
+  // router
+  const router = useRouter();
 
-// vuelidate variable
-const v$ = useVuelidate(rules, formData);
+  // vuelidate variable
+  const v$ = useVuelidate(rules, formData);
 
-//form submit function
-const submit = async () => {
-  const validation = await v$._value.$validate();
+  //form submit function
+  const submit = async () => {
+    const validation = await v$._value.$validate();
 
-  if (!validation) {
-    msgErr.value = "Tout les champs doivent être remplis";
-    return showPopup();
-  }
-  try {
-    const response = await login(formData);
-    if (!response) {
-      msgErr.value = "les identifiants ne correspondent à aucun compte";
-      showPopup();
+    if (!validation) {
+      msgErr.value = "Tout les champs doivent être remplis";
+      return showPopup();
     }
-    return response;
-  } catch (error) {
-    return;
-  }
-};
+    try {
+      const response = await login(formData);
+      if (!response) {
+        msgErr.value = "les identifiants ne correspondent à aucun compte";
+        showPopup();
+      }
+      return response;
+    } catch (error) {
+      return;
+    }
+  };
 </script>

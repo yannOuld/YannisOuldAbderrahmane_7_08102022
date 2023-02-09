@@ -33,7 +33,7 @@
 </template>
 
 <script setup>
-defineProps({
-  author: { type: Object },
-});
+  defineProps({
+    author: { type: Object },
+  });
 </script>

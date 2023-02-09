@@ -21,31 +21,31 @@
 </template>
 
 <script setup>
-import { useRoute } from "vue-router";
-import { useUsersStore } from "../stores/users";
-import { storeToRefs } from "pinia";
-import { reactive } from "vue";
-import ProfilModify from "../components/Profil/ProfilModify.vue";
-import ProfilPage from "../components/Profil/ProfilPage.vue";
+  import { useRoute } from "vue-router";
+  import { useUsersStore } from "../stores/users";
+  import { storeToRefs } from "pinia";
+  import { reactive } from "vue";
+  import ProfilModify from "../components/Profil/ProfilModify.vue";
+  import ProfilPage from "../components/Profil/ProfilPage.vue";
 
-// mode for components display
-const mode = reactive({
-  state: "read" || "modify",
-});
-// method for mode read
-const switchRead = () => {
-  mode.state = "read";
-};
-// method for mode modify
-const switchModify = () => {
-  mode.state = "modify";
-};
-// retrieving user uuid from the params
-const route = useRoute();
-const uuid = route.params.uuid;
+  // mode for components display
+  const mode = reactive({
+    state: "read" || "modify",
+  });
+  // method for mode read
+  const switchRead = () => {
+    mode.state = "read";
+  };
+  // method for mode modify
+  const switchModify = () => {
+    mode.state = "modify";
+  };
+  // retrieving user uuid from the params
+  const route = useRoute();
+  const uuid = route.params.uuid;
 
-// fetching page user with the store
-const { fetchOneAuthor } = useUsersStore();
-fetchOneAuthor(uuid);
-const { author } = storeToRefs(useUsersStore());
+  // fetching page user with the store
+  const { fetchOneAuthor } = useUsersStore();
+  fetchOneAuthor(uuid);
+  const { author } = storeToRefs(useUsersStore());
 </script>

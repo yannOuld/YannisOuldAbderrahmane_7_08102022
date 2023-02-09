@@ -37,21 +37,21 @@
 </template>
 
 <script setup>
-import { multiPartForm } from "../../utils/form.js";
-import { usePostStore } from "../../stores/posts";
+  import { multiPartForm } from "../../utils/form.js";
+  import { usePostStore } from "../../stores/posts";
 
-const { sendPost } = usePostStore();
-// input file handling
-let { title, fileTarget, handleFileUpload, content, handleData, formData } =
-  multiPartForm();
+  const { sendPost } = usePostStore();
+  // input file handling
+  let { title, fileTarget, handleFileUpload, content, handleData, formData } =
+    multiPartForm();
 
-// form submit
-const submit = async () => {
-  handleData();
-  try {
-    await sendPost(formData);
-  } catch (error) {
-    console.log(error);
-  }
-};
+  // form submit
+  const submit = async () => {
+    handleData();
+    try {
+      await sendPost(formData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 </script>

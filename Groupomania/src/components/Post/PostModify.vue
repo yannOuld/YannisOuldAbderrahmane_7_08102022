@@ -32,35 +32,35 @@
 </template>
 
 <script setup>
-import { ref, defineProps } from "vue";
-import { usePostStore } from "../../stores/posts";
+  import { ref, defineProps } from "vue";
+  import { usePostStore } from "../../stores/posts";
 
-//props uuid from parent component
-const props = defineProps({
-  uuid: { type: String, required: true },
-});
+  //props uuid from parent component
+  const props = defineProps({
+    uuid: { type: String, required: true },
+  });
 
-// form inputs refs
-const title = ref(null);
-const content = ref(null);
+  // form inputs refs
+  const title = ref(null);
+  const content = ref(null);
 
-// submit post modification
-const { modifyPost } = usePostStore();
+  // submit post modification
+  const { modifyPost } = usePostStore();
 
-const submit = async () => {
-  const uuid = props.uuid;
-  let formData;
-  if (title.value === null) {
-    formData = { content: content.value };
-  } else if (content.value === null) {
-    formData = { title: title.value };
-  } else {
-    formData = { title: title.value, content: content.value };
-  }
-  try {
-    await modifyPost(uuid, formData);
-  } catch (error) {
-    console.log(error);
-  }
-};
+  const submit = async () => {
+    const uuid = props.uuid;
+    let formData;
+    if (title.value === null) {
+      formData = { content: content.value };
+    } else if (content.value === null) {
+      formData = { title: title.value };
+    } else {
+      formData = { title: title.value, content: content.value };
+    }
+    try {
+      await modifyPost(uuid, formData);
+    } catch (error) {
+      console.log(error);
+    }
+  };
 </script>

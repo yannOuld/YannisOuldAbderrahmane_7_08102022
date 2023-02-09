@@ -43,39 +43,39 @@
 </template>
 
 <script setup>
-import router from "../../router/index";
-import { reactive } from "vue";
-import { useRoute } from "vue-router";
-import PostModify from "./PostModify.vue";
-import { usePostStore } from "../../stores/posts";
-import { useAuthStore } from "../../stores/auth";
+  import router from "../../router/index";
+  import { reactive } from "vue";
+  import { useRoute } from "vue-router";
+  import PostModify from "./PostModify.vue";
+  import { usePostStore } from "../../stores/posts";
+  import { useAuthStore } from "../../stores/auth";
 
-// reactive mode
-const mode = reactive({
-  state: "read" || "modify",
-});
+  // reactive mode
+  const mode = reactive({
+    state: "read" || "modify",
+  });
 
-// post uuid from the params
-const route = useRoute();
-const uuid = route.params.uuid;
+  // post uuid from the params
+  const route = useRoute();
+  const uuid = route.params.uuid;
 
-// finding user data
-const { userData } = useAuthStore();
-const { user } = userData;
+  // finding user data
+  const { userData } = useAuthStore();
+  const { user } = userData;
 
-const { post, deletePost } = usePostStore();
+  const { post, deletePost } = usePostStore();
 
-// function for mode read
-const switchRead = () => {
-  mode.state = "read";
-};
+  // function for mode read
+  const switchRead = () => {
+    mode.state = "read";
+  };
 
-// function for mode modify
-const switchModify = () => {
-  mode.state = "modify";
-};
-// delete post and move to home component
-const suppPost = async () => {
-  await deletePost(uuid).then(router.replace("/home"));
-};
+  // function for mode modify
+  const switchModify = () => {
+    mode.state = "modify";
+  };
+  // delete post and move to home component
+  const suppPost = async () => {
+    await deletePost(uuid).then(router.replace("/home"));
+  };
 </script>

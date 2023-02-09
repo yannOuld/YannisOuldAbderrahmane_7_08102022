@@ -17,17 +17,17 @@
 </template>
 
 <script>
-import { useRouter } from "vue-router";
-export default {
-  name: "NotFound",
-  setup() {
-    const router = useRouter();
-    const home = () => {
-      router.push("/home");
-    };
-    return {
-      home,
-    };
-  },
-};
+  import { useRouter } from "vue-router";
+  export default {
+    name: "NotFound",
+    setup() {
+      const router = useRouter();
+      const home = () => {
+        router.push("/home");
+      };
+      return {
+        home,
+      };
+    },
+  };
 </script>

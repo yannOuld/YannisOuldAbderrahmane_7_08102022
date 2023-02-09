@@ -33,33 +33,33 @@
 </template>
 
 <script setup>
-import PostAdmin from "./PostAdmin.vue";
-import { defineProps, ref } from "vue";
-import { useAdminStore } from "../../stores/admin";
+  import PostAdmin from "./PostAdmin.vue";
+  import { defineProps, ref } from "vue";
+  import { useAdminStore } from "../../stores/admin";
 
-defineProps({
-  posts: {
-    type: Array,
-  },
-});
+  defineProps({
+    posts: {
+      type: Array,
+    },
+  });
 
-const isOpen = ref(false);
-const targetUuid = ref(null);
+  const isOpen = ref(false);
+  const targetUuid = ref(null);
 
-const OpenTarget = (uuid) => {
-  isOpen.value = true;
-  targetUuid.value = uuid;
-};
+  const OpenTarget = (uuid) => {
+    isOpen.value = true;
+    targetUuid.value = uuid;
+  };
 
-const { deletePost } = useAdminStore();
+  const { deletePost } = useAdminStore();
 
-const postSupp = async (uuid) => {
-  try {
-    await deletePost(uuid);
-    alert("post supprimé !");
-  } catch (error) {
-    console.log(error);
-    alert("un probleme est survenu !");
-  }
-};
+  const postSupp = async (uuid) => {
+    try {
+      await deletePost(uuid);
+      alert("post supprimé !");
+    } catch (error) {
+      console.log(error);
+      alert("un probleme est survenu !");
+    }
+  };
 </script>

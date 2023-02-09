@@ -15,34 +15,34 @@
 </template>
 
 <script setup>
-defineProps({
-  label: {
-    type: String,
-    default: "",
-  },
-  maxlength: {
-    type: String,
-    default: "500",
-  },
-  rows: {
-    type: String,
-    default: "5",
-  },
-  cols: {
-    type: String,
-    default: "60",
-  },
-  name: {
-    type: String,
-    default: "",
-  },
-  id: {
-    type: String,
-    default: "",
-  },
-  modelValue: {
-    type: String,
-    default: "",
-  },
-});
+  defineProps({
+    label: {
+      type: String,
+      default: "",
+    },
+    maxlength: {
+      type: String,
+      default: "500",
+    },
+    rows: {
+      type: String,
+      default: "5",
+    },
+    cols: {
+      type: String,
+      default: "60",
+    },
+    name: {
+      type: String,
+      default: "",
+    },
+    id: {
+      type: String,
+      default: "",
+    },
+    modelValue: {
+      type: String,
+      default: "",
+    },
+  });
 </script>

@@ -7,7 +7,7 @@
 <script></script>
 
 <style scoped>
-.app {
-  @apply w-full;
-}
+  .app {
+    @apply w-full;
+  }
 </style>

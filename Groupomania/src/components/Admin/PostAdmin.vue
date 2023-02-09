@@ -43,28 +43,28 @@
 </template>
 
 <script setup>
-import { multiPartForm } from "../../utils/form.js";
-import { useAdminStore } from "../../stores/admin";
+  import { multiPartForm } from "../../utils/form.js";
+  import { useAdminStore } from "../../stores/admin";
 
-//props uuid from parent component
-const props = defineProps({
-  uuid: { type: String, required: true },
-});
+  //props uuid from parent component
+  const props = defineProps({
+    uuid: { type: String, required: true },
+  });
 
-const { modifyPost } = useAdminStore();
+  const { modifyPost } = useAdminStore();
 
-// composable form
-let { title, fileTarget, content, handleFileUpload, handleData, formData } =
-  multiPartForm();
+  // composable form
+  let { title, fileTarget, content, handleFileUpload, handleData, formData } =
+    multiPartForm();
 
-const submit = async () => {
-  handleData();
-  try {
-    await modifyPost(props.uuid, formData);
-    alert("le post à été modifié !");
-  } catch (error) {
-    console.log(error);
-    alert("une erreur est survenue");
-  }
-};
+  const submit = async () => {
+    handleData();
+    try {
+      await modifyPost(props.uuid, formData);
+      alert("le post à été modifié !");
+    } catch (error) {
+      console.log(error);
+      alert("une erreur est survenue");
+    }
+  };
 </script>

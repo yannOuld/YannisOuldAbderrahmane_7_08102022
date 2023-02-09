@@ -42,28 +42,28 @@
 </template>
 
 <script setup>
-import { defineProps, ref } from "vue";
-import { useAdminStore } from "../../stores/admin";
-import UserAdmin from "./UserAdmin.vue";
+  import { defineProps, ref } from "vue";
+  import { useAdminStore } from "../../stores/admin";
+  import UserAdmin from "./UserAdmin.vue";
 
-defineProps({
-  users: {
-    type: Array,
-    required: true,
-  },
-});
+  defineProps({
+    users: {
+      type: Array,
+      required: true,
+    },
+  });
 
-const isOpen = ref(false);
-const targetUuid = ref(null);
+  const isOpen = ref(false);
+  const targetUuid = ref(null);
 
-const OpenTarget = (uuid) => {
-  isOpen.value = true;
-  targetUuid.value = uuid;
-};
+  const OpenTarget = (uuid) => {
+    isOpen.value = true;
+    targetUuid.value = uuid;
+  };
 
-const { deleteUser } = useAdminStore();
+  const { deleteUser } = useAdminStore();
 
-const suppUser = async (uuid) => {
-  await deleteUser(uuid);
-};
+  const suppUser = async (uuid) => {
+    await deleteUser(uuid);
+  };
 </script>

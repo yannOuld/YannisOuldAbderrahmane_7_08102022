@@ -1,44 +1,41 @@
-'use strict';
-const {
-  Model
-} = require('sequelize');
+"use strict";
+const { Model } = require("sequelize");
 module.exports = (sequelize, DataTypes) => {
-
   class Like extends Model {
-
     static associate(models) {
       models.User.belongsToMany(models.Post, {
         through: models.Like,
-        foreignKey: 'user_id',
-        otherKey: 'post_uuid'
+        foreignKey: "user_id",
+        otherKey: "post_uuid",
       });
       models.Post.belongsToMany(models.User, {
         through: models.Like,
-        foreignKey: 'post_uuid',
-        otherKey: 'user_id'
+        foreignKey: "post_uuid",
+        otherKey: "user_id",
       });
       models.Like.belongsTo(models.User, {
-        foreignKey: 'user_id',
-        as: 'user',
+        foreignKey: "user_id",
+        as: "user",
       });
       models.Like.belongsTo(models.Post, {
-        foreignKey: 'post_uuid',
-        as: 'post',
+        foreignKey: "post_uuid",
+        as: "post",
       });
     }
-  };
-  Like.init({
-    post_uuid: {
-      type: DataTypes.UUID,
-
+  }
+  Like.init(
+    {
+      post_uuid: {
+        type: DataTypes.UUID,
+      },
+      user_id: {
+        type: DataTypes.INTEGER,
+      },
     },
-    user_id: {
-      type: DataTypes.INTEGER,
-
-    },
-  }, {
-    sequelize,
-    modelName: 'Like',
-  });
+    {
+      sequelize,
+      modelName: "Like",
+    }
+  );
   return Like;
 };

@@ -12,32 +12,32 @@
 </template>
 
 <script setup>
-import { useRoute } from "vue-router";
-import { storeToRefs } from "pinia";
-import { useCommentStore } from "../../stores/comment.js";
-import { defineProps, ref } from "vue";
-import CommentCard from "./CommentCard.vue";
+  import { useRoute } from "vue-router";
+  import { storeToRefs } from "pinia";
+  import { useCommentStore } from "../../stores/comment.js";
+  import { defineProps, ref } from "vue";
+  import CommentCard from "./CommentCard.vue";
 
-let update = ref(0);
+  let update = ref(0);
 
-const props = defineProps({
-  forceUpdate: {
-    type: Number,
-  },
-});
+  const props = defineProps({
+    forceUpdate: {
+      type: Number,
+    },
+  });
 
-// finding uuid of the post
-const route = useRoute();
-const uuid = route.params.uuid;
+  // finding uuid of the post
+  const route = useRoute();
+  const uuid = route.params.uuid;
 
-// fetch API corresponding comments to the store
-const { fetchComments } = useCommentStore();
-fetchComments(uuid);
+  // fetch API corresponding comments to the store
+  const { fetchComments } = useCommentStore();
+  fetchComments(uuid);
 
-// retrieving comments data from the store
-const { comments } = storeToRefs(useCommentStore());
+  // retrieving comments data from the store
+  const { comments } = storeToRefs(useCommentStore());
 
-const onCommentDelete = () => {
-  update += 1;
-};
+  const onCommentDelete = () => {
+    update += 1;
+  };
 </script>

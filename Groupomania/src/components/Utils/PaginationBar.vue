@@ -80,118 +80,117 @@
 </template>
 
 <script>
-import PostCard from "../Post/PostCard.vue";
+  import PostCard from "../Post/PostCard.vue";
 
-export default {
-  name: "PaginationBar",
-  components: {
-    PostCard,
-  },
-  props: {
-    posts: {
-      type: Array,
-      required: true,
+  export default {
+    name: "PaginationBar",
+    components: {
+      PostCard,
     },
-    maxVisibleButtons: {
-      type: Number,
-      required: false,
-      default: 3,
+    props: {
+      posts: {
+        type: Array,
+        required: true,
+      },
+      maxVisibleButtons: {
+        type: Number,
+        required: false,
+        default: 3,
+      },
+      totalPages: {
+        type: Number,
+        required: true,
+        default: 7,
+      },
+      perPage: {
+        type: Number,
+        required: true,
+      },
+      currentPage: {
+        type: Number,
+        required: true,
+      },
     },
-    totalPages: {
-      type: Number,
-      required: true,
-      default: 7,
-    },
-    perPage: {
-      type: Number,
-      required: true,
-    },
-    currentPage: {
-      type: Number,
-      required: true,
-    },
-  },
-  computed: {
-    // calculating the starting button value
-    startPage() {
-      if (this.currentPage === 1) return 1;
+    computed: {
+      // calculating the starting button value
+      startPage() {
+        if (this.currentPage === 1) return 1;
 
-      if (this.currentPage === this.totalPages) {
-        return (
-          this.totalPages -
-          this.maxVisibleButtons +
-          (this.maxVisibleButtons - 1)
+        if (this.currentPage === this.totalPages) {
+          return (
+            this.totalPages -
+            this.maxVisibleButtons +
+            (this.maxVisibleButtons - 1)
+          );
+        }
+
+        return this.currentPage - 1;
+      },
+      // calculatin the last button value
+      endPage() {
+        return Math.min(
+          this.startPage + this.maxVisibleButtons - 1,
+          this.totalPages
         );
-      }
+      },
+      // calcultating the pages number
+      pages() {
+        const range = [];
+        for (let i = this.startPage; i <= this.endPage; i += 1) {
+          range.push({
+            number: i,
+            isDisabled: i === this.currentPage,
+          });
+        }
+        return range;
+      },
 
-      return this.currentPage - 1;
-    },
-    // calculatin the last button value
-    endPage() {
-      return Math.min(
-        this.startPage + this.maxVisibleButtons - 1,
-        this.totalPages
-      );
-    },
-    // calcultating the pages number
-    pages() {
-      const range = [];
-      for (let i = this.startPage; i <= this.endPage; i += 1) {
-        range.push({
-          number: i,
-          isDisabled: i === this.currentPage,
-        });
-      }
-      return range;
-    },
+      // Posts array slice for pagination
+      paginatedPosts() {
+        let start = (this.currentPage - 1) * this.perPage;
+        let end = start + this.perPage;
 
-    // Posts array slice for pagination
-    paginatedPosts() {
-      let start = (this.currentPage - 1) * this.perPage;
-      let end = start + this.perPage;
+        return this.posts.slice(start, end);
+      },
 
-      return this.posts.slice(start, end);
-    },
+      // BOUNDING FIRST AND LAST PAGE
+      isInFirstPage() {
+        return this.currentPage === 1;
+      },
 
-    // BOUNDING FIRST AND LAST PAGE
-    isInFirstPage() {
-      return this.currentPage === 1;
+      isInLastPage() {
+        return this.currentPage === this.totalPages;
+      },
     },
+    methods: {
+      // BUTTONS EVENTS EMITS
+      onClickFirstPage() {
+        this.$emit("pagechanged", 1);
+      },
 
-    isInLastPage() {
-      return this.currentPage === this.totalPages;
-    },
-  },
-  methods: {
-    // BUTTONS EVENTS EMITS
-    onClickFirstPage() {
-      this.$emit("pagechanged", 1);
-    },
+      onClickPreviousPage() {
+        this.$emit("pagechanged", this.currentPage - 1);
+      },
 
-    onClickPreviousPage() {
-      this.$emit("pagechanged", this.currentPage - 1);
-    },
+      onClickPage(page) {
+        this.$emit("pagechanged", page);
+      },
 
-    onClickPage(page) {
-      this.$emit("pagechanged", page);
-    },
+      onClickNextPage() {
+        this.$emit("pagechanged", this.currentPage + 1);
+      },
 
-    onClickNextPage() {
-      this.$emit("pagechanged", this.currentPage + 1);
-    },
+      onClickLastPage() {
+        this.$emit("pagechanged", this.totalPages);
+      },
 
-    onClickLastPage() {
-      this.$emit("pagechanged", this.totalPages);
-    },
+      isPageActive(page) {
+        return this.currentPage === page;
+      },
 
-    isPageActive(page) {
-      return this.currentPage === page;
+      onPageChange(page) {
+        this.currentPage = page;
+      },
     },
-
-    onPageChange(page) {
-      this.currentPage = page;
-    },
-  },
-};
+  };
 </script>
-

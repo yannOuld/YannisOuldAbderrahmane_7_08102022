@@ -87,69 +87,69 @@
 </template>
 
 <script setup>
-import { modal } from "../../utils/modal.js";
-import { myfetch } from "../../utils/fetchWrapp";
-import { reactive } from "vue";
-import { computed } from "vue";
-import useVuelidate from "@vuelidate/core";
-import {
-  required,
-  email,
-  sameAs,
-  minLength,
-  helpers,
-} from "@vuelidate/validators";
+  import { modal } from "../../utils/modal.js";
+  import { myfetch } from "../../utils/fetchWrapp";
+  import { reactive } from "vue";
+  import { computed } from "vue";
+  import useVuelidate from "@vuelidate/core";
+  import {
+    required,
+    email,
+    sameAs,
+    minLength,
+    helpers,
+  } from "@vuelidate/validators";
 
-// compasable modal
-let { isOpen, msgErr, msgSucces, showPopup } = modal();
+  // compasable modal
+  let { isOpen, msgErr, msgSucces, showPopup } = modal();
 
-// reactive form inputs
-const formData = reactive({
-  firstName: "",
-  lastName: "",
-  email: "",
-  password: "",
-  confirmPassword: "",
-});
+  // reactive form inputs
+  const formData = reactive({
+    firstName: "",
+    lastName: "",
+    email: "",
+    password: "",
+    confirmPassword: "",
+  });
 
-// vuelidate rules and regex helper
-const regex = helpers.regex(
-  /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/
-);
+  // vuelidate rules and regex helper
+  const regex = helpers.regex(
+    /^(?=.*?[A-Z])(?=.*?[a-z])(?=.*?[0-9])(?=.*?[#?!@$ %^&*-]).{8,}$/
+  );
 
-const rules = computed(() => {
-  return {
-    firstName: { required, minLength: minLength(2) },
-    lastName: { required, minLength: minLength(2) },
-    email: { required, email },
-    password: { required, helpers: regex },
-    confirmPassword: { required, sameAs: sameAs(formData.password) },
+  const rules = computed(() => {
+    return {
+      firstName: { required, minLength: minLength(2) },
+      lastName: { required, minLength: minLength(2) },
+      email: { required, email },
+      password: { required, helpers: regex },
+      confirmPassword: { required, sameAs: sameAs(formData.password) },
+    };
+  });
+
+  // vuelidate
+  const v$ = useVuelidate(rules, formData);
+
+  //form submit
+  const submit = async () => {
+    // vuelidate inputs validation
+    const validation = await v$._value.$validate();
+
+    if (!validation) {
+      msgErr.value = "Veuillez verifier les champs.";
+      return showPopup();
+    }
+
+    // fetch
+    const response = await myfetch("POST", "/user/signup", formData);
+
+    // modal handling
+    if (response.uuid) {
+      msgSucces.value = "compte créée avec succes.";
+      return showPopup();
+    } else {
+      msgErr.value = "Echec de l'inscription.";
+      return showPopup();
+    }
   };
-});
-
-// vuelidate
-const v$ = useVuelidate(rules, formData);
-
-//form submit
-const submit = async () => {
-  // vuelidate inputs validation
-  const validation = await v$._value.$validate();
-
-  if (!validation) {
-    msgErr.value = "Veuillez verifier les champs.";
-    return showPopup();
-  }
-
-  // fetch
-  const response = await myfetch("POST", "/user/signup", formData);
-
-  // modal handling
-  if (response.uuid) {
-    msgSucces.value = "compte créée avec succes.";
-    return showPopup();
-  } else {
-    msgErr.value = "Echec de l'inscription.";
-    return showPopup();
-  }
-};
 </script>

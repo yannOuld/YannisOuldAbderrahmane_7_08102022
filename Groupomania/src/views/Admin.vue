@@ -18,36 +18,36 @@
 </template>
 
 <script>
-import { ref, defineAsyncComponent, onMounted } from "vue";
-import { useAdminStore } from "../stores/admin";
+  import { ref, defineAsyncComponent, onMounted } from "vue";
+  import { useAdminStore } from "../stores/admin";
 
-import { storeToRefs } from "pinia";
-export default {
-  name: "AdminView",
-  components: {
-    PostBoard: defineAsyncComponent({
-      loader: () => import("../components/Admin/PostBoard.vue"),
-      delay: 1000,
-    }),
-    UsersBoard: defineAsyncComponent({
-      loader: () => import("../components/Admin/UsersBoard.vue"),
-      delay: 1000,
-    }),
-  },
-  setup() {
-    const { fetchPosts, fetchUsers } = useAdminStore();
+  import { storeToRefs } from "pinia";
+  export default {
+    name: "AdminView",
+    components: {
+      PostBoard: defineAsyncComponent({
+        loader: () => import("../components/Admin/PostBoard.vue"),
+        delay: 1000,
+      }),
+      UsersBoard: defineAsyncComponent({
+        loader: () => import("../components/Admin/UsersBoard.vue"),
+        delay: 1000,
+      }),
+    },
+    setup() {
+      const { fetchPosts, fetchUsers } = useAdminStore();
 
-    onMounted(() => {
-      fetchUsers();
-      fetchPosts();
-    });
+      onMounted(() => {
+        fetchUsers();
+        fetchPosts();
+      });
 
-    const { users } = storeToRefs(useAdminStore());
-    const { posts } = storeToRefs(useAdminStore());
+      const { users } = storeToRefs(useAdminStore());
+      const { posts } = storeToRefs(useAdminStore());
 
-    const userSection = ref(true);
+      const userSection = ref(true);
 
-    return { users, userSection, posts };
-  },
-};
+      return { users, userSection, posts };
+    },
+  };
 </script>

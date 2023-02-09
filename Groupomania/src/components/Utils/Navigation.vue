@@ -46,38 +46,38 @@
 </template>
 
 <script setup>
-import { useAuthStore } from "../../stores/auth";
-import { useRouter } from "vue-router";
+  import { useAuthStore } from "../../stores/auth";
+  import { useRouter } from "vue-router";
 
-//call store data and router
-const { userData, authAdmin } = useAuthStore();
-const { user } = userData;
-const { logout } = useAuthStore();
-const router = useRouter();
+  //call store data and router
+  const { userData, authAdmin } = useAuthStore();
+  const { user } = userData;
+  const { logout } = useAuthStore();
+  const router = useRouter();
 
-// link Home component
-const home = () => {
-  router.push("/home");
-};
+  // link Home component
+  const home = () => {
+    router.push("/home");
+  };
 
-// link profil component
-const profil = () => {
-  router.push({
-    name: "ProfilView",
-    params: { uuid: user.uuid },
-  });
-};
+  // link profil component
+  const profil = () => {
+    router.push({
+      name: "ProfilView",
+      params: { uuid: user.uuid },
+    });
+  };
 
-// link profil component
-const admin = () => {
-  router.push({
-    name: "AdminView",
-  });
-};
+  // link profil component
+  const admin = () => {
+    router.push({
+      name: "AdminView",
+    });
+  };
 
-// logout function
-const logOut = () => {
-  logout();
-  return router.push("/");
-};
+  // logout function
+  const logOut = () => {
+    logout();
+    return router.push("/");
+  };
 </script>

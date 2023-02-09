@@ -33,50 +33,50 @@
 </template>
 
 <script setup>
-import { storeToRefs } from "pinia";
-import { ref, defineProps, onMounted, watchEffect } from "vue";
-import { useLikeStore } from "../../stores/like";
+  import { storeToRefs } from "pinia";
+  import { ref, defineProps, onMounted, watchEffect } from "vue";
+  import { useLikeStore } from "../../stores/like";
 
-const emit = defineEmits(["onLiked"]);
+  const emit = defineEmits(["onLiked"]);
 
-// props from parent component
-const props = defineProps({
-  uuid: {
-    type: String,
-    required: true,
-  },
-  user_id: {
-    type: Number,
-    required: true,
-  },
-});
+  // props from parent component
+  const props = defineProps({
+    uuid: {
+      type: String,
+      required: true,
+    },
+    user_id: {
+      type: Number,
+      required: true,
+    },
+  });
 
-// ref for the modal open and quit
-const isOpen = ref(false);
+  // ref for the modal open and quit
+  const isOpen = ref(false);
 
-// like store
-const { getLikes, LikePost, findLike } = useLikeStore();
+  // like store
+  const { getLikes, LikePost, findLike } = useLikeStore();
 
-// getting users who liked the post
-onMounted(() => {
-  getLikes(props.uuid);
-});
+  // getting users who liked the post
+  onMounted(() => {
+    getLikes(props.uuid);
+  });
 
-const { likes } = storeToRefs(useLikeStore());
+  const { likes } = storeToRefs(useLikeStore());
 
-const data = {
-  user_id: props.user_id,
-};
+  const data = {
+    user_id: props.user_id,
+  };
 
-//sending a like
-const sendLike = async () => {
-  await LikePost(props.uuid, data);
-};
-const userLiked = () => {
-  const liked = likes.value.find((like) => like.user_id == props.user_id);
-  if (liked != undefined) return true;
-};
-watchEffect(() => {
-  userLiked;
-});
+  //sending a like
+  const sendLike = async () => {
+    await LikePost(props.uuid, data);
+  };
+  const userLiked = () => {
+    const liked = likes.value.find((like) => like.user_id == props.user_id);
+    if (liked != undefined) return true;
+  };
+  watchEffect(() => {
+    userLiked;
+  });
 </script>

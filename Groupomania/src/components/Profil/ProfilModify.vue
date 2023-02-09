@@ -48,35 +48,36 @@
 </template>
 
 <script setup>
-import { modal } from "../../utils/modal.js";
-import { multiPartForm } from "../../utils/form.js";
-import { useAuthStore } from "../../stores/auth";
-import { storeToRefs } from "pinia";
+  import { modal } from "../../utils/modal.js";
+  import { multiPartForm } from "../../utils/form.js";
+  import { useAuthStore } from "../../stores/auth";
+  import { storeToRefs } from "pinia";
 
-// user uuid
-const { userData } = storeToRefs(useAuthStore());
-const uuid = userData.value.user.uuid;
+  // user uuid
+  const { userData } = storeToRefs(useAuthStore());
+  const uuid = userData.value.user.uuid;
 
-// composable form
-let { fileTarget, handleFileUpload, biography, handleData, formData } =
-  multiPartForm();
+  // composable form
+  let { fileTarget, handleFileUpload, biography, handleData, formData } =
+    multiPartForm();
 
-// compasable modal
-let { isOpen, msgErr, msgSucces, showPopup } = modal();
+  // compasable modal
+  let { isOpen, msgErr, msgSucces, showPopup } = modal();
 
-// form submit to modify user
-const { modify } = useAuthStore();
+  // form submit to modify user
+  const { modify } = useAuthStore();
 
-const submit = async () => {
-  handleData();
-  try {
-    await modify(uuid, formData);
-    msgSucces.value = "Votre profil à été mis à jour !";
-    return showPopup();
-  } catch (error) {
-    console.log(error);
-    msgErr.value = "Ouups une erreur c'est produite ! essayez plus tard... :(";
-    return showPopup();
-  }
-};
+  const submit = async () => {
+    handleData();
+    try {
+      await modify(uuid, formData);
+      msgSucces.value = "Votre profil à été mis à jour !";
+      return showPopup();
+    } catch (error) {
+      console.log(error);
+      msgErr.value =
+        "Ouups une erreur c'est produite ! essayez plus tard... :(";
+      return showPopup();
+    }
+  };
 </script>
