@@ -1,22 +1,21 @@
-const jwt = require("jsonwebtoken");
-const { JWT_SECRET } = process.env;
+const jwt = require("../manager/jwt");
 
-if (!JWT_SECRET) throw new Error("JWT_SECRET must be set in .env");
+
+function modifyPermit(req, res, user_id) {
+  if (req.auth.role === "admin") return;
+  if (user_id === req.auth.user_id) return;
+  throw res.status(401).json("Unauthorized")
+}
+
+
 
 module.exports = (req, res, next) => {
-  try {
-    const header = req.headers.authorization;
-    const token = header.split(" ")[1];
-    const decodedToken = jwt.verify(token, JWT_SECRET);
-    req.reqdata = decodedToken;
-    if (req.body.user_id && req.body.user_id !== req.reqdata.user_id) {
-      throw " Invalid user ID";
-    } else {
-      next();
-    }
-  } catch (error) {
-    res.status(401).json({
-      error: new Error("Invalid request!"),
-    });
-  }
+  const header = req.headers.authorization;
+  const token = header.split(" ")[1];
+  const decodedToken = jwt.verify(token);
+  req.auth = decodedToken;
+
+  if (!req.auth.user_id) throw res.status(401).json('Unauthorized');
+  next();
+
 };
