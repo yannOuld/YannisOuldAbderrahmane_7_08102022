@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-  import { modal } from "../../utils/modal.js";
+  import { modal } from "../Forms/modal";
   import { reactive, computed, ref } from "vue";
   import { useRouter } from "vue-router";
   import useVuelidate from "@vuelidate/core";
@@ -85,11 +85,12 @@
     }
     try {
       const response = await login(formData);
+      console.log(response);
       if (!response) {
         msgErr.value = "les identifiants ne correspondent à aucun compte";
         showPopup();
       }
-      return response;
+      router.push("/");
     } catch (error) {
       return;
     }

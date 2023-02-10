@@ -1,3 +1,5 @@
+const db = require("../models");
+const { User } = db.sequelize.models;
 const jwt = require('../manager/jwt');
 const bcrypt = require("bcrypt");
 
@@ -20,11 +22,11 @@ async function signup(req, res) {
         if (!passwordRegex.test(password)) throw new Error("Invalid password");
 
         // searching user in database
-        const userFound = await User.findOne({
+        const userSearch = await User.findOne({
             attributes: ["email"],
             where: { email: email },
         });
-        if (userFound) throw new Error("Email déja utilisée !");
+        if (userSearch) throw new Error("Email déja utilisée !");
 
         // bcrypt hash
         const bcryptedPassword = await bcrypt.hash(password, 5);
@@ -43,8 +45,8 @@ async function signup(req, res) {
         });
 
     } catch (err) {
-        console.error(err);
-        return res.status(400).json(err.message);
+        console.error('hello' + err);
+        return res.status(400).json(err);
     }
 };
 
@@ -65,7 +67,7 @@ async function login(req, res, next) {
         // format response
         const { createdAt, updatedAt, password, ...response } = user.dataValues;
 
-        return res.status(200).json(jwt.sign(response));
+        return res.status(200).json({ user: response, token: jwt.sign(response) });
     } catch (err) {
         console.error(err);
         res.status(401).json(err.message);

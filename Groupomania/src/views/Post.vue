@@ -50,7 +50,7 @@
         delay: 1000,
       }),
       Comments: defineAsyncComponent({
-        loader: () => import("../components/Comment/Comments.vue"),
+        loader: () => import("../components/Layout/Comments.vue"),
         delay: 1000,
       }),
     },

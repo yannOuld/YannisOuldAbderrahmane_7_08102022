@@ -48,8 +48,8 @@
 </template>
 
 <script setup>
-  import { modal } from "../../utils/modal.js";
-  import { multiPartForm } from "../../utils/form.js";
+  import { modal } from "../Forms/modal";
+  import { multiPartForm } from "../Forms/form";
   import { useAuthStore } from "../../stores/auth";
   import { storeToRefs } from "pinia";
 

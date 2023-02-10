@@ -87,7 +87,7 @@
 </template>
 
 <script setup>
-  import { modal } from "../../utils/modal.js";
+  import { modal } from "../Forms/modal";
   import { myfetch } from "../../utils/fetchWrapp";
   import { reactive } from "vue";
   import { computed } from "vue";

@@ -35,8 +35,6 @@ export const useAuthStore = defineStore({
         this.userData = userData;
       } catch (error) {
         console.log(error.message);
-      } finally {
-        router.push("/home");
       }
     },
 
@@ -55,7 +53,6 @@ export const useAuthStore = defineStore({
     //fonction de déconnection
     logout() {
       this.userData = null;
-      router.push("/");
     },
 
     async deleteUser(uuid) {

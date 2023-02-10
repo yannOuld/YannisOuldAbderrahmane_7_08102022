@@ -16,7 +16,7 @@
   import { storeToRefs } from "pinia";
   import { useCommentStore } from "../../stores/comment.js";
   import { defineProps, ref } from "vue";
-  import CommentCard from "./CommentCard.vue";
+  import CommentCard from "../Comment/CommentCard.vue";
 
   let update = ref(0);
 

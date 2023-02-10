@@ -13,6 +13,7 @@ function auth(req, res, next) {
   const header = req.headers.authorization;
   const token = header.split(" ")[1];
   const decodedToken = jwt.verify(token);
+  console.log('hello ' + JSON.stringify(decodedToken));
   req.auth = decodedToken;
 
   if (!req.auth.user_id) throw res.status(401).json('Unauthorized');

@@ -37,7 +37,7 @@
 </template>
 
 <script setup>
-  import { multiPartForm } from "../../utils/form.js";
+  import { multiPartForm } from "../Forms/form.js";
   import { usePostStore } from "../../stores/posts";
 
   const { sendPost } = usePostStore();

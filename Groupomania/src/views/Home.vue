@@ -37,7 +37,7 @@
     components: {
       PostForm,
       PaginationBar: defineAsyncComponent({
-        loader: () => import("../components/Utils/PaginationBar.vue"),
+        loader: () => import("../components/Layout/PaginationBar.vue"),
         delay: 1000,
       }),
     },
