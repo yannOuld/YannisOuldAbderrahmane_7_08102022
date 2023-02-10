@@ -2,7 +2,7 @@ const db = require("../models");
 const fs = require("fs");
 const { Post, Like } = db.sequelize.models;
 
-exports.addLike = async (req, res, next) => {
+async function addLike(req, res, next) {
   const uuid = req.params.uuid;
   const { user_id } = req.body;
 
@@ -41,7 +41,7 @@ exports.addLike = async (req, res, next) => {
   }
 };
 
-exports.getLikes = async (req, res, next) => {
+async function getLikes(req, res, next) {
   const post_uuid = req.params.uuid;
   try {
     const likes = await Like.findAll({
@@ -53,3 +53,5 @@ exports.getLikes = async (req, res, next) => {
     return res.status(400).json({ err });
   }
 };
+
+module.exports = { getLikes, addLike }

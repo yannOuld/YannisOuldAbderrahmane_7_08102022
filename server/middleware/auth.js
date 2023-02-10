@@ -9,7 +9,7 @@ function modifyPermit(req, res, user_id) {
 
 
 
-module.exports = (req, res, next) => {
+function auth(req, res, next) {
   const header = req.headers.authorization;
   const token = header.split(" ")[1];
   const decodedToken = jwt.verify(token);
@@ -19,3 +19,6 @@ module.exports = (req, res, next) => {
   next();
 
 };
+
+
+module.exports = { modifyPermit, auth }

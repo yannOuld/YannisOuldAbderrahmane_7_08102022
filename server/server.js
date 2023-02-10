@@ -1,4 +1,5 @@
 require("dotenv").config();
+const PORT = 3000 || process.env.PORT;
 
 // package HTTP de node.js
 const http = require("http");
@@ -21,7 +22,7 @@ const normalizePort = (val) => {
 };
 
 // créee une variable pour le port de connecté
-const port = normalizePort(process.env.PORT || "3000");
+const port = normalizePort(PORT);
 
 // gere les erreurs d'ecoutes de port
 const errorHandler = (error) => {
@@ -59,16 +60,5 @@ server.on("listening", () => {
 // écoute des requetes sur le port
 sequelize
   .sync({ force: true, alter: true })
-  .then(() => {
-    server.listen(port),
-      async () => {
-        console.log("Server up on http://localhost:3000");
-        console.log("Database synced");
-      };
-  })
-  .catch((e) => {
-    console.error(
-      "Une erreur est survenue lors de l'iniatialisation de la base de données !"
-    );
-    console.error(e);
-  });
+  .then(() => server.listen(port))
+  .catch((e) => console.error(e));

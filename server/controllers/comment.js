@@ -1,13 +1,14 @@
 const db = require("../models");
 const { Comment } = db.sequelize.models;
+const { modifyPermit } = require('../middleware/auth');
 
 // crée un commentaire
-exports.createComment = async (req, res, next) => {
+async function createComment(req, res, next) {
   const { content, owner_id } = req.body;
   const post_uuid = req.params.uuid;
 
   // conditions ou message d'erreur en cas de problèmes
-  if (owner_id !== req.reqdata.user_id) throw new Error("Wrong user");
+  if (owner_id !== req.auth.user_id) throw new Error("Wrong user");
 
   // creation du commentaire avec le model sequelize, le body de la requete , les id  user et post
   try {
@@ -26,7 +27,7 @@ exports.createComment = async (req, res, next) => {
 };
 
 // trouver tout les commentaires
-exports.getAllComment = async (req, res, next) => {
+async function getAllComment(req, res, next) {
   const post_uuid = req.params.uuid;
 
   // parametrages de recherche
@@ -49,13 +50,15 @@ exports.getAllComment = async (req, res, next) => {
 };
 
 // supprimer un commentaire
-exports.deleteComment = async (req, res, next) => {
+async function deleteComment(req, res, next) {
   const id = req.params.id;
 
   try {
-    const comment = await Comment.findOne({ where: { id } });
+    const comment = await Comment.findOne({ where: { id } }).then((comment) => {
+      if (!comment) throw new Error("I have the high ground Anakin !");
+      modifyPermit(comment.owner_id)
+    });
 
-    if (!comment) throw new Error("I have the high ground Anakin !");
 
     await comment.destroy();
 
@@ -64,3 +67,5 @@ exports.deleteComment = async (req, res, next) => {
     return res.status(400).json(err.message);
   }
 };
+
+module.exports = { deleteComment, createComment, getAllComment }

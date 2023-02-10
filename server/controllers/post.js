@@ -1,10 +1,11 @@
 const { sequelize } = require("../models");
 const db = require("../models");
 const { Post } = db.sequelize.models;
-const asyncHandler = require("express-async-handler");
+const { modifyPermit } = require('../middleware/auth');
+
 
 // crée un Post
-exports.createPost = async (req, res, next) => {
+async function createPost(req, res, next) {
   // recupération du body de la requete
   const object = JSON.stringify(req.body);
   const { title, content, owner_id } = JSON.parse(object);
@@ -16,9 +17,8 @@ exports.createPost = async (req, res, next) => {
 
   // vérifier si il y a un fichier et transformer la requete en object JSON
   if (req.file) {
-    imageUrl = `${req.protocol}://${req.get("host")}/images/${
-      req.file.filename
-    }`;
+    imageUrl = `${req.protocol}://${req.get("host")}/images/${req.file.filename
+      }`;
   }
 
   // crée  le Post dans la base de donnée avec l'id du user
@@ -39,7 +39,7 @@ exports.createPost = async (req, res, next) => {
 };
 
 // récupérer un Post grace à l'uuid et le model user
-exports.getOnePost = asyncHandler(async (req, res, next) => {
+async function getOnePost(req, res, next) {
   const uuid = req.params.uuid;
   try {
     const post = await Post.findOne({ where: { uuid }, include: "owner" });
@@ -48,10 +48,10 @@ exports.getOnePost = asyncHandler(async (req, res, next) => {
   } catch (err) {
     return res.status(500).json(err);
   }
-});
+};
 
 // récupérer tout les Posts d'un user
-exports.getAllPosts = async (req, res, next) => {
+async function getAllPosts(req, res, next) {
   try {
     const posts = await Post.findAll({
       include: "owner",
@@ -64,13 +64,18 @@ exports.getAllPosts = async (req, res, next) => {
 };
 
 // supprimé un Post
-exports.deletePost = async (req, res, next) => {
+async function deletePost(req, res, next) {
   try {
     // recupération de l'id
     const uuid = req.params.uuid;
 
     // retrouver le Post
-    const post = await Post.findOne({ where: { uuid } });
+    const post = await Post.findOne({ where: { uuid } }).then(
+      (post) => {
+        if (!post) throw new Error("Something went wrong !");
+        modifyPermit(post.owner_id)
+      }
+    );
 
     // supprimé le post
     await post.destroy();
@@ -80,13 +85,14 @@ exports.deletePost = async (req, res, next) => {
   }
 };
 
-exports.modifyPost = async (req, res, next) => {
+async function modifyPost(req, res, next) {
   let uuid = req.params.uuid;
 
   const { content, title } = req.body;
 
   Post.findOne({ where: { uuid }, include: "owner" }).then((post) => {
     if (!post) throw new Error("post not found");
+    modifyPermit(post.owner_id);
     post.title = title;
     post.content = content;
     post
@@ -95,3 +101,5 @@ exports.modifyPost = async (req, res, next) => {
       .catch((err) => res.status(500).json(err.message));
   });
 };
+
+module.exports = { modifyPost, deletePost, getAllPosts, getOnePost, createPost }
