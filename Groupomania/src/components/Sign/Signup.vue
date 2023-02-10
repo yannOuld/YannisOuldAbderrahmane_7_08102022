@@ -141,7 +141,7 @@
     }
 
     // fetch
-    const response = await myfetch("POST", "/user/signup", formData);
+    const response = await myfetch("POST", "/auth/register", formData);
 
     // modal handling
     if (response.uuid) {

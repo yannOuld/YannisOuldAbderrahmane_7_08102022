@@ -9,7 +9,12 @@ export const useAuthStore = defineStore({
 
   // States pinia user du localStorage et url de retour en cas de clear du localStorage
   state: () => ({
-    userData: useLocalStorage("userData", null),
+    userData: useLocalStorage("userData", null, {
+      serializer: {
+        read: (v) => (v ? JSON.parse(v) : null),
+        write: (v) => JSON.stringify(v),
+      }
+    }),
     returnUrl: null,
   }),
 
@@ -24,7 +29,7 @@ export const useAuthStore = defineStore({
     async login(formData) {
       try {
         const userData = await fetchWrapper.post(
-          `http://localhost:3000/api/user/login`,
+          `http://localhost:3000/api/auth/login`,
           formData
         );
         this.userData = userData;

@@ -1,73 +1,20 @@
 import { createRouter, createWebHistory } from "vue-router";
-import { useAuthStore } from "../stores/auth.js";
-import SignView from "../views/Sign.vue";
-import ProfilView from "../views/Profil.vue";
-import PostView from "../views/Post.vue";
-import HomeView from "../views/Home.vue";
+import Sign from "../views/Sign.vue";
+import Profil from "../views/Profil.vue";
+import Post from "../views/Post.vue";
+import Home from "../views/Home.vue";
 import NotFound from "../views/NotFound.vue";
-import AdminView from "../views/Admin.vue";
+import Admin from "../views/Admin.vue";
 
-// path to the components
+const authRequired = true;
+const adminRequired = true;
 const routes = [
-  // Public Page
-  {
-    path: "/",
-    name: "SignView",
-    component: SignView,
-
-    meta: {
-      title: "Inscription",
-    },
-  },
-  // Home component
-  {
-    path: "/home",
-    name: HomeView,
-    component: HomeView,
-    props: true,
-    meta: {
-      title: "Accueil",
-      description: "page des posts",
-    },
-  },
-  // Profil component
-  {
-    path: "/profil/:uuid",
-    name: "ProfilView",
-    component: ProfilView,
-    props: true,
-    meta: {
-      title: "Profil",
-      description: "page de profil",
-    },
-  },
-  // Post component
-  {
-    path: "/post/:uuid",
-    name: "PostView",
-    component: PostView,
-    props: true,
-    meta: {
-      title: "Post de",
-      description: "page de post",
-    },
-  },
-  // Admin DashBoard
-  {
-    path: "/admin",
-    name: "AdminView",
-    component: AdminView,
-  },
-  // Out of Boundaries
-  {
-    path: "/:pathMatch(.*)",
-    name: "NotFound",
-    component: NotFound,
-    meta: {
-      title: "not found",
-      description: "page non trouvée",
-    },
-  },
+  { path: "/login", component: Sign, meta: {}, },
+  { path: "/", component: Home, meta: { authRequired }, },
+  { path: "/profil/:uuid", component: Profil, meta: { authRequired }, },
+  { path: "/post/:uuid", component: Post, meta: { authRequired }, },
+  { path: "/admin", component: Admin, meta: { adminRequired } },
+  { path: "/:pathMatch(.*)", component: NotFound, meta: { authRequired }, },
 ];
 
 //  router creation
@@ -79,20 +26,12 @@ const router = createRouter({
 
 //Guardian redirection and public pages
 router.beforeEach(async (to) => {
-  // public page (signview)
-  const publicPages = ["/"];
+  if (to.meta.authRequired && auth.userData) {
+    return { path: '/login', query: { redirect: to.fullPath } };
+  }
 
-  // not public page
-  const authRequired = !publicPages.includes(to.path);
-
-  // pinia store auth
-  const auth = useAuthStore();
-
-  // if not in public page and auth data missing
-  if (authRequired && !auth.userData) {
-    // return to public page
-    auth.returnUrl = to.fullPath;
-    return "/";
+  if (to.meta.adminRequired && auth.userData?.role !== 'admin') {
+    return { path: '/', query: { redirect: to.fullPath } }
   }
 });
 

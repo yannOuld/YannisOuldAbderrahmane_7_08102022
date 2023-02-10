@@ -1,5 +1,4 @@
 const db = require("../models");
-const fs = require("fs");
 const { Post, Like } = db.sequelize.models;
 
 async function addLike(req, res, next) {
