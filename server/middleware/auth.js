@@ -16,7 +16,7 @@ function auth(req, res, next) {
   console.log('hello ' + JSON.stringify(decodedToken));
   req.auth = decodedToken;
 
-  if (!req.auth.user_id) throw res.status(401).json('Unauthorized');
+  if (!req.auth) throw res.status(401).json('Unauthorized');
   next();
 
 };

@@ -11,7 +11,7 @@ async function createPost(req, res, next) {
   const { title, content, owner_id } = JSON.parse(object);
 
   // vérifier si l'identifiant correspond à un admin
-  if (owner_id != req.reqdata.user_id) throw new Error("Wrong user");
+  if (owner_id != req.auth.id) throw new Error("Wrong user");
 
   let imageUrl;
 
