@@ -1,5 +1,6 @@
 <template>
   <form
+    ref="anyName"
     class="post-form_create hover:shadow-red-900 hover:shadow-xl"
     enctype="multipart/form-data"
     @submit.prevent="submit()"
@@ -39,6 +40,9 @@
 <script setup>
   import { multiPartForm } from "../Forms/form.js";
   import { usePostStore } from "../../stores/posts";
+  import { ref } from "vue";
+
+  const anyName = ref(null);
 
   const { sendPost } = usePostStore();
   // input file handling
@@ -53,5 +57,6 @@
     } catch (error) {
       console.log(error);
     }
+    anyName.value.reset();
   };
 </script>

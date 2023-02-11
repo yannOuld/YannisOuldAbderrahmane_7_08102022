@@ -11,7 +11,7 @@
       <p class="nofound-txt">
         Désolée Neo ! Il est trop tot pour pouvoir quitter la matrice du site !
       </p>
-      <router-link to="/home" class="no-underline text-white">
+      <router-link to="/" class="no-underline text-white">
         <button class="nofound-btn">Revenir à l'Accueil</button>
       </router-link>
     </div>

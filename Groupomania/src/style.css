@@ -265,7 +265,7 @@
     @apply text-sm  sm:text-base;
   }
   .postcard-user_img {
-    @apply w-8 h-8 sm:w-20 sm:h-20 border-solid border-4 border-red-400 rounded-full mr-2;
+    @apply w-8 h-8 sm:w-20 sm:h-20 border-solid border-4 border-red-400 rounded-full mx-2;
   }
   .postcard-date_txt,
   .postcard-likes_counter {
