@@ -1,18 +1,3 @@
-<template>
-  <div>
-    <label :for="name">{{ label }}</label>
-    <input
-      type="text"
-      :placeholder="placeholder"
-      :name="name"
-      :value="modelValue"
-      :id="id"
-      v-bind="$attrs"
-      @input="$emit('update:modelValue', $event.target.value)"
-    />
-  </div>
-</template>
-
 <script setup>
   defineProps({
     label: {
@@ -37,3 +22,18 @@
     },
   });
 </script>
+
+<template>
+  <div>
+    <label :for="name">{{ label }}</label>
+    <input
+      type="text"
+      :placeholder="placeholder"
+      :name="name"
+      :value="modelValue"
+      :id="id"
+      v-bind="$attrs"
+      @input="$emit('update:modelValue', $event.target.value)"
+    />
+  </div>
+</template>

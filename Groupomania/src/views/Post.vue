@@ -1,31 +1,3 @@
-<template>
-  <div class="post">
-    <navigation-links></navigation-links>
-    <div>
-      <!-- Post component -->
-      <post-card
-        :key="update"
-        :uuid="post?.uuid"
-        :content="post?.content"
-        :title="post?.title"
-        :owner="post?.owner"
-        :imageUrl="post?.imageUrl"
-        :createdAt="post?.createdAt"
-        :likesCounter="post?.likesCounter"
-      />
-      <!-- like component -->
-      <like-modal
-        @onLiked="updatePost"
-        :uuid="post?.uuid"
-        :user_id="user?.id"
-      />
-      <post-utils v-if="user?.uuid == post?.owner.uuid" />
-    </div>
-    <comment-form @onCommentSubmit="updateComments" />
-    <comments :key="forceUpdate" />
-  </div>
-</template>
-
 <script>
   import { useRoute } from "vue-router";
   import { ref, defineAsyncComponent } from "vue";
@@ -91,3 +63,30 @@
     },
   };
 </script>
+<template>
+  <div class="post">
+    <navigation-links></navigation-links>
+    <div>
+      <!-- Post component -->
+      <post-card
+        :key="update"
+        :uuid="post?.uuid"
+        :content="post?.content"
+        :title="post?.title"
+        :owner="post?.owner"
+        :imageUrl="post?.imageUrl"
+        :createdAt="post?.createdAt"
+        :likesCounter="post?.likesCounter"
+      />
+      <!-- like component -->
+      <like-modal
+        @onLiked="updatePost"
+        :uuid="post?.uuid"
+        :user_id="user?.id"
+      />
+      <post-utils v-if="user?.uuid == post?.owner.uuid" />
+    </div>
+    <comment-form @onCommentSubmit="updateComments" />
+    <comments :key="forceUpdate" />
+  </div>
+</template>

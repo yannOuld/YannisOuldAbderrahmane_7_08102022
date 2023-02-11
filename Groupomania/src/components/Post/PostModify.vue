@@ -1,36 +1,3 @@
-<template>
-  <div>
-    <form
-      class="post-form_modify"
-      enctype="multipart/form-data"
-      @submit.prevent="submit()"
-    >
-      <h2>Modifier le Post</h2>
-      <div class="form-control">
-        <div class="form-control">
-          <base-input
-            v-model="title"
-            label="changer le titre"
-            name="title"
-            id="title"
-          ></base-input>
-        </div>
-
-        <div class="form-control">
-          <base-input
-            v-model="content"
-            label="changer le message"
-            name="content"
-            id="content"
-          ></base-input>
-        </div>
-
-        <button class="btn">modifier le post</button>
-      </div>
-    </form>
-  </div>
-</template>
-
 <script setup>
   import { ref } from "vue";
   import { usePostStore } from "../../stores/posts";
@@ -64,3 +31,36 @@
     }
   };
 </script>
+
+<template>
+  <div>
+    <form
+      class="post-form_modify"
+      enctype="multipart/form-data"
+      @submit.prevent="submit()"
+    >
+      <h2>Modifier le Post</h2>
+      <div class="form-control">
+        <div class="form-control">
+          <base-input
+            v-model="title"
+            label="changer le titre"
+            name="title"
+            id="title"
+          ></base-input>
+        </div>
+
+        <div class="form-control">
+          <base-input
+            v-model="content"
+            label="changer le message"
+            name="content"
+            id="content"
+          ></base-input>
+        </div>
+
+        <button class="btn">modifier le post</button>
+      </div>
+    </form>
+  </div>
+</template>

@@ -1,3 +1,35 @@
+<script setup>
+  import PostAdmin from "./PostAdmin.vue";
+  import { ref } from "vue";
+  import { useAdminStore } from "../../stores/admin";
+
+  defineProps({
+    posts: {
+      type: Array,
+    },
+  });
+
+  const isOpen = ref(false);
+  const targetUuid = ref(null);
+
+  const OpenTarget = (uuid) => {
+    isOpen.value = true;
+    targetUuid.value = uuid;
+  };
+
+  const { deletePost } = useAdminStore();
+
+  const postSupp = async (uuid) => {
+    try {
+      await deletePost(uuid);
+      alert("post supprimé !");
+    } catch (error) {
+      console.log(error);
+      alert("un probleme est survenu !");
+    }
+  };
+</script>
+
 <template>
   <div v-if="posts">
     <ul class="admin-list" v-for="post in posts" :key="post.uuid">
@@ -31,35 +63,3 @@
     </teleport>
   </div>
 </template>
-
-<script setup>
-  import PostAdmin from "./PostAdmin.vue";
-  import { ref } from "vue";
-  import { useAdminStore } from "../../stores/admin";
-
-  defineProps({
-    posts: {
-      type: Array,
-    },
-  });
-
-  const isOpen = ref(false);
-  const targetUuid = ref(null);
-
-  const OpenTarget = (uuid) => {
-    isOpen.value = true;
-    targetUuid.value = uuid;
-  };
-
-  const { deletePost } = useAdminStore();
-
-  const postSupp = async (uuid) => {
-    try {
-      await deletePost(uuid);
-      alert("post supprimé !");
-    } catch (error) {
-      console.log(error);
-      alert("un probleme est survenu !");
-    }
-  };
-</script>

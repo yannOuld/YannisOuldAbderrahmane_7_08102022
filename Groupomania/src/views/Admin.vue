@@ -1,22 +1,3 @@
-<template>
-  <div>
-    <navigation-links></navigation-links>
-    <div class="admin">
-      <h1>DashBoard Administration</h1>
-      <nav>
-        <button @click="userSection = false">Posts</button>
-        <button @click="userSection = true">Users</button>
-      </nav>
-      <div v-if="userSection == true">
-        <users-board :users="users" />
-      </div>
-      <div v-if="userSection == false">
-        <post-board :posts="posts" />
-      </div>
-    </div>
-  </div>
-</template>
-
 <script setup>
   import PostBoard from "../components/Admin/PostBoard.vue";
   import UsersBoard from "../components/Admin/UsersBoard.vue";
@@ -36,3 +17,22 @@
 
   const userSection = ref(true);
 </script>
+
+<template>
+  <div>
+    <navigation-links></navigation-links>
+    <div class="admin">
+      <h1>DashBoard Administration</h1>
+      <nav>
+        <button @click="userSection = false">Posts</button>
+        <button @click="userSection = true">Users</button>
+      </nav>
+      <div v-if="userSection == true">
+        <users-board :users="users" />
+      </div>
+      <div v-if="userSection == false">
+        <post-board :posts="posts" />
+      </div>
+    </div>
+  </div>
+</template>

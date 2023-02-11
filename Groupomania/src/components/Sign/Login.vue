@@ -1,47 +1,3 @@
-<template>
-  <div class="sign_border">
-    <h1>Connexion</h1>
-    <form @submit.prevent="submit()" autocomplete="on" class="sign-form">
-      <div class="sign-form_display">
-        <!-- Email -->
-        <base-input
-          v-model="formData.email"
-          label="email"
-          placeholder="email@groupomania.com"
-          name="email"
-          id="email"
-          type="email"
-        ></base-input>
-        <p class="error" v-if="v$.email.$error">
-          une adresse email valide est requise
-        </p>
-
-        <!-- Password -->
-        <base-input
-          label="mot de passe"
-          type="password"
-          v-model="formData.password"
-          name="password"
-          id="password"
-          placeholder="votre mot de passe"
-          class="form-control"
-          autocomplete="on"
-        ></base-input>
-        <p class="error" v-if="v$.password.$error">
-          le mot de passe est requis
-        </p>
-
-        <!-- Form Submit Button -->
-        <button class="sign-form--btn">Se connecter</button>
-      </div>
-    </form>
-    <!-- Pop Up -->
-    <div class="modal" v-if="isOpen">
-      <p class="error">{{ msgErr }}</p>
-    </div>
-  </div>
-</template>
-
 <script setup>
   import { modal } from "../Forms/modal";
   import { reactive, computed, ref } from "vue";
@@ -96,3 +52,47 @@
     }
   };
 </script>
+
+<template>
+  <div class="sign_border">
+    <h1>Connexion</h1>
+    <form @submit.prevent="submit()" autocomplete="on" class="sign-form">
+      <div class="sign-form_display">
+        <!-- Email -->
+        <base-input
+          v-model="formData.email"
+          label="email"
+          placeholder="email@groupomania.com"
+          name="email"
+          id="email"
+          type="email"
+        ></base-input>
+        <p class="error" v-if="v$.email.$error">
+          une adresse email valide est requise
+        </p>
+
+        <!-- Password -->
+        <base-input
+          label="mot de passe"
+          type="password"
+          v-model="formData.password"
+          name="password"
+          id="password"
+          placeholder="votre mot de passe"
+          class="form-control"
+          autocomplete="on"
+        ></base-input>
+        <p class="error" v-if="v$.password.$error">
+          le mot de passe est requis
+        </p>
+
+        <!-- Form Submit Button -->
+        <button class="sign-form--btn">Se connecter</button>
+      </div>
+    </form>
+    <!-- Pop Up -->
+    <div class="modal" v-if="isOpen">
+      <p class="error">{{ msgErr }}</p>
+    </div>
+  </div>
+</template>

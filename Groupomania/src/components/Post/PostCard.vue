@@ -1,40 +1,3 @@
-<template>
-  <div class="postcard-container">
-    <div class="postcard-date">
-      <p class="postcard-date_txt" aria-labelledby="date">{{ createdAt }}</p>
-    </div>
-    <div class="postcard">
-      <div class="postcard-user">
-        <img
-          v-if="owner?.imageUrl == null"
-          src="../../assets/images/icon.webP"
-          alt="image de l'auteur"
-          class="postcard-user_img"
-        />
-        <img
-          v-if="owner?.imageUrl != null"
-          :src="owner.imageUrl"
-          alt="image de l'auteur"
-          class="postcard-user_img"
-        />
-        <p class="postcard-user_name">
-          {{ owner?.firstName }} {{ owner?.lastName }}
-        </p>
-      </div>
-      <router-link class="no-decoration" :to="postPage">
-        <h2 class="postcard-title">{{ title }}</h2>
-        <div v-if="imageUrl">
-          <img :src="imageUrl" alt="image du post" class="postcard-img" />
-        </div>
-        <div>
-          <p>{{ content }}</p>
-        </div>
-        <p class="postcard-likes_counter">likes: {{ likesCounter }}</p>
-      </router-link>
-    </div>
-  </div>
-</template>
-
 <script setup>
   import { useRouter } from "vue-router";
   import { ref } from "vue";
@@ -74,3 +37,40 @@
     return await deletePost(uuid);
   };
 </script>
+
+<template>
+  <div class="postcard-container">
+    <div class="postcard-date">
+      <p class="postcard-date_txt" aria-labelledby="date">{{ createdAt }}</p>
+    </div>
+    <div class="postcard">
+      <div class="postcard-user">
+        <img
+          v-if="owner?.imageUrl == null"
+          src="../../assets/images/icon.webP"
+          alt="image de l'auteur"
+          class="postcard-user_img"
+        />
+        <img
+          v-if="owner?.imageUrl != null"
+          :src="owner.imageUrl"
+          alt="image de l'auteur"
+          class="postcard-user_img"
+        />
+        <p class="postcard-user_name">
+          {{ owner?.firstName }} {{ owner?.lastName }}
+        </p>
+      </div>
+      <router-link class="no-decoration" :to="postPage">
+        <h2 class="postcard-title">{{ title }}</h2>
+        <div v-if="imageUrl">
+          <img :src="imageUrl" alt="image du post" class="postcard-img" />
+        </div>
+        <div>
+          <p>{{ content }}</p>
+        </div>
+        <p class="postcard-likes_counter">likes: {{ likesCounter }}</p>
+      </router-link>
+    </div>
+  </div>
+</template>

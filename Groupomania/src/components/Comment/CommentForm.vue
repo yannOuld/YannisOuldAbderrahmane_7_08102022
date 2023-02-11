@@ -1,23 +1,3 @@
-<template>
-  <form
-    class="comment-form shadow-black shadow-lg"
-    @submit.prevent="submit().then($emit('onCommentSubmit'))"
-  >
-    <base-textarea
-      label="Commenter le post:"
-      v-model="formData.content"
-      maxlength="500"
-      id="comment"
-      name="comment"
-    ></base-textarea>
-    <button
-      class="btn hover:-translate-y-1 hover:scale-90 hover:bg-gray-300 duration-300"
-    >
-      Envoyer
-    </button>
-  </form>
-</template>
-
 <script setup>
   import { useAuthStore } from "../../stores/auth";
   import { useRoute } from "vue-router";
@@ -51,3 +31,23 @@
     }
   };
 </script>
+
+<template>
+  <form
+    class="comment-form shadow-black shadow-lg"
+    @submit.prevent="submit().then($emit('onCommentSubmit'))"
+  >
+    <base-textarea
+      label="Commenter le post:"
+      v-model="formData.content"
+      maxlength="500"
+      id="comment"
+      name="comment"
+    ></base-textarea>
+    <button
+      class="btn hover:-translate-y-1 hover:scale-90 hover:bg-gray-300 duration-300"
+    >
+      Envoyer
+    </button>
+  </form>
+</template>

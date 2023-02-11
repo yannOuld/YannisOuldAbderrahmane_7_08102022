@@ -1,3 +1,31 @@
+<script setup>
+  import { multiPartForm } from "../Forms/form.js";
+  import { useAdminStore } from "../../stores/admin";
+
+  const { modifyUser } = useAdminStore();
+
+  //props uuid from parent component
+  const props = defineProps({
+    uuid: { type: String },
+  });
+
+  // composable form
+  let { biography, fileTarget, handleFileUpload, handleData, formData } =
+    multiPartForm();
+
+  //submit modify user
+  const submit = async () => {
+    handleData();
+    try {
+      await modifyUser(props.uuid, formData);
+      alert("l'utilisateur' à été modifié !");
+    } catch (error) {
+      console.log(error);
+      alert("une erreur est survenue");
+    }
+  };
+</script>
+
 <template>
   <div>
     <form
@@ -36,31 +64,3 @@
     </form>
   </div>
 </template>
-
-<script setup>
-  import { multiPartForm } from "../Forms/form.js";
-  import { useAdminStore } from "../../stores/admin";
-
-  const { modifyUser } = useAdminStore();
-
-  //props uuid from parent component
-  const props = defineProps({
-    uuid: { type: String },
-  });
-
-  // composable form
-  let { biography, fileTarget, handleFileUpload, handleData, formData } =
-    multiPartForm();
-
-  //submit modify user
-  const submit = async () => {
-    handleData();
-    try {
-      await modifyUser(props.uuid, formData);
-      alert("l'utilisateur' à été modifié !");
-    } catch (error) {
-      console.log(error);
-      alert("une erreur est survenue");
-    }
-  };
-</script>

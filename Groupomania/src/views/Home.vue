@@ -1,31 +1,3 @@
-<template>
-  <div>
-    <navigation-links v-once></navigation-links>
-    <h1 v-once>Bienvenue chez Groupomania.</h1>
-    <img
-      v-once
-      src="../assets/images/icon.webP"
-      class="home-img"
-      alt="logo groupomania"
-      rel="preload"
-    />
-
-    <post-form v-once />
-
-    <div class="home-container">
-      <h1 v-once>Les derniers Posts</h1>
-      <pagination-bar
-        :currentPage="currentPage"
-        :maxVisibleButtons="3"
-        :posts="posts"
-        :perPage="7"
-        :totalPages="Math.ceil(postsNumber / 7)"
-        @pagechanged="onPageChange"
-      />
-    </div>
-  </div>
-</template>
-
 <script>
   import { defineAsyncComponent } from "vue";
   import PostForm from "../components/Post/PostForm.vue";
@@ -65,3 +37,31 @@
     },
   };
 </script>
+
+<template>
+  <div>
+    <navigation-links v-once></navigation-links>
+    <h1 v-once>Bienvenue chez Groupomania.</h1>
+    <img
+      v-once
+      src="../assets/images/icon.webP"
+      class="home-img"
+      alt="logo groupomania"
+      rel="preload"
+    />
+
+    <post-form v-once />
+
+    <div class="home-container">
+      <h1 v-once>Les derniers Posts</h1>
+      <pagination-bar
+        :currentPage="currentPage"
+        :maxVisibleButtons="3"
+        :posts="posts"
+        :perPage="7"
+        :totalPages="Math.ceil(postsNumber / 7)"
+        @pagechanged="onPageChange"
+      />
+    </div>
+  </div>
+</template>

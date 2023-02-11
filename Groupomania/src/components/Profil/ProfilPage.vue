@@ -1,3 +1,9 @@
+<script setup>
+  defineProps({
+    author: { type: Object },
+  });
+</script>
+
 <template>
   <div class="profil">
     <div class="profil-user">
@@ -31,9 +37,3 @@
     </div>
   </div>
 </template>
-
-<script setup>
-  defineProps({
-    author: { type: Object },
-  });
-</script>

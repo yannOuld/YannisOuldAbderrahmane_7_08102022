@@ -1,19 +1,3 @@
-<template>
-  <div>
-    <label :for="name">{{ label }}</label>
-    <textarea
-      :rows="rows"
-      :cols="cols"
-      :maxlength="maxlength"
-      :name="name"
-      :value="modelValue"
-      :id="id"
-      v-bind="$attrs"
-      @input="$emit('update:modelValue', $event.target.value)"
-    />
-  </div>
-</template>
-
 <script setup>
   defineProps({
     label: {
@@ -46,3 +30,19 @@
     },
   });
 </script>
+
+<template>
+  <div>
+    <label :for="name">{{ label }}</label>
+    <textarea
+      :rows="rows"
+      :cols="cols"
+      :maxlength="maxlength"
+      :name="name"
+      :value="modelValue"
+      :id="id"
+      v-bind="$attrs"
+      @input="$emit('update:modelValue', $event.target.value)"
+    />
+  </div>
+</template>

@@ -1,3 +1,27 @@
+<script setup>
+  import { multiPartForm } from "../Forms/form.js";
+  import { usePostStore } from "../../stores/posts";
+  import { ref } from "vue";
+
+  const anyName = ref(null);
+
+  const { sendPost } = usePostStore();
+  // input file handling
+  let { title, fileTarget, handleFileUpload, content, handleData, formData } =
+    multiPartForm();
+
+  // form submit
+  const submit = async () => {
+    handleData();
+    try {
+      await sendPost(formData);
+    } catch (error) {
+      console.log(error);
+    }
+    anyName.value.reset();
+  };
+</script>
+
 <template>
   <form
     ref="anyName"
@@ -36,27 +60,3 @@
     <button class="btn" aria-label="bouton Envoyer">Envoyer</button>
   </form>
 </template>
-
-<script setup>
-  import { multiPartForm } from "../Forms/form.js";
-  import { usePostStore } from "../../stores/posts";
-  import { ref } from "vue";
-
-  const anyName = ref(null);
-
-  const { sendPost } = usePostStore();
-  // input file handling
-  let { title, fileTarget, handleFileUpload, content, handleData, formData } =
-    multiPartForm();
-
-  // form submit
-  const submit = async () => {
-    handleData();
-    try {
-      await sendPost(formData);
-    } catch (error) {
-      console.log(error);
-    }
-    anyName.value.reset();
-  };
-</script>

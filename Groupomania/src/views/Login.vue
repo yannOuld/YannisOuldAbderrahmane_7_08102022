@@ -1,3 +1,7 @@
+<script setup>
+  import LoggIn from "../components/Sign/Login.vue";
+</script>
+
 <template>
   <div class="sign">
     <img
@@ -12,7 +16,3 @@
     </router-link>
   </div>
 </template>
-
-<script setup>
-  import LoggIn from "../components/Sign/Login.vue";
-</script>
