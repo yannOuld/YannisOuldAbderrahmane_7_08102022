@@ -1,0 +1,8 @@
+.env
+server/node_modules
+groupomania/node_modules
+groupomania/vscode
+server/config.json
+server/database.js
+.env
+*.local
