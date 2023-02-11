@@ -11,23 +11,9 @@
       <p class="nofound-txt">
         Désolée Neo ! Il est trop tot pour pouvoir quitter la matrice du site !
       </p>
-      <button class="nofound-btn" @click="home">Revenir à l'Accueil</button>
+      <router-link to="/home" class="no-underline text-white">
+        <button class="nofound-btn">Revenir à l'Accueil</button>
+      </router-link>
     </div>
   </div>
 </template>
-
-<script>
-  import { useRouter } from "vue-router";
-  export default {
-    name: "NotFound",
-    setup() {
-      const router = useRouter();
-      const home = () => {
-        router.push("/home");
-      };
-      return {
-        home,
-      };
-    },
-  };
-</script>

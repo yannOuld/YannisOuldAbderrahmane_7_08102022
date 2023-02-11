@@ -43,7 +43,7 @@
 </template>
 
 <script setup>
-  import { multiPartForm } from "../../utils/form.js";
+  import { multiPartForm } from "../Forms/form.js";
   import { useAdminStore } from "../../stores/admin";
 
   //props uuid from parent component

@@ -34,7 +34,7 @@
 
 <script setup>
   import { storeToRefs } from "pinia";
-  import { ref, defineProps, onMounted, watchEffect } from "vue";
+  import { ref, onMounted, watchEffect } from "vue";
   import { useLikeStore } from "../../stores/like";
 
   const emit = defineEmits(["onLiked"]);

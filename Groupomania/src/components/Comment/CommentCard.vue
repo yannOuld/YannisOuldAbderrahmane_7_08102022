@@ -33,7 +33,6 @@
 <script setup>
   import { useAuthStore } from "../../stores/auth";
   import { useCommentStore } from "../../stores/comment";
-  import { defineEmits, defineProps } from "vue";
 
   const props = defineProps({
     comment: { type: Object },

@@ -42,7 +42,7 @@
 </template>
 
 <script setup>
-  import { defineProps, ref } from "vue";
+  import { ref } from "vue";
   import { useAdminStore } from "../../stores/admin";
   import UserAdmin from "./UserAdmin.vue";
 

@@ -32,7 +32,7 @@
 </template>
 
 <script setup>
-  import { ref, defineProps } from "vue";
+  import { ref } from "vue";
   import { usePostStore } from "../../stores/posts";
 
   //props uuid from parent component

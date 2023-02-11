@@ -17,37 +17,22 @@
   </div>
 </template>
 
-<script>
-  import { ref, defineAsyncComponent, onMounted } from "vue";
+<script setup>
+  import PostBoard from "../components/Admin/PostBoard.vue";
+  import UsersBoard from "../components/Admin/UsersBoard.vue";
+  import { ref, onMounted } from "vue";
   import { useAdminStore } from "../stores/admin";
-
   import { storeToRefs } from "pinia";
-  export default {
-    name: "AdminView",
-    components: {
-      PostBoard: defineAsyncComponent({
-        loader: () => import("../components/Admin/PostBoard.vue"),
-        delay: 1000,
-      }),
-      UsersBoard: defineAsyncComponent({
-        loader: () => import("../components/Admin/UsersBoard.vue"),
-        delay: 1000,
-      }),
-    },
-    setup() {
-      const { fetchPosts, fetchUsers } = useAdminStore();
 
-      onMounted(() => {
-        fetchUsers();
-        fetchPosts();
-      });
+  const { fetchPosts, fetchUsers } = useAdminStore();
 
-      const { users } = storeToRefs(useAdminStore());
-      const { posts } = storeToRefs(useAdminStore());
+  onMounted(() => {
+    fetchUsers();
+    fetchPosts();
+  });
 
-      const userSection = ref(true);
+  const { users } = storeToRefs(useAdminStore());
+  const { posts } = storeToRefs(useAdminStore());
 
-      return { users, userSection, posts };
-    },
-  };
+  const userSection = ref(true);
 </script>

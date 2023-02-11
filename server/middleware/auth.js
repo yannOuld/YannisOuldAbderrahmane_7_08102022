@@ -2,6 +2,7 @@ const jwt = require("../manager/jwt");
 
 
 function modifyPermit(req, res, user_id) {
+  console.log('hello there !!!!!!!!!!!!!!!!!!!!! ' + req)
   if (req.auth.role === "admin") return;
   if (user_id === req.auth.user_id) return;
   throw res.status(401).json("Unauthorized")
@@ -13,7 +14,6 @@ function auth(req, res, next) {
   const header = req.headers.authorization;
   const token = header.split(" ")[1];
   const decodedToken = jwt.verify(token);
-  console.log('hello ' + JSON.stringify(decodedToken));
   req.auth = decodedToken;
 
   if (!req.auth) throw res.status(401).json('Unauthorized');

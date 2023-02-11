@@ -34,7 +34,7 @@
 
 <script setup>
   import PostAdmin from "./PostAdmin.vue";
-  import { defineProps, ref } from "vue";
+  import { ref } from "vue";
   import { useAdminStore } from "../../stores/admin";
 
   defineProps({

@@ -37,7 +37,7 @@
 
 <script setup>
   import { useRouter } from "vue-router";
-  import { ref, defineProps } from "vue";
+  import { ref } from "vue";
   import { useAuthStore } from "../../stores/auth";
   import { usePostStore } from "../../stores/posts";
 

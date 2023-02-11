@@ -1,6 +1,7 @@
 <script setup>
   import SignIn from "../components/Sign/Register.vue";
 </script>
+
 <template>
   <div class="sign">
     <img
