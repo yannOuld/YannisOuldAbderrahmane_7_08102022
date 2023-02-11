@@ -1,5 +1,6 @@
 <script setup>
   import NavigationButton from "../Utils/NavigationButton.vue";
+  import LogOut from "../Utils/LogOut.vue";
   import { useAuthStore } from "../../stores/auth.js";
 
   const { userData } = useAuthStore();
@@ -15,13 +16,13 @@
       alt="logo groupomania"
     />
     <nav class="navigation-nav">
-      <navigation-button to="'/'" icon="'faHouse'" name="Accueil" />
+      <navigation-button to="/" icon="'faHouse'" name="Accueil" />
       <navigation-button
         :to="profil"
-        icon="'fa-solid fa-house'"
         name="mon compte"
         class="navigation-btn"
       />
+      <log-out />
     </nav>
   </div>
 </template>

@@ -3,7 +3,7 @@
     <div class="postcard-date">
       <p class="postcard-date_txt" aria-labelledby="date">{{ createdAt }}</p>
     </div>
-    <div class="postcard" @click="postPage()">
+    <div class="postcard">
       <div class="postcard-user">
         <img
           v-if="owner?.imageUrl == null"
@@ -21,14 +21,16 @@
           {{ owner?.firstName }} {{ owner?.lastName }}
         </p>
       </div>
-      <h2 class="postcard-title">{{ title }}</h2>
-      <div v-if="imageUrl">
-        <img :src="imageUrl" alt="image du post" class="postcard-img" />
-      </div>
-      <div>
-        <p>{{ content }}</p>
-      </div>
-      <p class="postcard-likes_counter">likes: {{ likesCounter }}</p>
+      <router-link class="no-decoration" :to="postPage">
+        <h2 class="postcard-title">{{ title }}</h2>
+        <div v-if="imageUrl">
+          <img :src="imageUrl" alt="image du post" class="postcard-img" />
+        </div>
+        <div>
+          <p>{{ content }}</p>
+        </div>
+        <p class="postcard-likes_counter">likes: {{ likesCounter }}</p>
+      </router-link>
     </div>
   </div>
 </template>
@@ -61,12 +63,8 @@
   const router = useRouter();
 
   // router link
-  const postPage = () => {
-    router.push({
-      name: "PostView",
-      params: { uuid: props.uuid },
-    });
-  };
+
+  const postPage = `/post/${props.uuid}`;
 
   // call post store
   const { deletePost } = usePostStore();
