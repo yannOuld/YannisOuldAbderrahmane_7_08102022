@@ -1,4 +1,5 @@
 const express = require("express");
+const rateLimit = require('express-rate-limit')
 const cors = require("cors");
 const morgan = require("morgan");
 
@@ -6,7 +7,15 @@ const path = require("path");
 const routes = require("./routes/index.js");
 const app = express();
 
+const limiter = rateLimit({
+  windowMs: 1 * 60 * 1000,
+  max: 60,
+  standardHeaders: true,
+  legacyHeaders: false,
+})
 
+
+app.use(limiter)
 app.use(cors());
 app.use(morgan("combined"));
 app.use(morgan("combined", { immediate: true }));

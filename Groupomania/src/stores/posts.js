@@ -44,7 +44,7 @@ export const usePostStore = defineStore({
       }
     },
     async sendPost(formData) {
-      this.post = null;
+      this.post = null
       try {
         this.post = await fetchWrapper.postfile(
           "http://localhost:3000/api/post/",
@@ -52,8 +52,9 @@ export const usePostStore = defineStore({
         );
       } catch (error) {
         this.error = error;
+      } finally {
+        this.posts.unshift(this.post);
       }
-      this.posts.unshift(this.post);
     },
     async deletePost(uuid) {
       this.post = null;

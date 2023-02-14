@@ -16,10 +16,11 @@
       alt="logo groupomania"
     />
     <nav class="navigation-nav">
-      <navigation-button to="/" icon="'faHouse'" name="Accueil" />
+      <navigation-button to="/" icon="fa-solid fa-house" name="Accueil" />
       <navigation-button
         :to="profil"
-        name="mon compte"
+        icon="fa-solid fa-user"
+        name="compte"
         class="navigation-btn"
       />
       <log-out />

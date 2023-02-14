@@ -32,7 +32,7 @@
   };
   // delete post and move to home component
   const suppPost = async () => {
-    await deletePost(uuid).then(router.replace("/home"));
+    await deletePost(uuid).then(router.replace("/"));
   };
 </script>
 
