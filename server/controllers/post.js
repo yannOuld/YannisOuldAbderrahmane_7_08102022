@@ -13,8 +13,7 @@ async function createPost(req, res, next) {
 
   let imageUrl;
   if (req.file) {
-    imageUrl = `${req.protocol}://${req.get("host")}/images/${req.file.filename
-      }`;
+    imageUrl = `${req.protocol}://${req.get("host")}/images/${req.file.filename}`;
   }
 
   try {
@@ -23,9 +22,9 @@ async function createPost(req, res, next) {
       content,
       imageUrl,
       owner_id,
-    }).catch((err) => {
-      throw new Error("le post n'as pas pu être créee !");
-    });
+    })
+    if (!post) throw new Error("le post n'as pas pu être créee !");
+
 
     return res.status(200).json(post);
   } catch (err) {

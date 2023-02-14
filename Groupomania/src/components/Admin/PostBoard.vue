@@ -32,10 +32,14 @@
 
 <template>
   <div v-if="posts">
-    <ul class="admin-list" v-for="post in posts" :key="post.uuid">
+    <ul
+      class="admin-list relative justify-between"
+      v-for="post in posts"
+      :key="post.uuid"
+    >
       <li class="admin-list_item">
-        <span class="admin-list_id"> uuid: {{ post.uuid }} </span>
-        <div class="admin-list_data">
+        <span class="admin-list_id absolute"> uuid: {{ post.uuid }} </span>
+        <div class="admin-list_data justify-between">
           <div v-if="post.imageUrl">
             <img class="admin-list_img" :src="post.imageUrl" alt="image post" />
           </div>

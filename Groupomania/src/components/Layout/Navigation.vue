@@ -1,6 +1,6 @@
 <script setup>
   import NavigationButton from "../Utils/NavigationButton.vue";
-  import LogOut from "../Utils/LogOut.vue";
+  import LogoutButton from "../Utils/LogoutButton.vue";
   import { useAuthStore } from "../../stores/auth.js";
 
   const { userData } = useAuthStore();
@@ -9,13 +9,13 @@
 </script>
 
 <template>
-  <div class="navigation">
+  <div class="navigation justify-between">
     <img
       src="../../assets/images/icon-left-font.webP"
-      class="navigation-logo"
+      class="navigation-logo flex-row"
       alt="logo groupomania"
     />
-    <nav class="navigation-nav">
+    <nav class="navigation-nav flex-row">
       <navigation-button to="/" icon="fa-solid fa-house" name="Accueil" />
       <navigation-button
         :to="profil"
@@ -23,7 +23,7 @@
         name="compte"
         class="navigation-btn"
       />
-      <log-out />
+      <logout-button />
     </nav>
   </div>
 </template>

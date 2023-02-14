@@ -38,7 +38,7 @@
     <form
       enctype="multipart/form-data"
       @submit.prevent="submit()"
-      class="profil-form_modify"
+      class="profil-form_modify w-11/12"
     >
       <div class="form-control">
         <h2>Modifier le profil</h2>

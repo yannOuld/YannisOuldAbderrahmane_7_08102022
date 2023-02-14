@@ -64,7 +64,7 @@
   };
 </script>
 <template>
-  <div class="post">
+  <div class="post w-full">
     <navigation-links></navigation-links>
     <div>
       <!-- Post component -->

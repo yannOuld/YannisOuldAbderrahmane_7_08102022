@@ -21,7 +21,7 @@
 <template>
   <div>
     <navigation-links></navigation-links>
-    <div class="admin">
+    <div class="w-full">
       <h1>DashBoard Administration</h1>
       <nav>
         <button @click="userSection = false">Posts</button>

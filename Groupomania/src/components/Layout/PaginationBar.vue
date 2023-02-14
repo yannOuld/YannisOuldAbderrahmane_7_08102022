@@ -1,7 +1,7 @@
 <template>
   <div class="pagination">
-    <ul class="pagination-posts">
-      <li class="pagination-posts_card">
+    <ul class="pagination-posts w-full">
+      <li class="pagination-posts_card w-full">
         <post-card
           v-for="post in paginatedPosts"
           :key="post.uuid"
@@ -15,7 +15,7 @@
         />
       </li>
     </ul>
-    <ul class="pagination-bar">
+    <ul class="w-full flex-row pagination-bar">
       <li class="pagination-item">
         <button
           class="pagination-btn"
@@ -23,7 +23,7 @@
           @click="onClickFirstPage"
           :disabled="isInFirstPage"
         >
-          First
+          &lt;&lt; <span class="hidden sm:flex">First</span>
         </button>
       </li>
 
@@ -34,7 +34,7 @@
           @click="onClickPreviousPage"
           :disabled="isInFirstPage"
         >
-          Previous
+          &lt; <span class="hidden sm:flex">Previous</span>
         </button>
       </li>
 
@@ -61,7 +61,7 @@
           @click="onClickNextPage"
           :disabled="isInLastPage"
         >
-          Next
+          <span class="hidden sm:flex">Next</span> &gt;
         </button>
       </li>
 
@@ -72,7 +72,7 @@
           @click="onClickLastPage"
           :disabled="isInLastPage"
         >
-          Last
+          <span class="hidden sm:flex">Last</span> &gt;&gt;
         </button>
       </li>
     </ul>

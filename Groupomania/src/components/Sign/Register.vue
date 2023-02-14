@@ -70,7 +70,7 @@
   <div class="sign_border">
     <h1>Inscription</h1>
     <form class="sign-form" @submit.prevent="submit()" autocomplete="on">
-      <div class="sign-form_display">
+      <div class="sign-form_display justify-between">
         <!-- Prénom -->
         <base-input
           label="prénom"
@@ -143,7 +143,7 @@
         </p>
 
         <!-- Form Submit Button -->
-        <button class="sign-form--btn">s'inscrire</button>
+        <button class="sign-form--btn font-bold rounded-lg">s'inscrire</button>
       </div>
     </form>
     <!-- Pop up-->

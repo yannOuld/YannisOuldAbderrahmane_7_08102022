@@ -35,7 +35,7 @@
 <template>
   <div>
     <form
-      class="post-form_modify"
+      class="post-form_modify w-11/12"
       enctype="multipart/form-data"
       @submit.prevent="submit()"
     >

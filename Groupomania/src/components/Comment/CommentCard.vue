@@ -33,8 +33,8 @@
 </script>
 
 <template>
-  <article class="comment">
-    <div class="comment-user">
+  <article class="comment relative">
+    <div class="comment-user font-bold">
       <img
         v-if="owner.imageUrl == null"
         src="../../assets/images/icon.webP"
@@ -52,10 +52,10 @@
       </h2>
     </div>
     <p class="comment_content">{{ comment.content }}</p>
-    <p class="comment_date">{{ comment.createdAt }}</p>
+    <p class="comment_date font-bold">{{ comment.createdAt }}</p>
     <div v-if="(owner.uuid = user.uuid || user.role != 'user')">
       <button
-        class="comment-btn_delete hover:brightness-50"
+        class="comment-btn_delete absolute hover:brightness-50"
         @click="suppComment().then(emitCommentId(comment.id))"
       >
         <font-awesome-icon icon="fa-solid fa-circle-xmark" />

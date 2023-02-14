@@ -12,7 +12,7 @@
     <logg-in />
     <p class="sign-btn_switch">Vous n'avez pas de compte ?</p>
     <router-link to="/register">
-      <button class="sign-btn_blue">S'inscrire.</button>
+      <button class="sign-btn_blue font-bold">S'inscrire.</button>
     </router-link>
   </div>
 </template>

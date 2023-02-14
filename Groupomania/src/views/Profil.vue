@@ -32,15 +32,15 @@
   <div>
     <navigation-links v-once></navigation-links>
 
-    <div class="profil" v-if="mode.state == 'read'">
-      <button class="profil-btn_switch" @click="switchModify()">
+    <div class="profil relative" v-if="mode.state == 'read'">
+      <button class="profil-btn_switch absolute" @click="switchModify()">
         modifier <font-awesome-icon icon="fa-solid fa-gear" />
       </button>
       <profil-page :author="author" />
     </div>
 
-    <div class="profil" v-if="mode.state == 'modify'">
-      <button class="profil-btn_switch" @click="switchRead()">
+    <div class="profil relative" v-if="mode.state == 'modify'">
+      <button class="profil-btn_switch absolute" @click="switchRead()">
         Retour<font-awesome-icon icon="fa-solid fa-gear" />
       </button>
       <div class="profil">

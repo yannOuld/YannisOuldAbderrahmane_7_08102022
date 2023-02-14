@@ -41,7 +41,7 @@
     <div v-if="mode.state == 'modify'">
       <post-modify :uuid="uuid" />
     </div>
-    <div class="post-utils">
+    <div class="post-utils flex-row rounded-lg">
       <!--show modifyPost form button -->
       <button
         v-if="mode.state == 'read'"

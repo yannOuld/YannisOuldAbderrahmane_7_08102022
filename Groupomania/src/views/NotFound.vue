@@ -8,7 +8,7 @@
         src="../assets/images/matrix.jpg"
         alt="photo de l'agent smith"
       />
-      <p class="nofound-txt">
+      <p class="nofound-txt font-bold">
         Désolée Neo ! Il est trop tot pour pouvoir quitter la matrice du site !
       </p>
       <router-link to="/" class="no-underline text-white">

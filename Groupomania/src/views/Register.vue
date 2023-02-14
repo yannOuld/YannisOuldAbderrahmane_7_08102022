@@ -13,7 +13,7 @@
     <div>
       <p class="sign-btn_switch">Déja inscrit ?</p>
       <router-link :to="'/login'">
-        <button class="sign-btn_blue">Se connecter.</button>
+        <button class="sign-btn_blue font-bold">Se connecter.</button>
       </router-link>
     </div>
   </div>

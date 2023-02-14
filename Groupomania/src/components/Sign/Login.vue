@@ -57,7 +57,7 @@
   <div class="sign_border">
     <h1>Connexion</h1>
     <form @submit.prevent="submit()" autocomplete="on" class="sign-form">
-      <div class="sign-form_display">
+      <div class="sign-form_display justify-between">
         <!-- Email -->
         <base-input
           v-model="formData.email"
@@ -87,7 +87,9 @@
         </p>
 
         <!-- Form Submit Button -->
-        <button class="sign-form--btn">Se connecter</button>
+        <button class="sign-form--btn font-bold rounded-lg">
+          Se connecter
+        </button>
       </div>
     </form>
     <!-- Pop Up -->

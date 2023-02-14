@@ -1,4 +1,5 @@
 <script>
+  import AdminButton from "./../components/Utils/AdminButton.vue";
   import { defineAsyncComponent } from "vue";
   import PostForm from "../components/Post/PostForm.vue";
   import { usePostStore } from "../stores/posts";
@@ -40,6 +41,7 @@
 
 <template>
   <div>
+    <admin-button />
     <navigation-links v-once></navigation-links>
     <h1 v-once>Bienvenue chez Groupomania.</h1>
     <img
@@ -52,7 +54,7 @@
 
     <post-form v-once />
 
-    <div class="home-container">
+    <div class="w-full">
       <h1 v-once>Les derniers Posts</h1>
       <pagination-bar
         :currentPage="currentPage"
