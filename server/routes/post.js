@@ -10,8 +10,5 @@ router.post("/", auth, multer, postCtrl.createPost);
 router.patch("/:uuid", auth, multer, postCtrl.modifyPost);
 router.delete("/:uuid", auth, postCtrl.deletePost);
 
-router.get("/", auth, postCtrl.getAllPosts);
-router.patch("/:uuid/admin", auth, multer, postCtrl.modifyPost);
-router.delete("/:uuid/admin", auth, postCtrl.deletePost);
 
 module.exports = router;

@@ -53,7 +53,7 @@ async function modifyUser(req, res, next) {
 
     user
       .save()
-      .then(() => res.status(201).json({ message: "user updated !" }))
+      .then(() => res.status(201).json(user))
       .catch((err) => res.status(500).json(err.message));
   });
 

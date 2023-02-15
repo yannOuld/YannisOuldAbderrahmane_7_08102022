@@ -1,5 +1,5 @@
 <script setup>
-  import { multiPartForm } from "../Forms/form.js";
+  import { useMultiPartForm } from "../Forms/form.js";
   import { useAdminStore } from "../../stores/admin";
 
   const { modifyUser } = useAdminStore();
@@ -11,7 +11,7 @@
 
   // composable form
   let { biography, fileTarget, handleFileUpload, handleData, formData } =
-    multiPartForm();
+    useMultiPartForm();
 
   //submit modify user
   const submit = async () => {

@@ -8,7 +8,7 @@ async function createComment(req, res, next) {
   const post_uuid = req.params.uuid;
 
   // conditions ou message d'erreur en cas de problèmes
-  if (owner_id !== req.auth.user_id) throw new Error("Wrong user");
+  if (owner_id !== req.auth.user.id) throw new Error("Wrong user");
 
   // creation du commentaire avec le model sequelize, le body de la requete , les id  user et post
   try {

@@ -17,19 +17,15 @@
   // reactive form input and user id
   const formData = reactive({
     content: "",
-    owner_id: null,
+    owner_id: user.id,
   });
 
   // sending a comment
   const { sendComment } = useCommentStore();
-  const submit = async () => {
-    formData.owner_id = user.id;
-    try {
-      await sendComment(uuid, formData);
-    } catch (error) {
-      console.log("un probleme est survenu");
-    }
-  };
+
+  async function submit() {
+    await sendComment(uuid, formData).catch((err) => console.log(err));
+  }
 </script>
 
 <template>

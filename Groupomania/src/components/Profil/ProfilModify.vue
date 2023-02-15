@@ -1,6 +1,6 @@
 <script setup>
   import { modal } from "../Forms/modal";
-  import { multiPartForm } from "../Forms/form";
+  import { useMultiPartForm } from "../Forms/form";
   import { useAuthStore } from "../../stores/auth";
   import { storeToRefs } from "pinia";
 
@@ -9,8 +9,8 @@
   const uuid = userData.value.user.uuid;
 
   // composable form
-  let { fileTarget, handleFileUpload, biography, handleData, formData } =
-    multiPartForm();
+  let { fileTarget, handleFileUpload, biography, handleData } =
+    useMultiPartForm();
 
   // compasable modal
   let { isOpen, msgErr, msgSucces, showPopup } = modal();
@@ -19,7 +19,7 @@
   const { modify } = useAuthStore();
 
   const submit = async () => {
-    handleData();
+    const formData = handleData();
     try {
       await modify(uuid, formData);
       msgSucces.value = "Votre profil à été mis à jour !";

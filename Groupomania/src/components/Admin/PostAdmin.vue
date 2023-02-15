@@ -1,5 +1,5 @@
 <script setup>
-  import { multiPartForm } from "../Forms/form.js";
+  import { useMultiPartForm } from "../Forms/form.js";
   import { useAdminStore } from "../../stores/admin";
 
   //props uuid from parent component
@@ -11,7 +11,7 @@
 
   // composable form
   let { title, fileTarget, content, handleFileUpload, handleData, formData } =
-    multiPartForm();
+    useMultiPartForm();
 
   const submit = async () => {
     handleData();

@@ -1,7 +1,7 @@
 import { ref } from "vue";
 import { useAuthStore } from "../../stores/auth";
 
-export function multiPartForm() {
+export function useMultiPartForm() {
   const { userData } = useAuthStore();
   const { user } = userData;
 
@@ -18,9 +18,9 @@ export function multiPartForm() {
     console.log(fileTarget.value);
   };
 
-  const formData = new FormData();
 
   const handleData = () => {
+    const formData = new FormData();
     if (fileTarget.value != null) {
       formData.append("image", fileTarget.value, fileTarget.value.name);
     }
@@ -40,7 +40,6 @@ export function multiPartForm() {
   };
 
   return {
-    formData,
     handleFileUpload,
     fileTarget,
     biography,

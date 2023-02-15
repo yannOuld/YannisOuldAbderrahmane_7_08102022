@@ -1,18 +1,14 @@
 <script setup>
-  import { multiPartForm } from "../Forms/form.js";
+  import { useMultiPartForm } from "../Forms/form.js";
   import { usePostStore } from "../../stores/posts";
-  // import { ref } from "vue";
-
-  //const anyName = ref(null);
 
   const { sendPost } = usePostStore();
-  // input file handling
-  let { title, fileTarget, handleFileUpload, content, handleData, formData } =
-    multiPartForm();
 
-  // form submit
+  let { title, fileTarget, handleFileUpload, content, handleData } =
+    useMultiPartForm();
+
   const submit = async () => {
-    handleData();
+    const formData = handleData();
     try {
       await sendPost(formData);
     } catch (error) {
