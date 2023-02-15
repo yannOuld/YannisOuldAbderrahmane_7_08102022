@@ -1,13 +1,12 @@
 <script setup>
   import { useAuthStore } from "../../stores/auth";
   import { useCommentStore } from "../../stores/comment";
+  import { storeToRefs } from "pinia";
 
   const props = defineProps({
     comment: { type: Object },
     owner: { type: Object },
   });
-
-  const emit = defineEmits(["onDelete"]);
 
   const comment = props.comment;
   const owner = props.owner;
@@ -18,17 +17,10 @@
   const { user } = userData;
 
   const { deleteComment } = useCommentStore();
+  const { comments } = storeToRefs(useCommentStore());
 
   const suppComment = async (uuid, user) => {
-    try {
-      await deleteComment(uuid, id);
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
-  const emitCommentId = () => {
-    emit("onDelete", comment.id);
+    await deleteComment(uuid, id).catch((err) => console.log(err));
   };
 </script>
 
@@ -56,7 +48,7 @@
     <div v-if="(owner.uuid = user.uuid || user.role != 'user')">
       <button
         class="comment-btn_delete absolute hover:brightness-50"
-        @click="suppComment().then(emitCommentId(comment.id))"
+        @click="suppComment()"
       >
         <font-awesome-icon icon="fa-solid fa-circle-xmark" />
       </button>

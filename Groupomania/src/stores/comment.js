@@ -27,14 +27,15 @@ export const useCommentStore = defineStore({
         `http://localhost:3000/api/post/${uuid}/comments`,
         formData
       ).catch(err => console.log(err, 'here'))
-      this.comments = this.comments.unshift(this.commentData)
     },
 
     async deleteComment(uuid, id) {
+      console.log(this.comments.filter((c) => { return c.id !== id }))
       await fetchWrapper.delete(
         `http://localhost:3000/api/post/${uuid}/comments/${id}`
       );
-      this.comments = this.comments.filter((comment) => comment.id !== id);
+      this.comments = this.comments.filter((c) => { return c.id !== id })
+
     },
   },
 });

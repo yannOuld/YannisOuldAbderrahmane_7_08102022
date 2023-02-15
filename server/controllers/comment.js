@@ -1,30 +1,31 @@
 const db = require("../models");
 const { Comment } = db.sequelize.models;
 const { modifyPermit } = require('../middleware/auth');
+const asyncHandler = require('express-async-handler')
 
 // crée un commentaire
-async function createComment(req, res, next) {
+const createComment = asyncHandler(async (req, res, next) => {
   const { content, owner_id } = req.body;
   const post_uuid = req.params.uuid;
 
-  // conditions ou message d'erreur en cas de problèmes
-  if (owner_id !== req.auth.user.id) throw new Error("Wrong user");
 
-  // creation du commentaire avec le model sequelize, le body de la requete , les id  user et post
+  if (owner_id !== req.auth.id) throw new Error("Wrong user");
+
+
   try {
-    let comment = await Comment.create({
+    const comment = await Comment.create({
       content,
       post_uuid,
       owner_id,
-    }).catch((err) => {
-      throw new Error("le commentaire n'a pas pu etre crée");
-    });
+    })
+    if (!comment) throw new Error("le commentaire n'a pas pu etre crée");
+
 
     return res.status(201).json(comment);
   } catch (err) {
-    res.status(400).json(err.message);
+    res.status(400).json(err);
   }
-};
+});
 
 // trouver tout les commentaires
 async function getAllComment(req, res, next) {
@@ -54,14 +55,10 @@ async function deleteComment(req, res, next) {
   const id = req.params.id;
 
   try {
-    const comment = await Comment.findOne({ where: { id } }).then((comment) => {
-      if (!comment) throw new Error("I have the high ground Anakin !");
-      modifyPermit(comment.owner_id)
-    });
-
-
-    await comment.destroy();
-
+    const comment = await Comment.findOne({ where: { id } })
+    if (!comment) throw new Error("I have the high ground Anakin !");
+    modifyPermit(req, res, comment.owner_id)
+    comment.destroy();
     return res.status(200).json("comment deleted !");
   } catch (err) {
     return res.status(400).json(err.message);

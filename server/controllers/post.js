@@ -62,7 +62,7 @@ async function deletePost(req, res, next) {
 
     const post = await Post.findOne({ where: { uuid }, include: "owner" })
     if (!post) throw new Error("Something went wrong !");
-    modifyPermit(req, post.owner_id)
+    modifyPermit(req, res, post.owner_id)
     post.destroy()
     return res.status(200).json("post deleted !");
   } catch (err) {

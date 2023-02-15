@@ -24,7 +24,7 @@
   const { sendComment } = useCommentStore();
 
   async function submit() {
-    await sendComment(uuid, formData).catch((err) => console.log(err));
+    await sendComment(uuid, formData);
   }
 </script>
 
