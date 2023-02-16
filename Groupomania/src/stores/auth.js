@@ -20,34 +20,24 @@ export const useAuthStore = defineStore({
 
   getters: {
     authAdmin() {
-      if (this.userData.user.role != "user") return true;
+      if (this.userData.user.role !== "user") return true;
     },
   },
 
   actions: {
     // fonction de connection
     async login(formData) {
-      try {
-        const userData = await fetchWrapper.post(
-          `http://localhost:3000/api/auth/login`,
-          formData
-        );
-        this.userData = userData;
-      } catch (error) {
-        console.log(error.message);
-      }
+      const userData = await fetchWrapper
+        .post(`http://localhost:3000/api/auth/login`, formData)
+        .catch((err) => console.log(err.message));
+      this.userData = userData;
     },
 
     // fonction pour modifier les infos users
     async modify(uuid, formData) {
-      try {
-        await fetchWrapper.patchfile(
-          `http://localhost:3000/api/user/${uuid}`,
-          formData
-        );
-      } catch (error) {
-        console.log(error.message);
-      }
+      await fetchWrapper
+        .patchfile(`http://localhost:3000/api/user/${uuid}`, formData)
+        .catch((err) => console.log(err.message));
     },
 
     //fonction de déconnection
@@ -56,13 +46,11 @@ export const useAuthStore = defineStore({
     },
 
     async deleteUser(uuid) {
-      try {
-        await fetchWrapper.delete(`http://localhost:3000/api/user/${uuid}`);
-      } catch (error) {
-        console.log(error.message);
-      } finally {
-        this.userData = null;
-      }
+      await fetchWrapper
+        .delete(`http://localhost:3000/api/user/${uuid}`)
+        .catch((err) => console.log(err.message));
+
+      this.userData = null;
     },
   },
 });

@@ -18,71 +18,54 @@ export const useAdminStore = defineStore({
   actions: {
     async fetchUsers() {
       this.users = [];
-      try {
-        this.users = await fetchWrapper.get(`http://localhost:3000/api/user/`);
-      } catch (error) {
-        console.log(error.message);
-      }
+      this.users = await fetchWrapper.get(`http://localhost:3000/api/user/`);
+
     },
 
     async modifyUser(uuid, formData) {
-      try {
-        await fetchWrapper.patchfile(
-          `http://localhost:3000/api/user/${uuid}/admin`,
-          formData
-        );
-      } catch (error) {
-        console.log(error.message);
-      }
+
+      await fetchWrapper.patchfile(
+        `http://localhost:3000/api/user/${uuid}/admin`,
+        formData
+      );
+
     },
 
     async deleteUser(uuid) {
-      try {
-        await fetchWrapper.delete(
-          `http://localhost:3000/api/user/${uuid}/admin`
-        );
-        this.users = this.users.filter((user) => user.uuid != uuid);
-      } catch (error) {
-        console.log(error.message);
-      }
+
+      await fetchWrapper
+        .delete(`http://localhost:3000/api/user/${uuid}/admin`)
+        .catch((err) => console.log(err.message));
+      this.users = this.users.filter((user) => user.uuid != uuid);
     },
 
     async fetchPosts() {
       this.posts = [];
-      try {
-        this.posts = await fetchWrapper
-          .get(`http://localhost:3000/api/post/`)
-          .then((response) => {
-            return response.reverse();
-          });
-      } catch (error) {
-        this.error = error;
-      } finally {
-        this.loading = false;
-      }
+      this.posts = await fetchWrapper
+        .get(`http://localhost:3000/api/post/`)
+        .then((response) => {
+          return response.reverse();
+        })
+        .catch((err) => console.log(err.message));
     },
 
     async modifyPost(uuid, formData) {
-      try {
-        await fetchWrapper.patchfile(
+      await fetchWrapper
+        .patchfile(
           `http://localhost:3000/api/post/${uuid}/admin`,
           formData
-        );
-      } catch (error) {
-        console.log(error.message);
-      }
+        )
+        .catch((err) => console.log(err.message));
     },
 
     async deletePost(uuid) {
       this.post = null;
-      try {
-        this.post = await fetchWrapper.delete(
+      this.post = await fetchWrapper
+        .delete(
           `http://localhost:3000/api/post/${uuid}/admin`
-        );
-        this.posts = this.posts.filter((post) => post.uuid != uuid);
-      } catch (error) {
-        this.error = error;
-      }
+        )
+        .catch((err) => console.log(err.message));
+      this.posts = this.posts.filter((post) => post.uuid != uuid);
     },
   },
 });

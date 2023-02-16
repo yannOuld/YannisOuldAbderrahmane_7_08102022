@@ -4,7 +4,9 @@
 </script>
 
 <template>
-  <router-link v-if="authAdmin" to="/admin">
-    <button class="fixed top-0 flex">administration</button>
-  </router-link>
+  <div v-if="authAdmin">
+    <router-link to="/admin">
+      <button class="fixed top-0 flex">administration</button>
+    </router-link>
+  </div>
 </template>

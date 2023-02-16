@@ -11,31 +11,27 @@ export const useCommentStore = defineStore({
   actions: {
     async fetchComments(uuid) {
       this.comments = [];
-
       this.comments = await fetchWrapper
         .get(`http://localhost:3000/api/post/${uuid}/comments/`)
         .then((response) => {
           return response.reverse();
         })
-        .catch(err => console.log(err));
+        .catch((err) => console.log(err.message));
 
     },
 
     async sendComment(uuid, formData) {
       this.commentData = null;
-      this.commentData = await fetchWrapper.post(
-        `http://localhost:3000/api/post/${uuid}/comments`,
-        formData
-      ).catch(err => console.log(err, 'here'))
+      this.commentData = await fetchWrapper
+        .post(`http://localhost:3000/api/post/${uuid}/comments`, formData)
+        .catch((err) => console.log(err.message))
     },
 
     async deleteComment(uuid, id) {
-      console.log(this.comments.filter((c) => { return c.id !== id }))
-      await fetchWrapper.delete(
-        `http://localhost:3000/api/post/${uuid}/comments/${id}`
-      );
+      await fetchWrapper
+        .delete(`http://localhost:3000/api/post/${uuid}/comments/${id}`)
+        .catch((err) => console.log(err.message));
       this.comments = this.comments.filter((c) => { return c.id !== id })
-
     },
   },
 });

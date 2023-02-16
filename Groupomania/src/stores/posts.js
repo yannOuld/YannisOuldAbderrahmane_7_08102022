@@ -7,8 +7,6 @@ export const usePostStore = defineStore({
   state: () => ({
     posts: [],
     post: {},
-    loading: false,
-    error: null,
   }),
 
   getters: {
@@ -20,58 +18,41 @@ export const usePostStore = defineStore({
   actions: {
     async fetchPosts() {
       this.posts = [];
-      this.loading = true;
-      try {
-        this.posts = await fetchWrapper
-          .get(`http://localhost:3000/api/post/`)
-          .then((response) => {
-            return response.reverse();
-          });
-      } catch (error) {
-        this.error = error;
-      } finally {
-        this.loading = false;
-      }
+      this.posts = await fetchWrapper
+        .get(`http://localhost:3000/api/post/`)
+        .then((response) => {
+          return response.reverse();
+        })
+        .catch((err) => console.log(err.message));
     },
+
     async fetchOnePost(uuid) {
       this.post = null;
-      try {
-        this.post = await fetchWrapper.get(
-          `http://localhost:3000/api/post/${uuid}`
-        );
-      } catch (error) {
-        this.error = error;
-      }
+      this.post = await fetchWrapper
+        .get(`http://localhost:3000/api/post/${uuid}`)
+        .catch((err) => console.log(err.message));
     },
+
     async sendPost(formData) {
       this.post = null
-      try {
-        this.post = await fetchWrapper.postfile(
-          "http://localhost:3000/api/post/",
-          formData
-        );
-      } catch (error) {
-        this.error = error;
-      } finally {
-        this.posts.unshift(this.post);
-      }
+      this.post = await fetchWrapper
+        .postfile("http://localhost:3000/api/post/", formData)
+        .catch((err) => console.log(err.message));
+      this.posts.unshift(this.post);
     },
+
     async deletePost(uuid) {
-      await fetchWrapper.delete(
-        `http://localhost:3000/api/post/${uuid}`
-      );
+      await fetchWrapper
+        .delete(`http://localhost:3000/api/post/${uuid}`)
+        .catch((err) => console.log(err.message));
       this.posts = this.posts.filter((p) => { return p.uuid !== uuid })
     },
+
     async modifyPost(uuid, formData) {
       this.post = null;
-      try {
-        this.post = await fetchWrapper.patch(
-          `http://localhost:3000/api/post/${uuid}`,
-          formData
-        );
-      } catch (error) {
-        console.log(error.message);
-      }
+      this.post = await fetchWrapper
+        .patch(`http://localhost:3000/api/post/${uuid}`, formData)
+        .catch((err) => console.log(err.message));
     },
   },
 });

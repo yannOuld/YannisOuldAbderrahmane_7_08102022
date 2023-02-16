@@ -14,24 +14,17 @@ export const useLikeStore = defineStore({
 
   actions: {
     async LikePost(uuid, user_uuid) {
-      try {
-        await fetchWrapper.post(
-          `http://localhost:3000/api/post/${uuid}/likes`,
-          user_uuid
-        );
-      } catch (error) {
-        console.log(error);
-      }
+      await fetchWrapper
+        .post(`http://localhost:3000/api/post/${uuid}/likes`, user_uuid)
+        .catch((err) => console.log(err.message));
+
     },
     async getLikes(uuid) {
       this.likes = [];
-      try {
-        this.likes = await fetchWrapper.get(
-          `http://localhost:3000/api/post/${uuid}/likes`
-        );
-      } catch (error) {
-        console.log(error.message);
-      }
+      this.likes = await fetchWrapper
+        .get(`http://localhost:3000/api/post/${uuid}/likes`)
+        .catch((err) => console.log(err.message));
+
     },
   },
 });
