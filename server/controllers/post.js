@@ -72,13 +72,12 @@ async function deletePost(req, res, next) {
 
 async function modifyPost(req, res, next) {
   let uuid = req.params.uuid;
-  const { content, title } = req.body;
 
   const post = await Post.findOne({ where: { uuid }, include: "owner" })
   if (!post) throw new Error("post not found");
   modifyPermit(req, res, post.owner_id);
-  post.title = title;
-  post.content = content;
+  if (req.body.title) post.title = req.body.title;
+  if (req.body.content) post.content = req.body.content;
   post
     .save()
     .then(() => res.status(201).json(post))

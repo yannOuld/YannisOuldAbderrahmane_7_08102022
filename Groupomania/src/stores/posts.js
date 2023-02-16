@@ -57,14 +57,10 @@ export const usePostStore = defineStore({
       }
     },
     async deletePost(uuid) {
-      this.post = null;
-      try {
-        this.post = await fetchWrapper.delete(
-          `http://localhost:3000/api/post/${uuid}`
-        );
-      } catch (error) {
-        this.error = error;
-      }
+      await fetchWrapper.delete(
+        `http://localhost:3000/api/post/${uuid}`
+      );
+      this.posts = this.posts.filter((p) => { return p.uuid !== uuid })
     },
     async modifyPost(uuid, formData) {
       this.post = null;

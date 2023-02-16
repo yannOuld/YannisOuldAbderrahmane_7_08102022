@@ -17,9 +17,9 @@
   const submit = async () => {
     const uuid = props.uuid;
     let formData;
-    if (title.value === null) {
+    if (title.value == null) {
       formData = { content: content.value };
-    } else if (content.value === null) {
+    } else if (content.value == null) {
       formData = { title: title.value };
     } else {
       formData = { title: title.value, content: content.value };
