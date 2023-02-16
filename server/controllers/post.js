@@ -74,16 +74,16 @@ async function modifyPost(req, res, next) {
   let uuid = req.params.uuid;
   const { content, title } = req.body;
 
-  Post.findOne({ where: { uuid }, include: "owner" }).then((post) => {
-    if (!post) throw new Error("post not found");
-    modifyPermit(req, post.owner_id);
-    post.title = title;
-    post.content = content;
-    post
-      .save()
-      .then(() => res.status(201).json(post))
-      .catch((err) => res.status(500).json(err.message));
-  });
+  const post = await Post.findOne({ where: { uuid }, include: "owner" })
+  if (!post) throw new Error("post not found");
+  modifyPermit(req, res, post.owner_id);
+  post.title = title;
+  post.content = content;
+  post
+    .save()
+    .then(() => res.status(201).json(post))
+    .catch((err) => res.status(500).json(err.message));
+
 };
 
 module.exports = { modifyPost, deletePost, getAllPosts, getOnePost, createPost }

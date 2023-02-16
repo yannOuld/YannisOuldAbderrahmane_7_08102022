@@ -32,31 +32,27 @@ async function getAllUsers(req, res, next) {
 async function modifyUser(req, res, next) {
 
   let uuid = req.params.uuid;
-  let imageUrl;
-
   const object = JSON.stringify(req.body);
   const { biography } = JSON.parse(object);
 
-  //multer
+
+  let imageUrl;
   if (req.file) {
     imageUrl = `${req.protocol}://${req.get("host")}/images/${req.file.filename
       }`;
   }
 
-  // search, modify and save user
-  User.findOne({ where: { uuid } }).then((user) => {
-    if (!user) throw new Error("user not found");
-    modifyPermit(req, user.id);
+  const user = await User.findOne({ where: { uuid } })
 
-    user.biography = biography;
-    user.imageUrl = imageUrl;
+  if (!user) throw new Error("user not found");
+  modifyPermit(req, res, user.id);
 
-    user
-      .save()
-      .then(() => res.status(201).json(user))
-      .catch((err) => res.status(500).json(err.message));
-  });
-
+  user.biography = biography;
+  user.imageUrl = imageUrl;
+  user
+    .save()
+    .then(() => res.status(201).json(user))
+    .catch((err) => res.status(500).json(err.message));
   return res.status(200).json({ message: "user updated !" });
 };
 

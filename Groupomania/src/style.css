@@ -110,7 +110,7 @@
     @apply hidden  sm:flex sm:w-3 sm:ml-2;
   }
   .profil {
-    @apply mt-10 mb-16  text-base w-10/12 bg-orange-100 rounded-2xl;
+    @apply mt-10 mb-16  text-base w-11/12 bg-orange-100 rounded-2xl;
   }
   .profil-btn_switch {
     @apply right-3 top-3 z-20;
@@ -253,7 +253,7 @@
     @apply uppercase font-extrabold;
   }
   .profil-user_img {
-    @apply w-64 h-64;
+    @apply w-52 sm:w-64 h-64 rounded-3xl;
   }
   .likes-modal_bg {
     @apply top-0 left-0 right-0 bottom-0 w-screen h-screen bg-slate-400 bg-opacity-50;

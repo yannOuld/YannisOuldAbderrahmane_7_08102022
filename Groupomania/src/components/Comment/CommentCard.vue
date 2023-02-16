@@ -17,7 +17,6 @@
   const { user } = userData;
 
   const { deleteComment } = useCommentStore();
-  const { comments } = storeToRefs(useCommentStore());
 
   const suppComment = async (uuid, user) => {
     await deleteComment(uuid, id).catch((err) => console.log(err));
