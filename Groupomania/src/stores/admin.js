@@ -18,23 +18,20 @@ export const useAdminStore = defineStore({
   actions: {
     async fetchUsers() {
       this.users = [];
-      this.users = await fetchWrapper.get(`http://localhost:3000/api/user/`);
-
+      this.users = await fetchWrapper
+        .get(`http://localhost:3000/api/user/`)
+        .catch((err) => console.log(err.message));
     },
 
     async modifyUser(uuid, formData) {
-
-      await fetchWrapper.patchfile(
-        `http://localhost:3000/api/user/${uuid}/admin`,
-        formData
-      );
-
+      await fetchWrapper
+        .patchfile(`http://localhost:3000/api/user/${uuid}`, formData)
+        .catch((err) => console.log(err.message));
     },
 
     async deleteUser(uuid) {
-
       await fetchWrapper
-        .delete(`http://localhost:3000/api/user/${uuid}/admin`)
+        .delete(`http://localhost:3000/api/user/${uuid}`)
         .catch((err) => console.log(err.message));
       this.users = this.users.filter((user) => user.uuid != uuid);
     },
@@ -51,19 +48,14 @@ export const useAdminStore = defineStore({
 
     async modifyPost(uuid, formData) {
       await fetchWrapper
-        .patchfile(
-          `http://localhost:3000/api/post/${uuid}/admin`,
-          formData
-        )
+        .patchfile(`http://localhost:3000/api/post/${uuid}`, formData)
         .catch((err) => console.log(err.message));
     },
 
     async deletePost(uuid) {
       this.post = null;
       this.post = await fetchWrapper
-        .delete(
-          `http://localhost:3000/api/post/${uuid}/admin`
-        )
+        .delete(`http://localhost:3000/api/post/${uuid}`)
         .catch((err) => console.log(err.message));
       this.posts = this.posts.filter((post) => post.uuid != uuid);
     },

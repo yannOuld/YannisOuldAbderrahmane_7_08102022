@@ -13,7 +13,7 @@ export const myfetch = async (method, query, body) => {
 };
 
 /**
- * fetch Promises wrapper 
+ * fetch Promises wrapper
  */
 export const fetchWrapper = {
   get: request("GET"),
@@ -28,7 +28,7 @@ export const fetchWrapper = {
 /**
  * Fetch method with a content-type application/json
  * @param {*} method fetch query
- * @returns fetch Promise with API url and body  
+ * @returns fetch Promise with API url and body
  */
 function request(method) {
   return (url, body) => {
@@ -46,9 +46,9 @@ function request(method) {
 }
 
 /**
- * Fetch method multipart/form-data 
- * @param {*} method fetch query  
- * @returns fetch Promise with API url and body  
+ * Fetch method multipart/form-data
+ * @param {*} method fetch query
+ * @returns fetch Promise with API url and body
  */
 function requestFile(method) {
   return (url, body) => {
@@ -63,9 +63,9 @@ function requestFile(method) {
   };
 }
 
-/** 
- * Function authorization Headers 
- * @param {String} url   request API url 
+/**
+ * Function authorization Headers
+ * @param {String} url   request API url
  * @returns Headers authorization token or empty object
  */
 function authHeader(url) {
@@ -81,25 +81,21 @@ function authHeader(url) {
 }
 
 /**
- *  Function Handling response  
+ *  Function Handling response
  * @param {*} response response of a fetch request
  * @returns Promise response data or auth store logout()
  */
 function handleResponse(response) {
   return response.text().then((text) => {
     const data = text && JSON.parse(text);
-
     if (!response.ok) {
-
       const { userData, logout } = useAuthStore();
       if ([401, 403].includes(response.status) && userData) {
         logout();
       }
-
       const error = (data && data.message) || response.statusText;
       return Promise.reject(error);
     }
-
     return data;
   });
 }

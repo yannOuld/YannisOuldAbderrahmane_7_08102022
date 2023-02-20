@@ -1,12 +1,13 @@
 <script setup>
+  import { storeToRefs } from "pinia";
   import { useAuthStore } from "../../stores/auth.js";
-  const { authAdmin } = useAuthStore();
+  const { authAdmin } = storeToRefs(useAuthStore());
 </script>
 
 <template>
   <div v-if="authAdmin">
     <router-link to="/admin">
-      <button class="fixed top-0 flex">administration</button>
+      <button>administration</button>
     </router-link>
   </div>
 </template>

@@ -9,6 +9,7 @@
     name: "HomeView",
     components: {
       PostForm,
+      AdminButton,
       PaginationBar: defineAsyncComponent({
         loader: () => import("../components/Layout/PaginationBar.vue"),
         delay: 1000,

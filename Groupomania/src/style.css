@@ -233,10 +233,10 @@
     @apply w-20  bottom-0 right-3 text-right;
   }
   .profil {
-    @apply mt-10 mb-16  text-base w-11/12 bg-orange-100 rounded-2xl;
+    @apply mt-10 mb-16  text-base w-11/12 bg-tertiarygroup text-white rounded-2xl;
   }
   .profil-btn_switch {
-    @apply right-3 top-3 z-20;
+    @apply right-3 top-3 z-20  p-3 rounded-xl bg-gray-200 font-bold hover:-translate-y-1 hover:scale-90 hover:bg-secondgroup duration-300;
   }
   .profil-user {
     @apply py-10;

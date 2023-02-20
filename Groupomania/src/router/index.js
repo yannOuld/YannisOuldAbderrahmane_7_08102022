@@ -11,6 +11,7 @@ import Admin from "../views/Admin.vue";
 
 const authRequired = true;
 const adminRequired = true;
+
 const routes = [
   { path: "/login", component: Login, meta: {}, },
   { path: "/register", component: Register, meta: {}, },
@@ -36,7 +37,7 @@ router.beforeEach(async (to) => {
     return { path: '/login', query: { redirect: to.fullPath } };
   }
 
-  if (to.meta.adminRequired && auth.userData.role !== 'admin') {
+  if (to.meta.adminRequired && !auth.authAdmin) {
     return { path: '/', query: { redirect: to.fullPath } }
   }
 });

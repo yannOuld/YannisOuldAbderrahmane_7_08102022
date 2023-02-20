@@ -6,7 +6,7 @@ export const useCommentStore = defineStore({
   state: () => ({
     comments: [],
     commentData: null,
-    error: null,
+
   }),
   actions: {
     async fetchComments(uuid) {

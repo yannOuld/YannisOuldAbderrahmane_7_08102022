@@ -10,12 +10,12 @@
   });
 
   // composable form
-  let { biography, fileTarget, handleFileUpload, handleData, formData } =
+  let { biography, fileTarget, handleFileUpload, handleData } =
     useMultiPartForm();
 
   //submit modify user
   const submit = async () => {
-    handleData();
+    const formData = handleData();
     try {
       await modifyUser(props.uuid, formData);
       alert("l'utilisateur' à été modifié !");

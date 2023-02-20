@@ -34,14 +34,14 @@
 
     <div class="profil relative" v-if="mode.state == 'read'">
       <button class="profil-btn_switch absolute" @click="switchModify()">
-        modifier <font-awesome-icon icon="fa-solid fa-gear" />
+        modifier &nbsp;<font-awesome-icon icon="fa-solid fa-gear" />
       </button>
       <profil-page :author="author" />
     </div>
 
     <div class="profil relative" v-if="mode.state == 'modify'">
       <button class="profil-btn_switch absolute" @click="switchRead()">
-        Retour<font-awesome-icon icon="fa-solid fa-gear" />
+        Retour &nbsp;<font-awesome-icon icon="fa-solid fa-gear" />
       </button>
       <div class="profil">
         <profil-modify />

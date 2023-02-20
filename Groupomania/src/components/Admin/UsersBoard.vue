@@ -27,7 +27,11 @@
 
 <template>
   <div>
-    <ul class="admin-list relative justify-between" v-for="user in users" :key="user">
+    <ul
+      class="admin-list relative justify-between"
+      v-for="user in users"
+      :key="user"
+    >
       <li class="admin-list_item">
         <span class="admin-list_id">
           <strong> uuid:</strong> {{ user.uuid }} <br />
@@ -60,7 +64,7 @@
       </li>
     </ul>
     <teleport to="body">
-      <div class="likes-modal_bg" v-if="isOpen">
+      <div class="likes-modal_bg absolute" v-if="isOpen">
         <button @click="isOpen = false">quitter</button>
         <user-admin :uuid="targetUuid" />
       </div>

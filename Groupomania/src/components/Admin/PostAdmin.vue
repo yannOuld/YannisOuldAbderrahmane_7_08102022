@@ -10,11 +10,11 @@
   const { modifyPost } = useAdminStore();
 
   // composable form
-  let { title, fileTarget, content, handleFileUpload, handleData, formData } =
+  let { title, fileTarget, content, handleFileUpload, handleData } =
     useMultiPartForm();
 
   const submit = async () => {
-    handleData();
+    const formData = handleData();
     try {
       await modifyPost(props.uuid, formData);
       alert("le post à été modifié !");

@@ -13,7 +13,7 @@ export const useAuthStore = defineStore({
       serializer: {
         read: (v) => (v ? JSON.parse(v) : null),
         write: (v) => JSON.stringify(v),
-      }
+      },
     }),
     returnUrl: null,
   }),
@@ -42,7 +42,7 @@ export const useAuthStore = defineStore({
 
     //fonction de déconnection
     logout() {
-      this.userData = null;
+      this.userData == null;
     },
 
     async deleteUser(uuid) {
