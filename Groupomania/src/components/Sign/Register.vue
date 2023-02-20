@@ -43,8 +43,7 @@
   const v$ = useVuelidate(rules, formData);
 
   //form submit
-  const submit = async () => {
-    // vuelidate inputs validation
+  async function submit() {
     const validation = await v$._value.$validate();
 
     if (!validation) {
@@ -52,10 +51,10 @@
       return showPopup();
     }
 
-    // fetch
-    const response = await myfetch("POST", "/auth/register", formData);
+    const response = await myfetch("POST", "/auth/register", formData).catch(
+      (err) => console.log(err)
+    );
 
-    // modal handling
     if (response.uuid) {
       msgSucces.value = "compte créée avec succes.";
       return showPopup();
@@ -63,7 +62,7 @@
       msgErr.value = "Echec de l'inscription.";
       return showPopup();
     }
-  };
+  }
 </script>
 
 <template>

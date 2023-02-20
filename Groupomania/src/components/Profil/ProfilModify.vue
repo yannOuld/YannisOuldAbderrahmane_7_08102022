@@ -18,7 +18,7 @@
   // form submit to modify user
   const { modify } = useAuthStore();
 
-  const submit = async () => {
+  async function submit() {
     const formData = handleData();
     try {
       await modify(uuid, formData);
@@ -30,7 +30,7 @@
         "Ouups une erreur c'est produite ! essayez plus tard... :(";
       return showPopup();
     }
-  };
+  }
 </script>
 
 <template>

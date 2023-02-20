@@ -14,7 +14,7 @@
   // submit post modification
   const { modifyPost } = usePostStore();
 
-  const submit = async () => {
+  async function submit() {
     const uuid = props.uuid;
     let formData;
     if (title.value == null) {
@@ -29,7 +29,7 @@
     } catch (error) {
       console.log(error);
     }
-  };
+  }
 </script>
 
 <template>

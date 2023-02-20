@@ -11,6 +11,16 @@
     state: "read" || "modify",
   });
 
+  // function for mode read
+  function switchRead() {
+    mode.state = "read";
+  }
+
+  // function for mode modify
+  function switchModify() {
+    mode.state = "modify";
+  }
+
   // post uuid from the params
   const route = useRoute();
   const uuid = route.params.uuid;
@@ -21,19 +31,10 @@
 
   const { post, deletePost } = usePostStore();
 
-  // function for mode read
-  const switchRead = () => {
-    mode.state = "read";
-  };
-
-  // function for mode modify
-  const switchModify = () => {
-    mode.state = "modify";
-  };
   // delete post and move to home component
-  const suppPost = async () => {
+  async function suppPost() {
     await deletePost(uuid).then(router.replace("/"));
-  };
+  }
 </script>
 
 <template>

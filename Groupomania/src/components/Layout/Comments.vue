@@ -1,12 +1,3 @@
-<template>
-  <div>
-    <h2>Commentaires</h2>
-    <div v-for="comment of comments" :key="comment">
-      <comment-card :comment="comment" :owner="comment.owner" />
-    </div>
-  </div>
-</template>
-
 <script setup>
   import { useRoute } from "vue-router";
   import { storeToRefs } from "pinia";
@@ -28,3 +19,12 @@
 
   const { comments } = storeToRefs(useCommentStore());
 </script>
+
+<template>
+  <div>
+    <h2>Commentaires</h2>
+    <div v-for="comment of comments" :key="comment">
+      <comment-card :comment="comment" :owner="comment.owner" />
+    </div>
+  </div>
+</template>

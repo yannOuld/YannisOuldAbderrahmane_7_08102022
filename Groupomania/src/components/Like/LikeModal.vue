@@ -35,13 +35,13 @@
   };
 
   //sending a like
-  const sendLike = async () => {
+  async function sendLike() {
     await LikePost(props.uuid, data);
-  };
-  const userLiked = () => {
+  }
+  function userLiked() {
     const liked = likes.value.find((like) => like.user_id == props.user_id);
     if (liked != undefined) return true;
-  };
+  }
   watchEffect(() => {
     userLiked;
   });

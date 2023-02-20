@@ -13,7 +13,7 @@
   let { title, fileTarget, content, handleFileUpload, handleData } =
     useMultiPartForm();
 
-  const submit = async () => {
+  async function submit() {
     const formData = handleData();
     try {
       await modifyPost(props.uuid, formData);
@@ -22,7 +22,7 @@
       console.log(error);
       alert("une erreur est survenue");
     }
-  };
+  }
 </script>
 
 <template>

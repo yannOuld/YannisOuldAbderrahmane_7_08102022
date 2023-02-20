@@ -13,13 +13,13 @@ export function useMultiPartForm() {
   const owner_id = ref(null);
   owner_id.value = user.id;
 
-  const handleFileUpload = (event) => {
+  function handleFileUpload(event) {
     fileTarget.value = event.target.files[0];
     console.log(fileTarget.value);
   };
 
 
-  const handleData = () => {
+  function handleData() {
     const formData = new FormData();
     if (fileTarget.value != null) {
       formData.append("image", fileTarget.value, fileTarget.value.name);

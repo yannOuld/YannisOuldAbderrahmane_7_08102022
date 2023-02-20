@@ -33,9 +33,9 @@
   const { deletePost } = usePostStore();
 
   // delete post function
-  const deleteOnePost = async (uuid) => {
+  async function deleteOnePost(uuid) {
     return await deletePost(uuid);
-  };
+  }
 </script>
 
 <template>

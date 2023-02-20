@@ -18,9 +18,9 @@
 
   const { deleteComment } = useCommentStore();
 
-  const suppComment = async (uuid, user) => {
+  async function suppComment(uuid, user) {
     await deleteComment(uuid, id).catch((err) => console.log(err));
-  };
+  }
 </script>
 
 <template>

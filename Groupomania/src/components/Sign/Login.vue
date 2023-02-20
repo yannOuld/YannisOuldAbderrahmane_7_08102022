@@ -32,25 +32,25 @@
   const v$ = useVuelidate(rules, formData);
 
   //form submit function
-  const submit = async () => {
+  async function submit() {
     const validation = await v$._value.$validate();
 
     if (!validation) {
       msgErr.value = "Tout les champs doivent être remplis";
       return showPopup();
     }
-    try {
-      const response = await login(formData);
-      console.log(response);
-      if (!response) {
-        msgErr.value = "les identifiants ne correspondent à aucun compte";
-        showPopup();
-      }
-      router.push("/");
-    } catch (error) {
-      return;
+
+    const response = await login(formData)
+      .then(() => {
+        router.push("/");
+      })
+      .catch((err) => console.log(err));
+
+    if (!response) {
+      msgErr.value = "les identifiants ne correspondent à aucun compte";
+      showPopup();
     }
-  };
+  }
 </script>
 
 <template>

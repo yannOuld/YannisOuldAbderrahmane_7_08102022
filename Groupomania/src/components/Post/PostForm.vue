@@ -7,14 +7,14 @@
   let { title, fileTarget, handleFileUpload, content, handleData } =
     useMultiPartForm();
 
-  const submit = async () => {
+  async function submit() {
     const formData = handleData();
     try {
       await sendPost(formData);
     } catch (error) {
       console.log(error);
     }
-  };
+  }
 </script>
 
 <template>

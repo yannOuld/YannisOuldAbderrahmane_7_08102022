@@ -12,26 +12,24 @@
   const update = ref(0);
   const forceUpdate = ref(0);
 
-  // post uuid from the params
   const route = useRoute();
   const uuid = route.params.uuid;
 
-  // fetch and find post data from the store
   const { fetchOnePost } = usePostStore();
   fetchOnePost(uuid);
+
   const { post } = storeToRefs(usePostStore());
-
-  // finding user data
   const { userData } = useAuthStore();
-  const { user } = userData;
   const { authAdmin } = storeToRefs(useAuthStore());
-  const updateComments = () => {
-    forceUpdate.value += 1;
-  };
+  const { user } = userData;
 
-  const updatePost = () => {
+  function updateComments() {
+    forceUpdate.value += 1;
+  }
+
+  function updatePost() {
     update.value += 1;
-  };
+  }
 </script>
 
 <template>
@@ -51,13 +49,13 @@
       />
       <!-- like component -->
       <like-modal
-        @onLiked="updatePost"
+        @onLiked="updatePost()"
         :uuid="post?.uuid"
         :user_id="user?.id"
       />
       <post-utils v-if="user?.uuid == post?.owner.uuid || authAdmin" />
     </div>
     <comment-form @onCommentSubmit="updateComments" />
-    <comments :key="forceUpdate" />
+    <comments :key="forceUpdate()" />
   </div>
 </template>

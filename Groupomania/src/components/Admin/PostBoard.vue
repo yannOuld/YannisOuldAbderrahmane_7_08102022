@@ -19,7 +19,7 @@
 
   const { deletePost } = useAdminStore();
 
-  const postSupp = async (uuid) => {
+  async function postSupp(uuid) {
     try {
       await deletePost(uuid);
       alert("post supprimé !");
@@ -27,7 +27,7 @@
       console.log(error);
       alert("un probleme est survenu !");
     }
-  };
+  }
 </script>
 
 <template>

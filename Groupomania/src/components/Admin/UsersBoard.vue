@@ -13,16 +13,16 @@
   const isOpen = ref(false);
   const targetUuid = ref(null);
 
-  const OpenTarget = (uuid) => {
+  function OpenTarget(uuid) {
     isOpen.value = true;
     targetUuid.value = uuid;
-  };
+  }
 
   const { deleteUser } = useAdminStore();
 
-  const suppUser = async (uuid) => {
+  async function suppUser(uuid) {
     await deleteUser(uuid);
-  };
+  }
 </script>
 
 <template>

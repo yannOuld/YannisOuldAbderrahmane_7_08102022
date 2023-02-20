@@ -14,7 +14,7 @@
     useMultiPartForm();
 
   //submit modify user
-  const submit = async () => {
+  async function submit() {
     const formData = handleData();
     try {
       await modifyUser(props.uuid, formData);
@@ -23,7 +23,7 @@
       console.log(error);
       alert("une erreur est survenue");
     }
-  };
+  }
 </script>
 
 <template>

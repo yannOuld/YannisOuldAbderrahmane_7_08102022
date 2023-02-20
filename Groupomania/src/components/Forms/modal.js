@@ -6,7 +6,7 @@ export function modal() {
   let msgSucces = ref("");
   let closePopup;
 
-  const showPopup = () => {
+  function showPopup() {
     {
       isOpen.value = true;
       clearTimeout(closePopup);
