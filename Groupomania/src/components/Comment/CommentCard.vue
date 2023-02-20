@@ -13,7 +13,7 @@
   const uuid = comment.uuid;
   const id = comment.id;
 
-  const { userData } = useAuthStore();
+  const { userData, authAdmin } = useAuthStore();
   const { user } = userData;
 
   const { deleteComment } = useCommentStore();
@@ -44,7 +44,7 @@
     </div>
     <p class="comment_content">{{ comment.content }}</p>
     <p class="comment_date font-bold">{{ comment.createdAt }}</p>
-    <div v-if="(owner.uuid = user.uuid || user.role != 'user')">
+    <div v-if="(owner.uuid = user.uuid || authAdmin == true)">
       <button
         class="comment-btn_delete absolute hover:brightness-50"
         @click="suppComment()"

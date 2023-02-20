@@ -60,7 +60,7 @@
       </li>
     </ul>
     <teleport to="body">
-      <div class="likes-modal_bg absolute" v-if="isOpen">
+      <div class="likes-modal_bg fixed" v-if="isOpen">
         <button @click="isOpen = false">quitter</button>
         <post-admin :uuid="targetUuid" />
       </div>

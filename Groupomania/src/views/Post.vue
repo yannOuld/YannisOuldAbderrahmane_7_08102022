@@ -24,7 +24,7 @@
   // finding user data
   const { userData } = useAuthStore();
   const { user } = userData;
-
+  const { authAdmin } = storeToRefs(useAuthStore());
   const updateComments = () => {
     forceUpdate.value += 1;
   };
@@ -55,7 +55,7 @@
         :uuid="post?.uuid"
         :user_id="user?.id"
       />
-      <post-utils v-if="user?.uuid == post?.owner.uuid" />
+      <post-utils v-if="user?.uuid == post?.owner.uuid || authAdmin" />
     </div>
     <comment-form @onCommentSubmit="updateComments" />
     <comments :key="forceUpdate" />

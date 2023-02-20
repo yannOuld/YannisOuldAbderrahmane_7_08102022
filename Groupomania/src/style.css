@@ -134,10 +134,10 @@
     @apply hidden sm:flex  my-3 w-96 h-96;
   }
   .likes-modal_bg {
-    @apply top-0 left-0 right-0 bottom-0 w-screen h-screen bg-slate-400 bg-opacity-50;
+    @apply top-0 left-0 right-0 bottom-0 w-screen fixed h-screen bg-slate-400 bg-opacity-50;
   }
   .likes-modal_content {
-    @apply bg-white p-12 rounded-xl blur-0;
+    @apply bg-white p-12 rounded-xl blur-0 w-1/2;
   }
   .likes-modal_link {
     @apply w-36;
