@@ -37,14 +37,14 @@
     @apply w-10/12 sm:w-2/5 md:w-3/12;
   }
   button {
-    @apply cursor-pointer font-bold text-base items-center flex flex-row justify-center;
+    @apply cursor-pointer font-bold text-base items-center flex flex-row justify-center text-black;
   }
   ul {
     @apply list-none p-0 m-0;
   }
   textarea,
   input {
-    @apply w-3/4 sm:w-60;
+    @apply w-3/4 sm:w-60 text-black;
   }
   textarea {
     @apply resize-none text-center;

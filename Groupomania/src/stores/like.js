@@ -6,11 +6,8 @@ export const useLikeStore = defineStore({
   state: () => ({
     likes: [],
   }),
-  getters: {
-    mapLikes() {
-      this.likes.map((like) => like + "hello");
-    },
-  },
+
+
 
   actions: {
     async LikePost(uuid, user_uuid) {

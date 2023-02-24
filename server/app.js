@@ -17,8 +17,8 @@ const limiter = rateLimit({
 
 app.use(limiter)
 app.use(cors());
-app.use(morgan("combined"));
-app.use(morgan("combined", { immediate: true }));
+app.use(morgan("dev"));
+app.use(morgan("dev", { immediate: true }));
 
 
 app.use(express.json());

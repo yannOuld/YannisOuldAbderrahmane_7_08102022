@@ -1,7 +1,7 @@
 <script setup>
   import { storeToRefs } from "pinia";
   import { ref, onMounted, watchEffect } from "vue";
-  import { useLikeStore } from "../../stores/like";
+  import { usePostStore } from "../../stores/posts.js";
 
   const emit = defineEmits(["onLiked"]);
 
@@ -21,14 +21,12 @@
   const isOpen = ref(false);
 
   // like store
-  const { getLikes, LikePost, findLike } = useLikeStore();
+  const { getLikes, likePost } = usePostStore();
 
   // getting users who liked the post
-  onMounted(() => {
-    getLikes(props.uuid);
-  });
+  getLikes(props.uuid);
 
-  const { likes } = storeToRefs(useLikeStore());
+  const { likes } = storeToRefs(usePostStore());
 
   const data = {
     user_id: props.user_id,
@@ -36,7 +34,7 @@
 
   //sending a like
   async function sendLike() {
-    await LikePost(props.uuid, data);
+    await likePost(props.uuid, data);
   }
   function userLiked() {
     const liked = likes.value.find((like) => like.user_id == props.user_id);

@@ -56,6 +56,6 @@
       <post-utils v-if="user?.uuid == post?.owner.uuid || authAdmin" />
     </div>
     <comment-form @onCommentSubmit="updateComments" />
-    <comments :key="forceUpdate()" />
+    <comments :key="forceUpdate" />
   </div>
 </template>

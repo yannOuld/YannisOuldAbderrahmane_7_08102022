@@ -1,196 +1,61 @@
 <template>
   <div class="pagination">
-    <ul class="pagination-posts w-full">
-      <li class="pagination-posts_card w-full">
-        <post-card
-          v-for="post in paginatedPosts"
-          :key="post.uuid"
-          :uuid="post.uuid"
-          :content="post.content"
-          :title="post.title"
-          :owner="post.owner"
-          :imageUrl="post.imageUrl"
-          :createdAt="post.createdAt"
-          :likesCounter="post.likesCounter"
-        />
-      </li>
-    </ul>
     <ul class="w-full flex-row pagination-bar">
-      <li class="pagination-item">
-        <button
-          class="pagination-btn"
-          type="button"
-          @click="onClickFirstPage"
-          :disabled="isInFirstPage"
-        >
-          &lt;&lt; <span class="hidden sm:flex">First</span>
-        </button>
-      </li>
-
-      <li class="pagination-item">
-        <button
-          class="pagination-btn"
-          type="button"
-          @click="onClickPreviousPage"
-          :disabled="isInFirstPage"
-        >
-          &lt; <span class="hidden sm:flex">Previous</span>
-        </button>
-      </li>
-
-      <!-- Visible Buttons Start  -->
-
-      <li v-for="page in pages" :key="page.number" class="pagination-item">
-        <button
-          class="pagination-btn"
-          type="button"
-          @click="onClickPage(page.number)"
-          :disabled="page.isDisabled"
-          :class="{ active: isPageActive(page.number) }"
-        >
-          {{ page.number }}
-        </button>
-      </li>
-
-      <!-- Visible Buttons End -->
-
-      <li class="pagination-item">
-        <button
-          class="pagination-btn"
-          type="button"
-          @click="onClickNextPage"
-          :disabled="isInLastPage"
-        >
-          <span class="hidden sm:flex">Next</span> &gt;
-        </button>
-      </li>
-
-      <li class="pagination-item">
-        <button
-          class="pagination-btn"
-          type="button"
-          @click="onClickLastPage"
-          :disabled="isInLastPage"
-        >
-          <span class="hidden sm:flex">Last</span> &gt;&gt;
-        </button>
-      </li>
+      <template v-for="(page, index) in pagination">
+        <li :key="index + 'd'" v-if="page === '...'" class="pagination-item">
+          <button class="pagination-btn" type="button">
+            {{ page }}
+          </button>
+        </li>
+        <li :key="index" v-else class="pagination-item">
+          <button
+            class="pagination-btn"
+            type="button"
+            @click="$emit('change', page)"
+          >
+            {{ page }}
+          </button>
+        </li>
+      </template>
     </ul>
   </div>
 </template>
 
-<script>
+<script setup>
+  import { computed } from "vue";
   import PostCard from "../Post/PostCard.vue";
 
-  export default {
-    name: "PaginationBar",
-    components: {
-      PostCard,
+  const emit = defineEmits(["change"]);
+  const props = defineProps({
+    total: {
+      type: Number,
+      required: true,
     },
-    props: {
-      posts: {
-        type: Array,
-        required: true,
-      },
-      maxVisibleButtons: {
-        type: Number,
-        required: false,
-        default: 3,
-      },
-      totalPages: {
-        type: Number,
-        required: true,
-        default: 7,
-      },
-      perPage: {
-        type: Number,
-        required: true,
-      },
-      currentPage: {
-        type: Number,
-        required: true,
-      },
+    pageLength: {
+      type: Number,
+      required: true,
     },
-    computed: {
-      // calculating the starting button value
-      startPage() {
-        if (this.currentPage === 1) return 1;
-
-        if (this.currentPage === this.totalPages) {
-          return (
-            this.totalPages -
-            this.maxVisibleButtons +
-            (this.maxVisibleButtons - 1)
-          );
-        }
-
-        return this.currentPage - 1;
-      },
-      // calculatin the last button value
-      endPage() {
-        return Math.min(
-          this.startPage + this.maxVisibleButtons - 1,
-          this.totalPages
-        );
-      },
-      // calcultating the pages number
-      pages() {
-        const range = [];
-        for (let i = this.startPage; i <= this.endPage; i += 1) {
-          range.push({
-            number: i,
-            isDisabled: i === this.currentPage,
-          });
-        }
-        return range;
-      },
-
-      // Posts array slice for pagination
-      paginatedPosts() {
-        let start = (this.currentPage - 1) * this.perPage;
-        let end = start + this.perPage;
-
-        return this.posts.slice(start, end);
-      },
-
-      // BOUNDING FIRST AND LAST PAGE
-      isInFirstPage() {
-        return this.currentPage === 1;
-      },
-
-      isInLastPage() {
-        return this.currentPage === this.totalPages;
-      },
+    current: {
+      type: Number,
+      required: true,
     },
-    methods: {
-      // BUTTONS EVENTS EMITS
-      onClickFirstPage() {
-        this.$emit("pagechanged", 1);
-      },
+  });
 
-      onClickPreviousPage() {
-        this.$emit("pagechanged", this.currentPage - 1);
-      },
+  const numPage = computed(() => Math.ceil(props.total / props.pageLength));
 
-      onClickPage(page) {
-        this.$emit("pagechanged", page);
-      },
+  const pagination = computed(() => {
+    const arr = [];
+    const current = props.current;
+    const num_page = numPage.value;
 
-      onClickNextPage() {
-        this.$emit("pagechanged", this.currentPage + 1);
-      },
-
-      onClickLastPage() {
-        this.$emit("pagechanged", this.totalPages);
-      },
-
-      isPageActive(page) {
-        return this.currentPage === page;
-      },
-
-      onPageChange(page) {
-        this.currentPage = page;
-      },
-    },
-  };
+    if (current > 2) arr.push(1);
+    if (current > 3) arr.push("...");
+    if (current > 1) arr.push(current - 1);
+    arr.push(current);
+    if (current < num_page) arr.push(current + 1);
+    if (current < num_page - 2) arr.push("...");
+    if (current < num_page - 1) arr.push(num_page);
+    console.log(num_page, current);
+    return arr;
+  });
 </script>

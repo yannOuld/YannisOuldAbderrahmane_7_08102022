@@ -1,7 +1,8 @@
 <script>
   import AdminButton from "./../components/Utils/AdminButton.vue";
-  import { defineAsyncComponent } from "vue";
+  import PaginationBar from "../components/Layout/PaginationBar.vue";
   import PostForm from "../components/Post/PostForm.vue";
+  import PostCard from "../components/Post/PostCard.vue";
   import { usePostStore } from "../stores/posts";
   import { mapState } from "pinia";
 
@@ -9,16 +10,15 @@
     name: "HomeView",
     components: {
       PostForm,
+      PostCard,
       AdminButton,
-      PaginationBar: defineAsyncComponent({
-        loader: () => import("../components/Layout/PaginationBar.vue"),
-        delay: 1000,
-      }),
+      PaginationBar,
     },
 
     data() {
       return {
         currentPage: 1,
+        perPage: 7,
       };
     },
     methods: {
@@ -28,6 +28,13 @@
       },
     },
     computed: {
+      // Posts array slice for pagination
+      range() {
+        let start = (this.currentPage - 1) * this.perPage;
+        let end = start + this.perPage;
+
+        return [start, end];
+      },
       // retrieving store data
       ...mapState(usePostStore, ["posts"]),
       ...mapState(usePostStore, ["postsNumber"]),
@@ -44,26 +51,31 @@
   <div>
     <admin-button />
     <navigation-links v-once></navigation-links>
-    <h1 v-once>Bienvenue chez Groupomania.</h1>
-    <img
-      v-once
-      src="../assets/images/icon.webP"
-      class="home-img"
-      alt="logo groupomania"
-      rel="preload"
-    />
 
     <post-form v-once />
 
     <div class="w-full">
       <h1 v-once>Les derniers Posts</h1>
+      <ul class="pagination-posts w-full">
+        <li class="pagination-posts_card w-full">
+          <post-card
+            v-for="post in posts.slice(...range)"
+            :key="post.uuid"
+            :uuid="post.uuid"
+            :content="post.content"
+            :title="post.title"
+            :owner="post.owner"
+            :imageUrl="post.imageUrl"
+            :createdAt="post.createdAt"
+            :likesCounter="post.likesCounter"
+          />
+        </li>
+      </ul>
       <pagination-bar
-        :currentPage="currentPage"
-        :maxVisibleButtons="3"
-        :posts="posts"
-        :perPage="7"
-        :totalPages="Math.ceil(postsNumber / 7)"
-        @pagechanged="onPageChange"
+        :current="currentPage"
+        :total="posts.length"
+        :pageLength="7"
+        @change="onPageChange"
       />
     </div>
   </div>

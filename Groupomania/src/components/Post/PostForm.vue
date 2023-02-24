@@ -19,7 +19,7 @@
 
 <template>
   <form
-    class="post-form_create w-11/12 hover:shadow-red-900 hover:shadow-xl"
+    class="post-form_create w-11/12"
     enctype="multipart/form-data"
     @submit.prevent="submit()"
   >

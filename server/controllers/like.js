@@ -22,7 +22,7 @@ async function addLike(req, res, next) {
 
       await post.save();
 
-      return res.status(201).json("post liked !");
+      return res.status(201).json(1);
     }
 
     // Si le like existe le supprimé et enlever 1 au compteur de like du post
@@ -33,7 +33,7 @@ async function addLike(req, res, next) {
 
       await post.save();
 
-      return res.status(200).json("post unliked !");
+      return res.status(200).json(-1);
     }
   } catch (error) {
     return res.status(400).json(error.message);
