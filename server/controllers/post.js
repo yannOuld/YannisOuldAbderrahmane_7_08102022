@@ -24,9 +24,9 @@ async function createPost(req, res, next) {
       owner_id,
     })
     if (!post) throw new Error("le post n'as pas pu être créee !");
+    const newPost = await Post.findOne({ where: { uuid: post.uuid }, include: "owner" });
 
-
-    return res.status(200).json(post);
+    return res.status(200).json(newPost);
   } catch (err) {
     res.status(400).json(err.message);
   }

@@ -6,7 +6,7 @@ const { modifyPermit } = require('../middleware/auth');
 async function getOneUser(req, res, next) {
   const uuid = req.params.uuid;
   try {
-    const user = await User.findOne({ where: { uuid } });
+    const user = await User.findOne({ where: { uuid }, include: 'posts' });
     const { createdAt, updatedAt, password, id, ...response } = user.dataValues;
     return res.status(200).json(response);
   } catch (err) {

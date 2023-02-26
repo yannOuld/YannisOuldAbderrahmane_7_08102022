@@ -1,4 +1,5 @@
 <script setup>
+  import PostCard from "../components/Post/PostCard.vue";
   import { useRoute } from "vue-router";
   import { useUsersStore } from "../stores/users";
   import { storeToRefs } from "pinia";
@@ -29,23 +30,37 @@
 </script>
 
 <template>
-  <div>
+  <div class="flex-row">
     <navigation-links v-once></navigation-links>
 
-    <div class="profil relative" v-if="mode.state == 'read'">
+    <div class="profil self-start relative" v-if="mode.state == 'read'">
       <button class="profil-btn_switch absolute" @click="switchModify()">
         modifier &nbsp;<font-awesome-icon icon="fa-solid fa-gear" />
       </button>
       <profil-page :author="author" />
     </div>
 
-    <div class="profil relative" v-if="mode.state == 'modify'">
+    <div class="profil self-start relative" v-if="mode.state == 'modify'">
       <button class="profil-btn_switch absolute" @click="switchRead()">
         Retour &nbsp;<font-awesome-icon icon="fa-solid fa-gear" />
       </button>
       <div class="profil">
         <profil-modify />
       </div>
+    </div>
+
+    <div v-if="author?.posts">
+      <post-card
+        v-for="post in author.posts"
+        :key="post.uuid"
+        :uuid="post.uuid"
+        :content="post.content"
+        :title="post.title"
+        :owner="post.owner"
+        :imageUrl="post.imageUrl"
+        :createdAt="post.createdAt"
+        :likesCounter="post.likesCounter"
+      />
     </div>
   </div>
 </template>

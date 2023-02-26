@@ -54,7 +54,7 @@
 </script>
 
 <template>
-  <div class="sign_border">
+  <div class="sign_layout">
     <h1>Connexion</h1>
     <form @submit.prevent="submit()" autocomplete="on" class="sign-form">
       <div class="sign-form_display justify-between">

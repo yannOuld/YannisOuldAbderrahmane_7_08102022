@@ -19,11 +19,13 @@
 
 <template>
   <form
-    class="post-form_create w-11/12"
+    class="post-form_create"
     enctype="multipart/form-data"
     @submit.prevent="submit()"
   >
-    <h2>Partagez un Post.</h2>
+    <div class="border-b-2 my-2">
+      <h2>Créer une publication</h2>
+    </div>
 
     <base-input
       v-model="title"

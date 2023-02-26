@@ -1,63 +1,57 @@
-import router from "../router/index.js";
+import { ref } from 'vue'
 import { defineStore } from "pinia";
 import { fetchWrapper } from "../utils/fetchWrapp.js";
-import { useLocalStorage } from "@vueuse/core";
+
 
 // store d'authentification du user
-export const useAdminStore = defineStore({
-  id: "admin",
+export const useAdminStore = defineStore('admin', () => {
+  const posts = ref([]);
+  const post = ref(null);
+  const users = ref([]);
+  const user = ref(null);
 
-  // States pinia user du localStorage et url de retour en cas de clear du localStorage
-  state: () => ({
-    posts: [],
-    post: null,
-    users: [],
-    user: null,
-  }),
+  async function fetchUsers() {
+    users.value = [];
+    users.value = await fetchWrapper
+      .get(`http://localhost:3000/api/user/`)
+      .catch((err) => console.log(err.message));
+  }
 
-  actions: {
-    async fetchUsers() {
-      this.users = [];
-      this.users = await fetchWrapper
-        .get(`http://localhost:3000/api/user/`)
-        .catch((err) => console.log(err.message));
-    },
+  async function modifyUser(uuid, formData) {
+    await fetchWrapper
+      .patchfile(`http://localhost:3000/api/user/${uuid}`, formData)
+      .catch((err) => console.log(err.message));
+  }
 
-    async modifyUser(uuid, formData) {
-      await fetchWrapper
-        .patchfile(`http://localhost:3000/api/user/${uuid}`, formData)
-        .catch((err) => console.log(err.message));
-    },
+  async function deleteUser(uuid) {
+    await fetchWrapper
+      .delete(`http://localhost:3000/api/user/${uuid}`)
+      .catch((err) => console.log(err.message));
+    users.value = users.value.filter((user) => user.uuid != uuid);
+  }
 
-    async deleteUser(uuid) {
-      await fetchWrapper
-        .delete(`http://localhost:3000/api/user/${uuid}`)
-        .catch((err) => console.log(err.message));
-      this.users = this.users.filter((user) => user.uuid != uuid);
-    },
+  async function fetchPosts() {
+    posts.value = [];
+    posts.value = await fetchWrapper
+      .get(`http://localhost:3000/api/post/`)
+      .then((response) => {
+        return response.reverse();
+      })
+      .catch((err) => console.log(err.message));
+  }
 
-    async fetchPosts() {
-      this.posts = [];
-      this.posts = await fetchWrapper
-        .get(`http://localhost:3000/api/post/`)
-        .then((response) => {
-          return response.reverse();
-        })
-        .catch((err) => console.log(err.message));
-    },
+  async function modifyPost(uuid, formData) {
+    await fetchWrapper
+      .patchfile(`http://localhost:3000/api/post/${uuid}`, formData)
+      .catch((err) => console.log(err.message));
+  }
 
-    async modifyPost(uuid, formData) {
-      await fetchWrapper
-        .patchfile(`http://localhost:3000/api/post/${uuid}`, formData)
-        .catch((err) => console.log(err.message));
-    },
+  async function deletePost(uuid) {
+    await fetchWrapper
+      .delete(`http://localhost:3000/api/post/${uuid}`)
+      .catch((err) => console.log(err.message));
+    posts.value = posts.value.filter((post) => post.uuid != uuid);
+  }
 
-    async deletePost(uuid) {
-      this.post = null;
-      this.post = await fetchWrapper
-        .delete(`http://localhost:3000/api/post/${uuid}`)
-        .catch((err) => console.log(err.message));
-      this.posts = this.posts.filter((post) => post.uuid != uuid);
-    },
-  },
+  return { posts, post, users, user, fetchUsers, modifyUser, deleteUser, modifyPost, deletePost, fetchPosts }
 });

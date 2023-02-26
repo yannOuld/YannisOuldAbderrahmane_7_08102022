@@ -26,7 +26,7 @@
   // getting users who liked the post
   getLikes(props.uuid);
 
-  const { likes } = storeToRefs(usePostStore());
+  const { likes, like } = storeToRefs(usePostStore());
 
   const data = {
     user_id: props.user_id,
@@ -37,8 +37,7 @@
     await likePost(props.uuid, data);
   }
   function userLiked() {
-    const liked = likes.value.find((like) => like.user_id == props.user_id);
-    if (liked != undefined) return true;
+    if (like.value == 1) return true;
   }
   watchEffect(() => {
     userLiked;

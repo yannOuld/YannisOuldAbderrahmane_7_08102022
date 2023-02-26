@@ -1,5 +1,4 @@
 <script>
-  import AdminButton from "./../components/Utils/AdminButton.vue";
   import PaginationBar from "../components/Layout/PaginationBar.vue";
   import PostForm from "../components/Post/PostForm.vue";
   import PostCard from "../components/Post/PostCard.vue";
@@ -11,7 +10,6 @@
     components: {
       PostForm,
       PostCard,
-      AdminButton,
       PaginationBar,
     },
 
@@ -48,14 +46,17 @@
 </script>
 
 <template>
-  <div>
-    <admin-button />
+  <div class="lg:flex-row-reverse">
     <navigation-links v-once></navigation-links>
-
-    <post-form v-once />
+    <div class="w-1/2 flex self-start">
+      <div class="w-full my-4 border-solid border-2 border-black">
+        <h1>Vous etes sur la page d'accueil</h1>
+        <p>Ici, vous pouvez partager des publications avec vous collègues</p>
+      </div>
+      <post-form v-once />
+    </div>
 
     <div class="w-full">
-      <h1 v-once>Les derniers Posts</h1>
       <ul class="pagination-posts w-full">
         <li class="pagination-posts_card w-full">
           <post-card

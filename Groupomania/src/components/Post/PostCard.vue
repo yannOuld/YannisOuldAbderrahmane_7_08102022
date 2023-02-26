@@ -39,14 +39,14 @@
 </script>
 
 <template>
-  <div class="postcard-container relative rounded-lg">
-    <div class="postcard-date">
-      <p class="postcard-date_txt font-bold" aria-labelledby="date">
-        {{ createdAt }}
-      </p>
-    </div>
-    <div class="postcard relative">
-      <div class="postcard-user flex-row">
+  <div class="postcard-container my-10 relative rounded-lg">
+    <p
+      class="postcard-date absolute -top-6 right-4 flex-end w-72 font-bold text-right"
+    >
+      {{ createdAt }}
+    </p>
+    <div class="">
+      <div class="postcard-user absolute top-4 left-4 flex-row">
         <img
           v-if="owner?.imageUrl == null"
           src="../../assets/images/icon.webP"
@@ -63,13 +63,13 @@
           {{ owner?.firstName }} {{ owner?.lastName }}
         </p>
       </div>
-      <router-link class="no-decoration" :to="postPage">
+      <router-link class="no-decoration mt-12 w-full" :to="postPage">
         <h2 class="postcard-title">{{ title }}</h2>
-        <div v-if="imageUrl">
-          <img :src="imageUrl" alt="image du post" class="postcard-img" />
-        </div>
         <div>
           <p>{{ content }}</p>
+        </div>
+        <div v-if="imageUrl">
+          <img :src="imageUrl" alt="image du post" class="postcard-img" />
         </div>
         <p class="postcard-likes_counter font-bold absolute">
           likes: {{ likesCounter }}

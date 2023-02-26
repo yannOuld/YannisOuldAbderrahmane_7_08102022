@@ -66,7 +66,7 @@
 </script>
 
 <template>
-  <div class="sign_border">
+  <div class="sign_layout">
     <h1>Inscription</h1>
     <form class="sign-form" @submit.prevent="submit()" autocomplete="on">
       <div class="sign-form_display justify-between">

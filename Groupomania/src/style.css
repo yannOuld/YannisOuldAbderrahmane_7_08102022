@@ -7,7 +7,7 @@
 @layer base {
   body,
   html {
-    @apply w-full p-0 m-0 font-lato;
+    @apply w-full p-0 m-0 font-lato mt-16;
   }
   a {
     @apply no-underline text-black;
@@ -44,7 +44,7 @@
   }
   textarea,
   input {
-    @apply w-3/4 sm:w-60 text-black;
+    @apply w-full sm:w-96  text-black;
   }
   textarea {
     @apply resize-none text-center;
@@ -71,7 +71,7 @@
   }
   .postcard-date_txt,
   .postcard-likes_counter {
-    @apply py-0 px-1 rounded bg-white;
+    @apply py-0 px-1 rounded;
   }
   .error,
   .succes {
@@ -133,6 +133,9 @@
   .home-img {
     @apply hidden sm:flex  my-3 w-96 h-96;
   }
+  .liked {
+    @apply text-red-600;
+  }
   .likes-modal_bg {
     @apply top-0 left-0 right-0 bottom-0 w-screen fixed h-screen bg-slate-400 bg-opacity-50;
   }
@@ -149,10 +152,10 @@
     @apply w-72 flex justify-center items-center;
   }
   .navigation {
-    @apply p-0 md:flex-row md:px-16 md:py-24;
+    @apply p-0 md:flex-row md:px-16 md:py-24 border-solid border-b-2 border-black;
   }
   .navigation-logo {
-    @apply w-64  flex h-24 object-cover lg:w-72 md:mx-0;
+    @apply w-64  flex h-16 object-cover lg:w-72 md:mx-0;
   }
   .navigation-nav {
     @apply flex my-0 w-10/12 sm:w-96 justify-center sm:justify-end md:justify-end md:mx-3;
@@ -199,20 +202,23 @@
   .post-btn_icon {
     @apply hidden  sm:flex sm:w-3 sm:ml-2;
   }
+  .post-form_create {
+    @apply w-full;
+  }
   .post-form_modify {
     @apply bg-tertiarygroup;
   }
   .postcard-container {
-    @apply bg-secondgroup   p-4 mb-8   shadow-lg shadow-black;
+    @apply p-4 mb-8 border-black border-solid border-2  sm:w-3/4;
   }
   .postcard {
-    @apply cursor-pointer  bg-white   rounded p-4 w-56 h-96 sm:w-11/12 sm:h-fit   my-0 sm:my-3;
+    @apply cursor-pointer  bg-white   p-4 w-56 h-96 sm:w-11/12 sm:h-fit   my-0 sm:my-3;
   }
   .postcard-title {
     @apply my-0  sm:mt-8 mb-5;
   }
   .postcard-img {
-    @apply object-fill border-black w-52 h-52 sm:w-72 sm:h-72 md:w-96 md:h-72;
+    @apply object-fill mb-3 border-black w-72 h-52 sm:w-10/12 sm:h-72 md:w-11/12 md:h-72;
   }
   .postcard-user {
     @apply justify-start sm:mt-4  mb-2 h-14;
@@ -223,11 +229,9 @@
   .postcard-user_img {
     @apply w-8 h-8 sm:w-20 sm:h-20 border-solid border-4 border-red-400 rounded-full mx-2;
   }
-  .postcard-date {
-    @apply items-start;
-  }
+
   .postcard-date_txt {
-    @apply w-32 sm:w-1/3;
+    @apply w-32 sm:w-1/3 text-right;
   }
   .postcard-likes_counter {
     @apply w-20  bottom-0 right-3 text-right;
@@ -259,8 +263,8 @@
   .sign {
     @apply w-11/12;
   }
-  .sign_border {
-    @apply w-11/12 sm:w-3/4 md:w-7/12 border-black border-solid border-4 rounded-3xl p-3 text-base bg-white;
+  .sign_layout {
+    @apply w-11/12 sm:w-3/4 md:w-7/12 border-black border-solid border-4 rounded-3xl p-3 text-base  bg-white;
   }
   .sign-form {
     @apply justify-center w-fit;
