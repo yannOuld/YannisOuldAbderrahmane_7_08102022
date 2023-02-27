@@ -1,7 +1,9 @@
 <script setup>
+  import { ref } from "vue";
   import { useMultiPartForm } from "../Forms/form.js";
   import { usePostStore } from "../../stores/posts";
 
+  const clear = ref(null);
   const { sendPost } = usePostStore();
 
   let { title, fileTarget, handleFileUpload, content, handleData } =
@@ -14,11 +16,13 @@
     } catch (error) {
       console.log(error);
     }
+    clear.value.reset();
   }
 </script>
 
 <template>
   <form
+    ref="clear"
     class="post-form_create"
     enctype="multipart/form-data"
     @submit.prevent="submit()"

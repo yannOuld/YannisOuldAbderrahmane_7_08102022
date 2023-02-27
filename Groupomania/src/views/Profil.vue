@@ -1,5 +1,6 @@
 <script setup>
   import PostCard from "../components/Post/PostCard.vue";
+  import ScrollTop from "../components/Utils/ScrollTopButton.vue";
   import { useRoute } from "vue-router";
   import { useUsersStore } from "../stores/users";
   import { storeToRefs } from "pinia";
@@ -30,7 +31,7 @@
 </script>
 
 <template>
-  <div class="flex-row">
+  <div class="lg:flex-row">
     <navigation-links v-once></navigation-links>
 
     <div class="profil self-start relative" v-if="mode.state == 'read'">
@@ -56,11 +57,13 @@
         :uuid="post.uuid"
         :content="post.content"
         :title="post.title"
-        :owner="post.owner"
+        :owner="author"
         :imageUrl="post.imageUrl"
         :createdAt="post.createdAt"
         :likesCounter="post.likesCounter"
       />
     </div>
+
+    <scroll-top />
   </div>
 </template>

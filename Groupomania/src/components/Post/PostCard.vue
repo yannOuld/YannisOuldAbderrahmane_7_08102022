@@ -39,14 +39,12 @@
 </script>
 
 <template>
-  <div class="postcard-container my-10 relative rounded-lg">
-    <p
-      class="postcard-date absolute -top-6 right-4 flex-end w-72 font-bold text-right"
-    >
+  <div class="postcard-container">
+    <p class="postcard-date">
       {{ createdAt }}
     </p>
-    <div class="">
-      <div class="postcard-user absolute top-4 left-4 flex-row">
+    <div>
+      <div class="postcard-user">
         <img
           v-if="owner?.imageUrl == null"
           src="../../assets/images/icon.webP"
@@ -60,7 +58,9 @@
           class="postcard-user_img"
         />
         <p class="postcard-user_name">
-          {{ owner?.firstName }} {{ owner?.lastName }}
+          <router-link :to="`/profil/${owner?.uuid}`">
+            {{ owner?.firstName }} {{ owner?.lastName }}
+          </router-link>
         </p>
       </div>
       <router-link class="no-decoration mt-12 w-full" :to="postPage">
@@ -71,10 +71,41 @@
         <div v-if="imageUrl">
           <img :src="imageUrl" alt="image du post" class="postcard-img" />
         </div>
-        <p class="postcard-likes_counter font-bold absolute">
-          likes: {{ likesCounter }}
-        </p>
+        <p class="postcard-likes_counter">likes: {{ likesCounter }}</p>
       </router-link>
     </div>
   </div>
 </template>
+
+<style scoped>
+  .postcard-container {
+    @apply p-4 mb-8 border-black border-solid border-2  sm:w-3/4 my-10 relative rounded-lg;
+  }
+  .postcard {
+    @apply cursor-pointer  bg-white   p-4 w-56 h-96 sm:w-11/12 sm:h-fit   my-0 sm:my-3;
+  }
+  .postcard-title {
+    @apply my-0  sm:mt-8 mb-5;
+  }
+  .postcard-img {
+    @apply object-fill mb-3 border-black w-full h-64 sm:w-full sm:h-72 md:w-10/12 lg:w-full md:h-1/4;
+  }
+  .postcard-user {
+    @apply justify-start sm:mt-4  mb-2 h-14 absolute top-4 left-4 flex-row;
+  }
+  .postcard-user_name {
+    @apply text-sm  sm:text-base;
+  }
+  .postcard-user_img {
+    @apply w-8 h-8 sm:w-20 sm:h-20 border-solid border-4 border-red-400 rounded-full mx-2;
+  }
+  .postcard-date {
+    @apply absolute -top-6 right-4 w-72 font-bold text-right;
+  }
+  .postcard-date_txt {
+    @apply w-32 sm:w-1/3 text-right;
+  }
+  .postcard-likes_counter {
+    @apply w-20  bottom-0 right-3 text-right font-bold absolute;
+  }
+</style>
