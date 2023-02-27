@@ -1,3 +1,5 @@
+
+
 /** @type {import('tailwindcss').Config} */
 module.exports = {
   content: ["./index.html", "./src/**/*.{vue,js,ts,jsx,tsx}"],
@@ -6,6 +8,9 @@ module.exports = {
     extend: {
       fontFamily: {
         lato: "'Lato', sans-serif",
+      },
+      backgroundImage: {
+        'groupomania': "url('./assets/images/icon.webp')"
       },
       backgroundColor: {
         primarygroup: "#FD2D01",

@@ -8,6 +8,6 @@
 
 <style scoped>
   .app {
-    @apply w-full;
+    @apply w-full bg-groupomania bg-fixed bg-origin-border bg-no-repeat bg-center;
   }
 </style>

@@ -4,18 +4,13 @@
 
 <template>
   <div class="sign">
-    <img
-      class="sign-logo"
-      alt="Groupamania logo"
-      src="../assets/images/icon.webp"
-    />
     <sign-in />
     <div>
       <p class="sign-btn_switch">
         Déja inscrit ?
-        <span class="text-red-600">
-          <router-link :to="'/login'"> Se connecter. </router-link>
-        </span>
+        <router-link :to="'/login'">
+          <span class="sign-btn_blue"> Se connecter. </span>
+        </router-link>
       </p>
     </div>
   </div>

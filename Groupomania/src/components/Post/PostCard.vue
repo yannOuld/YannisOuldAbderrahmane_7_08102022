@@ -79,16 +79,16 @@
 
 <style scoped>
   .postcard-container {
-    @apply p-4 mb-8 border-black border-solid border-2  sm:w-3/4 my-10 relative rounded-lg;
+    @apply sm:w-3/4 my-10 p-4 mb-8 bg-white border-black border-solid border-2 relative rounded-lg;
   }
   .postcard {
-    @apply cursor-pointer  bg-white   p-4 w-56 h-96 sm:w-11/12 sm:h-fit   my-0 sm:my-3;
+    @apply cursor-pointer    p-4 w-56 h-96 sm:w-11/12 sm:h-fit   my-0 sm:my-3;
   }
   .postcard-title {
     @apply my-0  sm:mt-8 mb-5;
   }
   .postcard-img {
-    @apply object-fill mb-3 border-black w-full h-64 sm:w-full sm:h-72 md:w-10/12 lg:w-full md:h-1/4;
+    @apply object-fill mb-3 border-black w-full h-64 sm:w-full sm:h-72 md:w-[400px] md:h-[400px];
   }
   .postcard-user {
     @apply justify-start sm:mt-4  mb-2 h-14 absolute top-4 left-4 flex-row;

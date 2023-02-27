@@ -42,8 +42,4 @@
   .navigation-nav {
     @apply flex my-0 w-10/12 sm:w-96 justify-around sm:justify-end md:justify-end md:mx-3;
   }
-
-  .navigation-btn_icon {
-    @apply w-4 mr-2;
-  }
 </style>

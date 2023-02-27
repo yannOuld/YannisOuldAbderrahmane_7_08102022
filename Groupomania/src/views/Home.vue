@@ -5,13 +5,15 @@
   import PostCard from "../components/Post/PostCard.vue";
   import { usePostStore } from "../stores/posts";
   import { useAuthStore } from "../stores/auth";
-  import { mapState } from "pinia";
-  import { computed, ref } from "vue";
+
+  import { computed, ref, watchEffect } from "vue";
+  import { storeToRefs } from "pinia";
 
   const { fetchPosts } = usePostStore();
   const { userData } = useAuthStore();
   const { user } = userData;
   fetchPosts();
+  const { posts } = storeToRefs(usePostStore());
 
   const mapPosts = () => {
     const store = usePostStore();
@@ -20,8 +22,14 @@
     );
   };
 
-  const store = mapPosts();
-  const posts = store.posts;
+  let store = mapPosts();
+  const arr = store.posts;
+
+  watchEffect(() => {
+    if (posts.value != arr) {
+      store = mapPosts();
+    }
+  });
 
   const currentPage = ref(1);
   const perPage = ref(7);
@@ -38,33 +46,29 @@
 </script>
 
 <template>
-  <div class="lg:flex-row-reverse">
-    <navigation-links v-once></navigation-links>
-    <div class="sm:w-3/4 lg:3/4 flex self-start">
-      <div class="w-full my-4 border-solid border-2 border-black">
+  <div class="home">
+    <navigation-links v-once />
+    <div class="home-aside">
+      <div class="home-aside_info">
         <h1>Vous etes sur la page d'accueil</h1>
         <p>Ici, vous pouvez partager des publications avec vos collègues</p>
       </div>
       <post-form v-once />
+      <div class="flex-row" v-if="user">
+        <p>
+          &nbsp; <strong> Connecté en tant que :</strong>
+          {{ user.firstName }}
+          {{ user.lastName }}
+        </p>
+      </div>
       <scroll-top />
     </div>
 
     <div class="w-full">
-      <div class="flex-row">
-        <span
-          class="bg-green-600 rounded-full w-4 h-4 items-center align-middle content-center"
-        >
-          &nbsp;</span
-        >
-        <p>
-          &nbsp; <strong> Connecté en tant que :</strong> {{ user.firstName }}
-          {{ user.lastName }}
-        </p>
-      </div>
-      <ul class="pagination-posts w-full">
-        <li class="pagination-posts_card w-full">
+      <ul class="pagination-posts">
+        <li class="pagination-posts_card">
           <post-card
-            v-for="post in posts.slice(...range)"
+            v-for="post in arr.slice(...range)"
             :key="post.uuid"
             :uuid="post.uuid"
             :content="post.content"
@@ -78,7 +82,7 @@
       </ul>
       <pagination-bar
         :current="currentPage"
-        :total="posts.length"
+        :total="arr.length"
         :pageLength="7"
         @change="onPageChange"
       />
@@ -86,4 +90,14 @@
   </div>
 </template>
 
-<style scoped></style>
+<style scoped>
+  .home {
+    @apply lg:flex-row-reverse;
+  }
+  .home-aside {
+    @apply sm:w-3/4 lg:w-3/4 flex self-start;
+  }
+  .home-aside_info {
+    @apply w-full my-4 border-solid border-2 border-black;
+  }
+</style>

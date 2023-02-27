@@ -30,7 +30,7 @@
 
 <template>
   <form
-    class="comment-form shadow-black shadow-lg"
+    class="comment-form"
     @submit.prevent="submit().then($emit('onCommentSubmit'))"
   >
     <base-textarea
@@ -40,10 +40,15 @@
       id="comment"
       name="comment"
     ></base-textarea>
-    <button
-      class="btn hover:-translate-y-1 hover:scale-90 hover:bg-gray-300 duration-300"
-    >
-      Envoyer
-    </button>
+    <button class="comment-form_btn">Envoyer</button>
   </form>
 </template>
+
+<style scoped>
+  .comment-form {
+    @apply w-3/4 my-3 py-3 rounded-2xl font-extrabold;
+  }
+  .comment-form_btn {
+    @apply hover:-translate-y-1 hover:scale-90 hover:bg-gray-300 duration-300;
+  }
+</style>

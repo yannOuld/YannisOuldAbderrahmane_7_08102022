@@ -5,7 +5,7 @@
     <div>
       <img
         class="nofound-img"
-        src="../assets/images/matrix.jpg"
+        src="../assets/images/icon.webp"
         alt="photo de l'agent smith"
       />
       <p class="nofound-txt font-bold">
@@ -17,3 +17,18 @@
     </div>
   </div>
 </template>
+
+<style scoped>
+  .nofound-title {
+    @apply text-2xl font-extrabold;
+  }
+  .nofound-img {
+    @apply w-8/12;
+  }
+  .nofound-btn {
+    @apply text-white bg-green-600 text-lg;
+  }
+  .nofound-txt {
+    @apply text-xl;
+  }
+</style>

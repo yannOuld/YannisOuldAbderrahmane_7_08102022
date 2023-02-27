@@ -16,7 +16,7 @@
     } catch (error) {
       console.log(error);
     }
-    clear.value.reset();
+    // clear.value.reset();
   }
 </script>
 

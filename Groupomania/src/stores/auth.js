@@ -5,7 +5,7 @@ import { useLocalStorage } from "@vueuse/core";
 
 // store d'authentification du user
 export const useAuthStore = defineStore('auth', () => {
-  const userData = useLocalStorage("userData", null, {
+  let userData = useLocalStorage("userData", null, {
     serializer: {
       read: (v) => (v ? JSON.parse(v) : null),
       write: (v) => JSON.stringify(v),

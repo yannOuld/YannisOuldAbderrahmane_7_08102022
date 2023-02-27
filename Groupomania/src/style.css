@@ -50,7 +50,7 @@
     @apply resize-none text-center;
   }
   input {
-    @apply my-1  file:rounded-full file:bg-white file:py-2 file:px-6 file:cursor-pointer file:font-bold;
+    @apply my-1 p-1 file:rounded-full file:bg-white file:py-2 file:px-6 file:cursor-pointer file:font-bold;
   }
 }
 @layer components {
@@ -81,6 +81,10 @@
   .post-btn_delete {
     @apply text-red-600;
   }
+  .comment_content,
+  .comment_date {
+    @apply bg-white rounded-2xl p-5;
+  }
   .active {
     @apply bg-opacity-20;
   }
@@ -102,87 +106,23 @@
   .btn {
     @apply my-5 py-1 px-2 rounded-md bg-white;
   }
-  .comment {
-    @apply w-3/4 my-2 p-4 rounded-3xl  bg-tertiarygroup;
-  }
-  .comment-form {
-    @apply w-3/4 my-3 py-3 rounded-2xl font-extrabold;
-  }
-  .comment-user {
-    @apply text-base text-left flex-row;
-  }
-  .comment-user_img {
-    @apply w-20 rounded-full border-solid border-black border-4 mr-1;
-  }
-  .comment-user_name {
-    @apply text-lg text-white;
-  }
-  .comment_content,
-  .comment_date {
-    @apply bg-white rounded-2xl p-5;
-  }
-  .comment-btn_delete {
-    @apply bg-white  py-1 px-2 rounded-full top-2 right-2;
-  }
-  .comment_date {
-    @apply w-1/3  m-0 self-end text-center;
-  }
   .form-control {
     @apply mt-2;
   }
   .home-img {
     @apply hidden sm:flex  my-3 w-96 h-96;
   }
-  .liked {
-    @apply text-red-600;
-  }
-  .likes-modal_bg {
-    @apply top-0 left-0 right-0 bottom-0 w-screen fixed h-screen bg-slate-400 bg-opacity-50;
-  }
-  .likes-modal_content {
-    @apply bg-white p-12 rounded-xl blur-0 w-1/2;
-  }
-  .likes-modal_link {
-    @apply w-36;
-  }
-  .likes {
-    @apply justify-evenly w-2/4;
-  }
-  .likes-btn_show {
-    @apply w-72 flex justify-center items-center;
-  }
   .navigation-btn {
     @apply text-xs sm:text-lg text-white border-0 rounded m-1 contrast-125  py-1 px-3 h-12 transition ease-in-out delay-150;
   }
-  .nofound-title {
-    @apply text-2xl font-extrabold;
-  }
-  .nofound-img {
-    @apply w-8/12;
-  }
-  .nofound-btn {
-    @apply text-white bg-green-600 text-lg;
-  }
-  .nofound-txt {
-    @apply text-xl;
-  }
-  .pagination {
-    @apply mt-3 mb-8;
-  }
-  .pagination-item {
-    @apply inline-block mb-10  rounded;
-  }
-  .pagination-bar {
-    @apply text-center rounded content-center;
-  }
-  .pagination-btn {
-    @apply mx-2 flex font-extrabold w-fit p-1 sm:p-2 sm:mx-1 rounded border-gray-500;
+  .navigation-btn_icon {
+    @apply w-4 mr-2;
   }
   .pagination-posts {
-    @apply flex flex-col items-center justify-center;
+    @apply flex flex-col items-center justify-center w-full;
   }
   .pagination-posts_card {
-    @apply sm:w-10/12;
+    @apply sm:w-10/12 w-full;
   }
   .post-utils {
     @apply my-5 w-3/4 p-4 justify-evenly  bg-tertiarygroup bg-opacity-80 shadow-md shadow-black;
@@ -218,10 +158,10 @@
     @apply font-medium border-none bg-transparent my-3;
   }
   .sign-btn_blue {
-    @apply text-blue-500;
+    @apply text-blue-500 font-bold;
   }
   .sign {
-    @apply w-11/12;
+    @apply w-11/12 absolute top-0 bottom-0 left-0 right-0 items-center justify-center;
   }
   .sign_layout {
     @apply w-11/12 sm:w-3/4 md:w-7/12 border-black border-solid border-4 rounded-3xl p-3 text-base  bg-white;
