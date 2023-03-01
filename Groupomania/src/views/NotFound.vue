@@ -1,5 +1,5 @@
 <template>
-  <div>
+  <div class="container">
     <h1 class="nofound-title">Not Found</h1>
 
     <div>

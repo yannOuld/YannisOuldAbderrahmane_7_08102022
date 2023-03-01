@@ -13,8 +13,8 @@ export const useAuthStore = defineStore('auth', () => {
   })
   const returnUrl = ref(null)
 
-  function authAdmin() {
-    if (userData.user.role !== "user") return true;
+  const authAdmin = () => {
+    if (userData.value.user.role !== "user") return true;
   }
 
   async function login(formData) {
@@ -30,7 +30,7 @@ export const useAuthStore = defineStore('auth', () => {
   }
 
   function logout() {
-    userData = null;
+    userData.value = null;
   }
 
   async function deleteUser(uuid) {

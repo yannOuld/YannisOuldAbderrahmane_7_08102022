@@ -1,4 +1,5 @@
 <script setup>
+  import imageUrl from "../../assets/images/icon.webp";
   import { ref } from "vue";
   import { useMultiPartForm } from "../Forms/form.js";
   import { usePostStore } from "../../stores/posts";
@@ -6,8 +7,15 @@
   const clear = ref(null);
   const { sendPost } = usePostStore();
 
-  let { title, fileTarget, handleFileUpload, content, handleData } =
-    useMultiPartForm();
+  let {
+    title,
+    fileTarget,
+    handleFileUpload,
+    defaultSrc,
+    src,
+    content,
+    handleData,
+  } = useMultiPartForm();
 
   async function submit() {
     const formData = handleData();
@@ -16,7 +24,8 @@
     } catch (error) {
       console.log(error);
     }
-    // clear.value.reset();
+    clear.value.reset();
+    src.value = null;
   }
 </script>
 
@@ -27,36 +36,44 @@
     enctype="multipart/form-data"
     @submit.prevent="submit()"
   >
-    <div class="border-b-2 my-2">
-      <h2>Créer une publication</h2>
-    </div>
-
     <base-input
       v-model="title"
-      label="Titre"
+      placeholder="titre"
       name="title"
       id="title"
     ></base-input>
 
-    <base-input
-      label="image"
-      type="file"
-      name="image"
-      id="image"
-      accept="image/png, image/jpeg, image/bmp, image/gif"
-      @change="handleFileUpload"
-    ></base-input>
-
     <base-textarea
       v-model="content"
-      label="message"
+      placeholder="message"
       maxlength="500"
       cols="50"
       rows="5"
       name="content"
       id="content"
     ></base-textarea>
+    <div class="preview">
+      <img
+        v-if="src !== null"
+        class="preview-img"
+        :src="src"
+        alt="image entrée dans le formulaire"
+      />
+      <div class="preview-input">
+        <base-input
+          label="image"
+          type="file"
+          name="image"
+          placeholder="image"
+          id="image"
+          accept="image/png, image/jpeg, image/bmp, image/gif"
+          @change="handleFileUpload"
+        ></base-input>
+      </div>
+    </div>
 
-    <button class="btn" aria-label="bouton Envoyer">Envoyer</button>
+    <button class="btn" aria-label="bouton Envoyer">
+      Créer une publication
+    </button>
   </form>
 </template>

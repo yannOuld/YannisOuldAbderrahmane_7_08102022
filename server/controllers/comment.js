@@ -1,5 +1,5 @@
 const db = require("../models");
-const { Comment } = db.sequelize.models;
+const { Comment, Post } = db.sequelize.models;
 const { modifyPermit } = require('../middleware/auth');
 const asyncHandler = require('express-async-handler')
 
@@ -8,6 +8,9 @@ const createComment = asyncHandler(async (req, res, next) => {
   const { content, owner_id } = req.body;
   const post_uuid = req.params.uuid;
 
+  // retrouver le post correspondant
+  const post = await Post.findOne({ where: { uuid: post_uuid } });
+  if (!post) throw new Error("Post not found");
 
   if (owner_id !== req.auth.id) throw new Error("Wrong user");
 
@@ -19,7 +22,7 @@ const createComment = asyncHandler(async (req, res, next) => {
       owner_id,
     })
     if (!comment) throw new Error("le commentaire n'a pas pu etre crée");
-
+    post.increment("commentsCounter", { by: 1 })
 
     return res.status(201).json(comment);
   } catch (err) {

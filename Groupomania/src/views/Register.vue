@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="sign">
+  <div class="container">
     <sign-in />
     <div>
       <p class="sign-btn_switch">

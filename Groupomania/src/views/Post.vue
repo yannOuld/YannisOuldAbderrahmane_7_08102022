@@ -33,9 +33,10 @@
 </script>
 
 <template>
-  <div class="post w-full">
+  <div class="container">
     <navigation-links></navigation-links>
-    <div>
+    <div class="w-full">
+      <post-utils v-if="user?.uuid == post?.owner.uuid || authAdmin" />
       <!-- Post component -->
       <post-card
         :key="update"
@@ -46,6 +47,7 @@
         :imageUrl="post?.imageUrl"
         :createdAt="post?.createdAt"
         :likesCounter="post?.likesCounter"
+        :commentsCounter="post?.commentsCounter"
       />
       <!-- like component -->
       <like-modal
@@ -53,7 +55,6 @@
         :uuid="post?.uuid"
         :user_id="user?.id"
       />
-      <post-utils v-if="user?.uuid == post?.owner.uuid || authAdmin" />
     </div>
     <comment-form @onCommentSubmit="updateComments" />
     <comments :key="forceUpdate" />

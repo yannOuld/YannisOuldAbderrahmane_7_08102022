@@ -10,6 +10,7 @@ import { library } from "@fortawesome/fontawesome-svg-core";
 import { FontAwesomeIcon } from "@fortawesome/vue-fontawesome";
 import {
   faPenToSquare,
+  faArrowUp,
   faHouse,
   faUser,
   faArrowRightFromBracket,
@@ -20,12 +21,17 @@ import {
   faMessage,
   faCamera,
   faHeart,
+  faImage,
+  faComments,
 } from "@fortawesome/free-solid-svg-icons";
 
 library.add(
   faPenToSquare,
   faCamera,
+  faImage,
+  faArrowUp,
   faHouse,
+  faComments,
   faUser,
   faArrowRightFromBracket,
   faKey,

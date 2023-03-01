@@ -7,7 +7,7 @@
 @layer base {
   body,
   html {
-    @apply w-full p-0 m-0 font-lato mt-16;
+    @apply w-full p-0 m-0 font-lato;
   }
   a {
     @apply no-underline text-black;
@@ -57,7 +57,8 @@
   .comment-form,
   .profil-form_modify,
   .post-form_create,
-  .post-form_modify {
+  .post-form_modify,
+  #image {
     @apply border-none text-white;
   }
   .post-form_create,
@@ -106,14 +107,32 @@
   .btn {
     @apply my-5 py-1 px-2 rounded-md bg-white;
   }
+  .container {
+    @apply w-full;
+  }
+  .limit {
+    @apply sm:w-[500px] md:w-[670px] lg:w-[700px];
+  }
   .form-control {
     @apply mt-2;
   }
   .home-img {
     @apply hidden sm:flex  my-3 w-96 h-96;
   }
+  .navigation {
+    @apply fixed flex sm:flex-row top-0 justify-between w-screen bg-white z-20 border-b-2 border-solid border-black;
+  }
+  .navigation-logo {
+    @apply w-64  flex h-16 object-cover lg:w-72 md:mx-0;
+  }
+  .navigation-nav {
+    @apply sm:flex-row my-0 w-10/12 sm:w-[500px] justify-around sm:justify-end md:justify-end md:mx-3;
+  }
+  .navigation-nav-img {
+    @apply border-solid border-black border-2 w-10 h-10 rounded-full;
+  }
   .navigation-btn {
-    @apply text-xs sm:text-lg text-white border-0 rounded m-1 contrast-125  py-1 px-3 h-12 transition ease-in-out delay-150;
+    @apply text-xs sm:text-base text-white border-0 rounded m-1 contrast-125  py-1 px-3 h-12 transition ease-in-out delay-150;
   }
   .navigation-btn_icon {
     @apply w-4 mr-2;
@@ -125,19 +144,28 @@
     @apply sm:w-10/12 w-full;
   }
   .post-utils {
-    @apply my-5 w-3/4 p-4 justify-evenly  bg-tertiarygroup bg-opacity-80 shadow-md shadow-black;
+    @apply flex-row rounded-lg  w-full my-5 p-4 justify-evenly  bg-tertiarygroup bg-opacity-80 shadow-md shadow-black;
   }
   .post-btn_icon {
     @apply hidden  sm:flex sm:w-3 sm:ml-2;
   }
   .post-form_create {
-    @apply w-full;
+    @apply pt-4 max-w-2xl w-full rounded-3xl;
+  }
+  .preview {
+    @apply relative border-dashed border-white border-4 rounded-lg my-3 w-52 h-44 sm:w-96 sm:h-72;
+  }
+  .preview-input {
+    @apply absolute w-full h-full top-0 right-0 bottom-0 left-0 bg-gray-500 bg-opacity-25;
+  }
+  .preview-img {
+    @apply w-full h-full;
   }
   .post-form_modify {
     @apply bg-tertiarygroup;
   }
   .profil {
-    @apply mt-10 mb-16  text-base w-11/12 bg-tertiarygroup text-white rounded-2xl;
+    @apply mt-10 mb-16  text-base  bg-tertiarygroup text-white rounded-2xl;
   }
   .profil-btn_switch {
     @apply right-3 top-3 z-10  p-3 rounded-xl bg-gray-200 font-bold hover:-translate-y-1 hover:scale-90 hover:bg-secondgroup duration-300;

@@ -31,21 +31,20 @@
 </script>
 
 <template>
-  <div class="lg:flex-row">
+  <div class="w-full">
     <navigation-links v-once></navigation-links>
-
-    <div class="profil self-start relative" v-if="mode.state == 'read'">
+    <div class="self-start profil limit relative" v-if="mode.state == 'read'">
       <button class="profil-btn_switch absolute" @click="switchModify()">
         modifier &nbsp;<font-awesome-icon icon="fa-solid fa-gear" />
       </button>
       <profil-page :author="author" />
     </div>
 
-    <div class="profil self-start relative" v-if="mode.state == 'modify'">
+    <div class="self-start profil limit relative" v-if="mode.state == 'modify'">
       <button class="profil-btn_switch absolute" @click="switchRead()">
         Retour &nbsp;<font-awesome-icon icon="fa-solid fa-gear" />
       </button>
-      <div class="profil">
+      <div class="">
         <profil-modify />
       </div>
     </div>

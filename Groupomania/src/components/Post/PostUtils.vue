@@ -33,16 +33,20 @@
 
   // delete post and move to home component
   async function suppPost() {
-    await deletePost(uuid).then(router.replace("/"));
+    try {
+      await deletePost(uuid).then(router.replace("/"));
+    } catch (error) {
+      alert("une erreur est survenue.");
+    }
   }
 </script>
 
 <template>
-  <div>
+  <div class="limit">
     <div v-if="mode.state == 'modify'">
       <post-modify :uuid="uuid" />
     </div>
-    <div class="post-utils flex-row rounded-lg">
+    <div class="post-utils">
       <!--show modifyPost form button -->
       <button
         v-if="mode.state == 'read'"

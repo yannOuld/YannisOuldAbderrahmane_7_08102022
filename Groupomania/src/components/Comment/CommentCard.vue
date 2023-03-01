@@ -1,4 +1,5 @@
 <script setup>
+  import imgUrl from "../../assets/images/icon.webp";
   import { useAuthStore } from "../../stores/auth";
   import { useCommentStore } from "../../stores/comment";
   import { storeToRefs } from "pinia";
@@ -24,17 +25,10 @@
 </script>
 
 <template>
-  <article class="comment">
+  <div class="comment limit">
     <div class="comment-user">
       <img
-        v-if="owner.imageUrl == null"
-        src="../../assets/images/icon.webP"
-        alt="image de l'auteur"
-        class="comment-user_img"
-      />
-      <img
-        v-if="owner.imageUrl != null"
-        :src="owner.imageUrl"
+        :src="owner.imageUrl ? owner.imageUrl : imgUrl"
         alt="image de l'auteur"
         class="comment-user_img"
       />
@@ -46,29 +40,32 @@
     <p class="comment_date">{{ comment.createdAt }}</p>
     <div v-if="(owner.uuid = user.uuid || authAdmin == true)">
       <button class="comment-btn_delete" @click="suppComment()">
-        <font-awesome-icon icon="fa-solid fa-circle-xmark" />
+        supprimer &nbsp; <font-awesome-icon icon="fa-solid fa-circle-xmark" />
       </button>
     </div>
-  </article>
+  </div>
 </template>
 
 <style scoped>
   .comment {
-    @apply w-3/4 my-2 p-4 rounded-3xl bg-tertiarygroup relative;
+    @apply my-2 p-4 rounded-3xl bg-tertiarygroup  relative;
   }
   .comment-user {
-    @apply text-base text-left flex-row font-bold;
+    @apply mb-1 justify-start text-base text-left flex-row font-bold;
   }
   .comment-user_img {
-    @apply w-20 rounded-full border-solid border-black border-4 mr-1;
+    @apply m-0 block w-20 rounded-full border-solid border-black border-4;
   }
   .comment-user_name {
-    @apply text-lg text-white;
+    @apply ml-2 text-lg text-white;
   }
   .comment_date {
-    @apply w-1/3  m-0 self-end text-center font-bold;
+    @apply w-1/3 m-2 p-1 self-end text-center font-bold;
   }
   .comment-btn_delete {
-    @apply bg-white  py-1 px-2 rounded-full top-2 right-2 absolute hover:brightness-50;
+    @apply bg-white text-red-600 py-1 px-2 rounded-full top-2 right-2 absolute hover:brightness-50;
+  }
+  .comment_content {
+    @apply w-full;
   }
 </style>

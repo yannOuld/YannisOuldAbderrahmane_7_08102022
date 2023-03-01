@@ -5,7 +5,7 @@
 </script>
 
 <template>
-  <div class="profil">
+  <div>
     <div class="profil-user">
       <p class="profil-user_name">
         {{ author?.firstName }} {{ author?.lastName }}

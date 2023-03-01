@@ -1,6 +1,6 @@
 <script setup>
   import { storeToRefs } from "pinia";
-  import { ref, onMounted, watchEffect } from "vue";
+  import { ref, watchEffect } from "vue";
   import { usePostStore } from "../../stores/posts.js";
 
   const emit = defineEmits(["onLiked"]);
@@ -9,11 +9,9 @@
   const props = defineProps({
     uuid: {
       type: String,
-      required: true,
     },
     user_id: {
       type: Number,
-      required: true,
     },
   });
 
@@ -45,8 +43,8 @@
 </script>
 
 <template>
-  <div class="relative">
-    <div class="likes flex-row">
+  <div class="limit relative">
+    <div class="likes">
       <button class="likes-btn_show" @click="isOpen = true">
         Likes utilisateurs
       </button>
@@ -77,7 +75,7 @@
     @apply text-red-600;
   }
   .likes_heart {
-    @apply text-gray-400  text-xl hover:-translate-y-1 hover:scale-125 duration-300;
+    @apply text-gray-400 w-5 text-xl hover:-translate-y-1 hover:scale-125 duration-300;
   }
   .likes-modal_bg {
     @apply top-0 left-0 right-0 bottom-0 w-screen fixed h-screen bg-slate-400 bg-opacity-50;
@@ -89,7 +87,7 @@
     @apply w-36;
   }
   .likes {
-    @apply justify-evenly w-2/4;
+    @apply flex-row w-full justify-between;
   }
   .likes-btn_show {
     @apply w-[250px] flex justify-center items-center hover:-translate-y-1 hover:scale-90 hover:bg-gray-300 duration-300;

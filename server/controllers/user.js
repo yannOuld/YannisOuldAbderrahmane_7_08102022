@@ -33,7 +33,7 @@ async function modifyUser(req, res, next) {
 
   let uuid = req.params.uuid;
   const object = JSON.stringify(req.body);
-  const { biography } = JSON.parse(object);
+  const { firstName, lastName, biography } = JSON.parse(object);
 
 
   let imageUrl;
@@ -46,7 +46,8 @@ async function modifyUser(req, res, next) {
 
   if (!user) throw new Error("user not found");
   modifyPermit(req, res, user.id);
-
+  user.firstName = firstName;
+  user.lastName = lastName;
   user.biography = biography;
   user.imageUrl = imageUrl;
   user

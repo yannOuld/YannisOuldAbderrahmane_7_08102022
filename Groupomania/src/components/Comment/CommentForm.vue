@@ -30,7 +30,7 @@
 
 <template>
   <form
-    class="comment-form"
+    class="comment-form limit"
     @submit.prevent="submit().then($emit('onCommentSubmit'))"
   >
     <base-textarea
@@ -46,7 +46,7 @@
 
 <style scoped>
   .comment-form {
-    @apply w-3/4 my-3 py-3 rounded-2xl font-extrabold;
+    @apply my-3 py-3 rounded-2xl font-extrabold;
   }
   .comment-form_btn {
     @apply hover:-translate-y-1 hover:scale-90 hover:bg-gray-300 duration-300;

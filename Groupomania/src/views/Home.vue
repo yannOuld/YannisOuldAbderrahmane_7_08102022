@@ -5,7 +5,6 @@
   import PostCard from "../components/Post/PostCard.vue";
   import { usePostStore } from "../stores/posts";
   import { useAuthStore } from "../stores/auth";
-
   import { computed, ref, watchEffect } from "vue";
   import { storeToRefs } from "pinia";
 
@@ -46,25 +45,12 @@
 </script>
 
 <template>
-  <div class="home">
+  <div class="container">
     <navigation-links v-once />
-    <div class="home-aside">
-      <div class="home-aside_info">
-        <h1>Vous etes sur la page d'accueil</h1>
-        <p>Ici, vous pouvez partager des publications avec vos collègues</p>
-      </div>
-      <post-form v-once />
-      <div class="flex-row" v-if="user">
-        <p>
-          &nbsp; <strong> Connecté en tant que :</strong>
-          {{ user.firstName }}
-          {{ user.lastName }}
-        </p>
-      </div>
-      <scroll-top />
-    </div>
 
     <div class="w-full">
+      <post-form v-once />
+      <scroll-top />
       <ul class="pagination-posts">
         <li class="pagination-posts_card">
           <post-card
@@ -77,6 +63,7 @@
             :imageUrl="post.imageUrl"
             :createdAt="post.createdAt"
             :likesCounter="post.likesCounter"
+            :commentsCounter="post.commentsCounter"
           />
         </li>
       </ul>

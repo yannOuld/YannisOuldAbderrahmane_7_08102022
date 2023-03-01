@@ -30,14 +30,18 @@ const router = createRouter({
   base: '/login',
 });
 
+
 //Guardian redirection and public pages
 router.beforeEach(async (to) => {
-  const auth = useAuthStore()
+  const auth = useAuthStore();
+
+
+
   if (to.meta.authRequired && !auth.userData) {
     return { path: '/login', query: { redirect: to.fullPath } };
   }
 
-  if (to.meta.adminRequired && !auth.authAdmin) {
+  if (to.meta.adminRequired && !auth.authAdmin()) {
     return { path: '/', query: { redirect: to.fullPath } }
   }
 });

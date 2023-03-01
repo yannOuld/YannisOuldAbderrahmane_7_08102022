@@ -1,5 +1,6 @@
 <script setup>
   import NavigationButton from "../Utils/NavigationButton.vue";
+  import imgUrl from "../..//assets/images/icon.webp";
   import AdminButton from "../Utils/AdminButton.vue";
   import LogoutButton from "../Utils/LogoutButton.vue";
   import { useAuthStore } from "../../stores/auth.js";
@@ -10,36 +11,40 @@
 </script>
 
 <template>
-  <div
-    class="fixed flex sm:flex-row top-0 justify-between w-screen bg-white z-20 border-b-2 border-solid border-black"
-  >
-    <img
-      src="../../assets/images/icon-left-font.webP"
-      class="navigation-logo flex-row"
-      alt="logo groupomania"
-    />
-    <nav class="navigation-nav flex-row">
-      <admin-button />
-      <navigation-button to="/" icon="fa-solid fa-house" name="Accueil" />
-      <navigation-button
-        :to="profil"
-        icon="fa-solid fa-user"
-        name="compte"
-        class="navigation-btn"
+  <div class="navigation">
+    <router-link to="/">
+      <img
+        src="../../assets/images/icon-left-font.webp"
+        class="navigation-logo flex-row"
+        alt="logo groupomania"
       />
-      <logout-button />
-    </nav>
+    </router-link>
+    <admin-button />
+
+    <div class="navigation-nav">
+      <img
+        :src="user.imageUrl ? user.imageUrl : imgUrl"
+        alt=""
+        class="navigation-nav-img"
+      />
+      <p class="font-bold pointer-events-none">
+        {{ user.firstName }} {{ user.lastName }}
+      </p>
+      <div class="flex-row">
+        <navigation-button
+          to="/"
+          icon="fa-solid fa-house"
+          name="Accueil"
+          class="navigation-btn sm:hidden"
+        />
+        <navigation-button
+          :to="profil"
+          icon="fa-solid fa-user"
+          name="Profil"
+          class="navigation-btn"
+        />
+        <logout-button />
+      </div>
+    </div>
   </div>
 </template>
-
-<style scoped>
-  .navigation {
-    @apply p-0 md:flex-row md:px-16 md:py-24 border-solid border-b-2 border-black;
-  }
-  .navigation-logo {
-    @apply w-64  flex h-16 object-cover lg:w-72 md:mx-0;
-  }
-  .navigation-nav {
-    @apply flex my-0 w-10/12 sm:w-96 justify-around sm:justify-end md:justify-end md:mx-3;
-  }
-</style>

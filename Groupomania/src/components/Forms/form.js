@@ -7,7 +7,10 @@ export function useMultiPartForm() {
 
   // form input refs
   const fileTarget = ref(null);
+  const firstName = ref(null);
+  const lastName = ref(null);
   const biography = ref(null);
+  const src = ref(null);
   const title = ref(null);
   const content = ref(null);
   const owner_id = ref(null);
@@ -15,7 +18,11 @@ export function useMultiPartForm() {
 
   function handleFileUpload(event) {
     fileTarget.value = event.target.files[0];
-    console.log(fileTarget.value);
+    let reader = new FileReader();
+    reader.readAsDataURL(fileTarget.value)
+    reader.onload = (e) => {
+      src.value = e.target.result
+    }
   };
 
 
@@ -23,6 +30,12 @@ export function useMultiPartForm() {
     const formData = new FormData();
     if (fileTarget.value != null) {
       formData.append("image", fileTarget.value, fileTarget.value.name);
+    }
+    if (firstName.value != null) {
+      formData.append("firstName", firstName.value);
+    }
+    if (lastName.value != null) {
+      formData.append("lastName", lastName.value);
     }
     if (biography.value != null) {
       formData.append("biography", biography.value);
@@ -46,5 +59,8 @@ export function useMultiPartForm() {
     title,
     content,
     handleData,
+    firstName,
+    lastName,
+    src,
   };
 }

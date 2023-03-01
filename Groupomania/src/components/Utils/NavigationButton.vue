@@ -9,7 +9,7 @@
   });
 
   const defaultClass =
-    "hover:-translate-y-1 hover:scale-110 hover:bg-orange-500 duration-300 navigation-btn";
+    "hover:-translate-y-1  hover:bg-orange-500 duration-300 navigation-btn";
 </script>
 
 <template>

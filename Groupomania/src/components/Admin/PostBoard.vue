@@ -22,9 +22,8 @@
   async function postSupp(uuid) {
     try {
       await deletePost(uuid);
-      alert("post supprimé !");
+      alert("le post à été supprimé !");
     } catch (error) {
-      console.log(error);
       alert("un probleme est survenu !");
     }
   }

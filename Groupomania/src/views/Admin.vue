@@ -19,7 +19,7 @@
 </script>
 
 <template>
-  <div>
+  <div class="container">
     <navigation-links></navigation-links>
     <div class="w-full">
       <h1>DashBoard Administration</h1>

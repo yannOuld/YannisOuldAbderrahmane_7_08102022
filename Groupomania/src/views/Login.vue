@@ -3,7 +3,7 @@
 </script>
 
 <template>
-  <div class="sign">
+  <div class="container">
     <logg-in />
     <p class="sign-btn_switch">Vous n'avez pas de compte ?</p>
     <router-link to="/register">
