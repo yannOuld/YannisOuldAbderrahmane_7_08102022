@@ -33,6 +33,7 @@ module.exports = (sequelize, DataTypes) => {
       imageUrl: {
         type: DataTypes.STRING,
         allowNull: true,
+        defaultValue: 'http://localhost:3000/images/icon1.webp',
       },
       firstName: {
         type: DataTypes.STRING,

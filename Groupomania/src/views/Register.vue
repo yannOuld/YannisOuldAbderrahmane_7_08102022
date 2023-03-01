@@ -4,6 +4,7 @@
 
 <template>
   <div class="container">
+    <navigation-sign />
     <sign-in />
     <div>
       <p class="sign-btn_switch">

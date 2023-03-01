@@ -4,6 +4,7 @@
 
 <template>
   <div class="container">
+    <navigation-sign />
     <logg-in />
     <p class="sign-btn_switch">Vous n'avez pas de compte ?</p>
     <router-link to="/register">
