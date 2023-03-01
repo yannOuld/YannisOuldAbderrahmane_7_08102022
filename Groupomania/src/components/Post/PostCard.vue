@@ -45,13 +45,6 @@
     <div>
       <div class="postcard-user">
         <img
-          v-if="owner?.imageUrl == null"
-          src="../../assets/images/icon.webP"
-          alt="image de l'auteur"
-          class="postcard-user_img"
-        />
-        <img
-          v-if="owner?.imageUrl != null"
           :src="owner.imageUrl"
           alt="image de l'auteur"
           class="postcard-user_img"

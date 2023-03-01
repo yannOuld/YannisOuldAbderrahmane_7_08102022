@@ -39,13 +39,11 @@
           {{ user.id }}
         </span>
         <div class="admin-list_data justify-between">
-          <div v-if="user.imageUrl">
-            <img
-              class="admin-list_img"
-              :src="user.imageUrl"
-              alt="image utilisateur"
-            />
-          </div>
+          <img
+            class="admin-list_img"
+            :src="user.imageUrl"
+            alt="image utilisateur"
+          />
           <div class="admin-list_content">
             <p>
               {{ user.firstName }}

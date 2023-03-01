@@ -13,13 +13,6 @@
 
       <img
         class="profil-user_img"
-        v-if="!author?.imageUrl"
-        src="../../assets/images/icon.webP"
-        alt="image de profil"
-      />
-
-      <img
-        class="profil-user_img"
         v-if="author?.imageUrl"
         :src="author?.imageUrl"
         alt="image de profil"

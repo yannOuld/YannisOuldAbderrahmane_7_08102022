@@ -22,11 +22,7 @@
     <admin-button />
 
     <div class="navigation-nav">
-      <img
-        :src="user.imageUrl ? user.imageUrl : imgUrl"
-        alt=""
-        class="navigation-nav-img"
-      />
+      <img :src="user.imageUrl" alt="user" class="navigation-nav-img" />
       <p class="font-bold pointer-events-none">
         {{ user.firstName }} {{ user.lastName }}
       </p>

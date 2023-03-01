@@ -28,7 +28,7 @@
   <div class="comment limit">
     <div class="comment-user">
       <img
-        :src="owner.imageUrl ? owner.imageUrl : imgUrl"
+        :src="owner.imageUrl"
         alt="image de l'auteur"
         class="comment-user_img"
       />
