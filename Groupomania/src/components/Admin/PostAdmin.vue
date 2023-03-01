@@ -26,9 +26,9 @@
 </script>
 
 <template>
-  <div>
+  <div class="w-full">
     <form
-      class="post-form_modify"
+      class="post-form_modify w-full"
       enctype="multipart/form-data"
       @submit.prevent="submit()"
     >

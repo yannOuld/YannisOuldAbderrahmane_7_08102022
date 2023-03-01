@@ -59,18 +59,3 @@
     </ul>
   </div>
 </template>
-
-<style scoped>
-  .pagination {
-    @apply mt-3 mb-8;
-  }
-  .pagination-item {
-    @apply inline-block mb-10  rounded;
-  }
-  .pagination-bar {
-    @apply text-center rounded content-center w-full flex-row;
-  }
-  .pagination-btn {
-    @apply mx-2 flex font-extrabold w-fit p-1 sm:p-2 sm:mx-1 rounded border-gray-500;
-  }
-</style>

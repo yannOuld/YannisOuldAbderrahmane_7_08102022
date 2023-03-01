@@ -78,39 +78,3 @@
     </div>
   </div>
 </template>
-
-<style scoped>
-  .postcard-container {
-    @apply h-[420px] sm:h-[470px] md:h-[570px] lg:h-[600px]  my-2 bg-white border-black border-solid border-2 relative rounded-lg;
-  }
-  .postcard-a {
-    @apply absolute right-0 left-0 bottom-6;
-  }
-  .postcard {
-    @apply cursor-pointer    p-4 w-56 h-96 sm:w-11/12 sm:h-fit   my-0 sm:my-3;
-  }
-  .postcard-title {
-    @apply my-0  sm:mt-8 mb-1;
-  }
-  .postcard-img {
-    @apply object-fill mb-3 border-black w-full h-64 sm:h-72 md:h-[400px];
-  }
-  .postcard-user {
-    @apply justify-start sm:mt-4  mb-2 h-14 absolute top-4 left-4 flex-row;
-  }
-  .postcard-user_name {
-    @apply text-sm  sm:text-base;
-  }
-  .postcard-user_img {
-    @apply w-10 h-10 sm:w-20 sm:h-20 border-solid border-4 border-red-400 rounded-full mx-2;
-  }
-  .postcard-date {
-    @apply absolute top-1 right-4 w-72 font-bold text-right;
-  }
-  .postcard-date_txt {
-    @apply w-32 sm:w-1/3 text-right;
-  }
-  .postcard-likes_counter {
-    @apply flex w-60 bottom-0 right-2 text-right font-bold absolute;
-  }
-</style>

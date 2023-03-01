@@ -10,8 +10,14 @@
   });
 
   // composable form
-  let { biography, fileTarget, handleFileUpload, handleData } =
-    useMultiPartForm();
+  let {
+    firstName,
+    lastName,
+    biography,
+    fileTarget,
+    handleFileUpload,
+    handleData,
+  } = useMultiPartForm();
 
   //submit modify user
   async function submit() {
@@ -27,14 +33,33 @@
 </script>
 
 <template>
-  <div>
+  <div class="w-full">
     <form
-      class="post-form_modify"
+      class="post-form_modify w-full sm:w3/4"
       enctype="multipart/form-data"
       @submit.prevent="submit()"
     >
       <h2>Modifier l'utilisateur'</h2>
-      <div class="form-control">
+      <div>
+        <div class="form-control">
+          <base-input
+            label="prénom"
+            v-model="firstName"
+            name="firstName"
+            id="firstName"
+            placeholder="Obiwan"
+            minlength="2"
+          ></base-input>
+        </div>
+        <div class="form-control">
+          <base-input
+            label="nom"
+            v-model="lastName"
+            name="name"
+            id="name"
+            placeholder="Kenobi"
+          ></base-input>
+        </div>
         <div class="form-control">
           <base-input
             label="image"
