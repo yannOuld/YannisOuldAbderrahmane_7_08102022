@@ -36,6 +36,8 @@
   }
   function userLiked() {
     if (like.value == 1) return true;
+    if (likes.value.find((e) => e.user_id == props.user_id)) return true;
+    else return false
   }
   watchEffect(() => {
     userLiked;

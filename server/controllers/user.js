@@ -1,5 +1,6 @@
 const db = require("../models");
 const { User } = db.sequelize.models;
+const asyncHandler = require('express-async-handler')
 const { modifyPermit } = require('../middleware/auth');
 
 // retrouver un user via son uuid
@@ -29,33 +30,34 @@ async function getAllUsers(req, res, next) {
 };
 
 // modifications user
-async function modifyUser(req, res, next) {
-
+const modifyUser = asyncHandler(async (req, res, next) => {
   let uuid = req.params.uuid;
   const object = JSON.stringify(req.body);
   const { firstName, lastName, biography } = JSON.parse(object);
 
+  try {
+    let imageUrl;
+    if (req.file) {
+      imageUrl = `${req.protocol}://${req.get("host")}/images/${req.file.filename
+        }`;
+    }
 
-  let imageUrl;
-  if (req.file) {
-    imageUrl = `${req.protocol}://${req.get("host")}/images/${req.file.filename
-      }`;
+    const user = await User.findOne({ where: { uuid } })
+    if (!user) throw new Error("user not found");
+    modifyPermit(req, res, user.id)
+
+    if (firstName) user.firstName = firstName;
+    if (lastName) user.lastName = lastName;
+    if (biography) user.biography = biography;
+    if (req.file) user.imageUrl = imageUrl;
+    user.save()
+
+    return res.status(200).json({ message: "user updated !" });
+
+  } catch (error) {
+    return res.status(500).json(err.message)
   }
-
-  const user = await User.findOne({ where: { uuid } })
-
-  if (!user) throw new Error("user not found");
-  modifyPermit(req, res, user.id);
-  user.firstName = firstName;
-  user.lastName = lastName;
-  user.biography = biography;
-  user.imageUrl = imageUrl;
-  user
-    .save()
-    .then(() => res.status(201).json(user))
-    .catch((err) => res.status(500).json(err.message));
-  return res.status(200).json({ message: "user updated !" });
-};
+});
 
 // delete user
 async function deleteUser(req, res, next) {

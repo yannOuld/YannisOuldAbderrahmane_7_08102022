@@ -40,7 +40,7 @@
       id="comment"
       name="comment"
     ></base-textarea>
-    <button class="comment-form_btn">Envoyer</button>
+    <button class="btn">Envoyer</button>
   </form>
 </template>
 

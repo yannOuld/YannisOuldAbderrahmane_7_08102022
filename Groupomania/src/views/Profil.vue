@@ -1,5 +1,7 @@
 <script setup>
   import PostCard from "../components/Post/PostCard.vue";
+  import PaginationBar from "../components/Layout/PaginationBar.vue";
+  import { pagination } from "../components/Layout/pagination.js";
   import ScrollTop from "../components/Utils/ScrollTopButton.vue";
   import { useRoute } from "vue-router";
   import { useUsersStore } from "../stores/users";
@@ -7,6 +9,11 @@
   import { reactive } from "vue";
   import ProfilModify from "../components/Profil/ProfilModify.vue";
   import ProfilPage from "../components/Profil/ProfilPage.vue";
+
+  const { currentPage, perPage, mapUser, range, onPageChange } = pagination();
+
+  let store = mapUser();
+  const arr = store.userPosts;
 
   // mode for components display
   const mode = reactive({
@@ -51,7 +58,7 @@
 
     <div v-if="author?.posts">
       <post-card
-        v-for="post in author.posts"
+        v-for="post in arr.slice(...range)"
         :key="post.uuid"
         :uuid="post.uuid"
         :content="post.content"
@@ -60,6 +67,13 @@
         :imageUrl="post.imageUrl"
         :createdAt="post.createdAt"
         :likesCounter="post.likesCounter"
+        :commentsCounter="post.commentsCounter"
+      />
+      <pagination-bar
+        :current="currentPage"
+        :total="arr.length"
+        :pageLength="7"
+        @change="onPageChange"
       />
     </div>
 

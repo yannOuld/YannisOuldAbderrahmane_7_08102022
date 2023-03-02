@@ -9,7 +9,7 @@ const app = express();
 
 const limiter = rateLimit({
   windowMs: 1 * 60 * 1000,
-  max: 60,
+  max: 150,
   standardHeaders: true,
   legacyHeaders: false,
 })
@@ -17,8 +17,8 @@ const limiter = rateLimit({
 
 app.use(limiter)
 app.use(cors());
-app.use(morgan("dev"));
-app.use(morgan("dev", { immediate: true }));
+app.use(morgan());
+
 
 
 app.use(express.json());

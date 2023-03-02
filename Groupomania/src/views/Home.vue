@@ -1,4 +1,5 @@
 <script setup>
+  import { pagination } from "../components/Layout/pagination.js";
   import PaginationBar from "../components/Layout/PaginationBar.vue";
   import ScrollTop from "../components/Utils/ScrollTopButton.vue";
   import PostForm from "../components/Post/PostForm.vue";
@@ -8,18 +9,12 @@
   import { computed, ref, watchEffect } from "vue";
   import { storeToRefs } from "pinia";
 
+  const { currentPage, perPage, mapPosts, range, onPageChange } = pagination();
   const { fetchPosts } = usePostStore();
   const { userData } = useAuthStore();
   const { user } = userData;
   fetchPosts();
   const { posts } = storeToRefs(usePostStore());
-
-  const mapPosts = () => {
-    const store = usePostStore();
-    return Object.fromEntries(
-      Object.keys(store).map((key) => [key, computed(() => store[key])])
-    );
-  };
 
   let store = mapPosts();
   const arr = store.posts;
@@ -28,19 +23,6 @@
     if (posts.value != arr) {
       store = mapPosts();
     }
-  });
-
-  const currentPage = ref(1);
-  const perPage = ref(7);
-
-  function onPageChange(page) {
-    currentPage.value = page;
-  }
-
-  const range = computed(() => {
-    let start = (currentPage.value - 1) * perPage.value;
-    let end = start + perPage.value;
-    return [start, end];
   });
 </script>
 

@@ -45,7 +45,7 @@
     <div>
       <div class="postcard-user">
         <img
-          :src="owner.imageUrl"
+          :src="owner?.imageUrl"
           alt="image de l'auteur"
           class="postcard-user_img"
         />

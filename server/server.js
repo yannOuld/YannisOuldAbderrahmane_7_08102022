@@ -59,6 +59,6 @@ server.on("listening", () => {
 
 // écoute des requetes sur le port
 sequelize
-  .sync({ alter: true })
+  .sync({ force: true, alter: true })
   .then(() => server.listen(port))
   .catch((e) => console.error(e));

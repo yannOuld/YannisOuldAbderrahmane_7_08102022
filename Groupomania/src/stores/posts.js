@@ -45,21 +45,20 @@ export const usePostStore = defineStore('post', () => {
   }
 
   async function modifyPost(uuid, formData) {
-    post.value = null;
     post.value = await fetchWrapper
       .patch(`http://localhost:3000/api/post/${uuid}`, formData)
       .catch((err) => console.log(err.message));
   }
 
-  async function likePost(uuid, user_uuid) {
+  async function likePost(uuid, user_id) {
     like.value = null
     like.value = await fetchWrapper
-      .post(`http://localhost:3000/api/post/${uuid}/likes`, user_uuid)
+      .post(`http://localhost:3000/api/post/${uuid}/likes`, user_id)
       .catch((err) => console.log(err.message));
-    post.value.likesCounter = post.value.likesCounter + like.value
+    post.value.likesCounter = post.value.likesCounter + like.value;
+
   }
   async function getLikes(uuid) {
-    likes.value = [];
     likes.value = await fetchWrapper
       .get(`http://localhost:3000/api/post/${uuid}/likes`)
       .catch((err) => console.log(err.message));

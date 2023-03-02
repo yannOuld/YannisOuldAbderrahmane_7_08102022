@@ -42,6 +42,7 @@
 
 <template>
   <div class="w-full">
+    <h2>Modifier le profil</h2>
     <form
       enctype="multipart/form-data"
       @submit.prevent="submit()"
@@ -67,7 +68,6 @@
         ></base-input>
       </div>
       <div class="form-control">
-        <h2>Modifier le profil</h2>
         <div class="preview">
           <img
             v-if="src !== null"
