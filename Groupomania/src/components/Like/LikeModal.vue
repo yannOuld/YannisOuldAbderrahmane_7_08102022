@@ -5,7 +5,6 @@
 
   const emit = defineEmits(["onLiked"]);
 
-  // props from parent component
   const props = defineProps({
     uuid: {
       type: String,
@@ -15,32 +14,29 @@
     },
   });
 
-  // ref for the modal open and quit
   const isOpen = ref(false);
 
-  // like store
-  const { getLikes, likePost } = usePostStore();
+  const { getLikes, likePost, likeState } = usePostStore();
+  getLikes(props.uuid, props.user_id);
+  likeState(props.uuid);
 
-  // getting users who liked the post
-  getLikes(props.uuid);
-
-  const { likes, like } = storeToRefs(usePostStore());
+  const { likes, like, liked } = storeToRefs(usePostStore());
 
   const data = {
     user_id: props.user_id,
   };
 
-  //sending a like
   async function sendLike() {
     await likePost(props.uuid, data);
+    if (liked.value == false) {
+      return (liked.value = true);
+    } else if (liked.value == true) {
+      return (liked.value = false);
+    }
   }
-  function userLiked() {
-    if (like.value == 1) return true;
-    if (likes.value.find((e) => e.user_id == props.user_id)) return true;
-    else return false
-  }
+
   watchEffect(() => {
-    userLiked;
+    liked;
   });
 </script>
 
@@ -51,7 +47,7 @@
         Likes utilisateurs
       </button>
       <div class="likes_heart" @click="sendLike().then($emit('onLiked'))">
-        <span :class="{ liked: userLiked() }">
+        <span :class="{ liked: !!liked }">
           <font-awesome-icon icon="fa-solid fa-heart" />
         </span>
       </div>

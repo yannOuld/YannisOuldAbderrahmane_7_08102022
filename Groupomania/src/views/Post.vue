@@ -50,11 +50,7 @@
         :commentsCounter="post?.commentsCounter"
       />
       <!-- like component -->
-      <like-modal
-        @onLiked="updatePost()"
-        :uuid="post?.uuid"
-        :user_id="user?.id"
-      />
+      <like-modal @onLiked="updatePost()" :uuid="uuid" :user_id="user.id" />
     </div>
     <comment-form @onCommentSubmit="updateComments" />
     <comments :key="forceUpdate" />

@@ -40,17 +40,43 @@ async function addLike(req, res, next) {
   }
 };
 
+async function getLikeState(req, res, next) {
+  const uuid = req.params.uuid;
+  const user_id = req.auth.id;
+  console.log(user_id)
+  const post = await Post.findOne({ where: { uuid } });
+  if (!post) throw new Error("Post not found");
+
+  try {
+    let liked;
+    const like = await Like.findOne({ where: { post_uuid: uuid } });
+    if (!like || like.user_id !== user_id) {
+      liked = false
+
+    }
+
+    // Si le like existe le supprimé et enlever 1 au compteur de like du post
+    else if (like && like.user_id == user_id) {
+      liked = true
+    }
+    return res.status(201).json(liked);
+  } catch (error) {
+    return res.status(400).json(error.message);
+  }
+};
+
 async function getLikes(req, res, next) {
   const post_uuid = req.params.uuid;
   try {
-    const likes = await Like.findAll({
+    const allLikes = await Like.findAll({
       post_uuid,
       include: "user",
     });
+    const likes = allLikes.filter((like) => { return like.post_uuid == post_uuid })
     return res.status(200).json(likes);
   } catch (err) {
     return res.status(400).json({ err });
   }
 };
 
-module.exports = { getLikes, addLike }
+module.exports = { getLikes, getLikeState, addLike }
