@@ -21,7 +21,7 @@ A l'installation du projet créer un fichier environnement contenant les variabl
          // le mot de passe de votre de base de donnée Mysql
          DB_DIALECT = mysql
          ADMINPASS
-         // mot de pase de l'administrateur du site
+         // mot de pase de l'administrateur du site doit contenir 8 caracteres dont 1 minuscule, 1 majuscule, 1 chiffre et un symbole au mininmum. 
 
 Ouvrir deux terminals et installer les dépendances des dossiers server et groupomania à l'aide des commandes:
       
@@ -33,5 +33,13 @@ Ouvrir deux terminals et installer les dépendances des dossiers server et group
         npm install
         npm run dev
 
+Afin de crée le User possédant les droits d'administrateur du site:
+
+        - rendez vous dans le fichier 20230301140258-admin-user.js du dossier seeder 
+        - remplacez l'email dans la promise User.create à la ligne 18 par celui de votre choix
+        - dans le terminal server rentrer la ligne de code suivante:
+                           npx sequelize-cli db:seed:all
+        
 ( Rappel:  le projet n'a pas encore subit de compression afin d'ameliorer la visibilité de la version developpement)
+ 
 
