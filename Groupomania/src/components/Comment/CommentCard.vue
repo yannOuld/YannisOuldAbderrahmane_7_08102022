@@ -45,27 +45,3 @@
     </div>
   </div>
 </template>
-
-<style scoped>
-  .comment {
-    @apply my-2 p-4 rounded-3xl bg-tertiarygroup  relative;
-  }
-  .comment-user {
-    @apply mb-1 justify-start text-base text-left flex-row font-bold;
-  }
-  .comment-user_img {
-    @apply m-0 block w-20 rounded-full border-solid border-black border-4;
-  }
-  .comment-user_name {
-    @apply ml-2 text-lg text-white;
-  }
-  .comment_date {
-    @apply w-1/3 m-2 p-1 self-end text-center font-bold;
-  }
-  .comment-btn_delete {
-    @apply bg-white text-red-600 py-1 px-2 rounded-full top-2 right-2 absolute hover:brightness-50;
-  }
-  .comment_content {
-    @apply w-full;
-  }
-</style>

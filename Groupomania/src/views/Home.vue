@@ -58,15 +58,3 @@
     </div>
   </div>
 </template>
-
-<style scoped>
-  .home {
-    @apply lg:flex-row-reverse;
-  }
-  .home-aside {
-    @apply sm:w-3/4 lg:w-3/4 flex self-start;
-  }
-  .home-aside_info {
-    @apply w-full my-4 border-solid border-2 border-black;
-  }
-</style>

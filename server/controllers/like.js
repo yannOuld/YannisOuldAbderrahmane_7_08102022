@@ -43,7 +43,6 @@ async function addLike(req, res, next) {
 async function getLikeState(req, res, next) {
   const uuid = req.params.uuid;
   const user_id = req.auth.id;
-  console.log(user_id)
   const post = await Post.findOne({ where: { uuid } });
   if (!post) throw new Error("Post not found");
 
@@ -52,11 +51,7 @@ async function getLikeState(req, res, next) {
     const like = await Like.findOne({ where: { post_uuid: uuid } });
     if (!like || like.user_id !== user_id) {
       liked = false
-
-    }
-
-    // Si le like existe le supprimé et enlever 1 au compteur de like du post
-    else if (like && like.user_id == user_id) {
+    } else if (like && like.user_id == user_id) {
       liked = true
     }
     return res.status(201).json(liked);

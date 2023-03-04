@@ -148,7 +148,7 @@
     <!-- Pop up-->
     <div class="modal" v-if="isOpen">
       <p class="error">{{ msgErr }}</p>
-      <p class="succes">{{ msgSucces }}</p>
+      <p class="font-bold">{{ msgSucces }}</p>
     </div>
   </div>
 </template>

@@ -41,7 +41,7 @@
 </script>
 
 <template>
-  <div class="w-full">
+  <div class="w-full mt-20 ">
     <h2>Modifier le profil</h2>
     <form
       enctype="multipart/form-data"

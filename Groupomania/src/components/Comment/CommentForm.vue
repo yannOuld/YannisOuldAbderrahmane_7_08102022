@@ -43,12 +43,3 @@
     <button class="btn">Envoyer</button>
   </form>
 </template>
-
-<style scoped>
-  .comment-form {
-    @apply my-3 py-3 rounded-2xl font-extrabold;
-  }
-  .comment-form_btn {
-    @apply hover:-translate-y-1 hover:scale-90 hover:bg-gray-300 duration-300;
-  }
-</style>

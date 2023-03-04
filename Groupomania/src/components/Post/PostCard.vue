@@ -55,7 +55,7 @@
           </router-link>
         </p>
       </div>
-      <router-link class="no-decoration w-full postcard-a" :to="postPage">
+      <router-link class="postcard-a" :to="postPage">
         <h2 class="postcard-title">{{ title }}</h2>
         <div>
           <p>{{ content }}</p>
@@ -65,7 +65,7 @@
         </div>
       </router-link>
 
-      <div class="postcard-likes_counter flex">
+      <div class="postcard-likes_counter">
         <p>
           commentaires
           <font-awesome-icon icon="fa-solid fa-comments" />

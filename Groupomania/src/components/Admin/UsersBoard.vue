@@ -27,11 +27,7 @@
 
 <template>
   <div>
-    <ul
-      class="admin-list relative justify-between"
-      v-for="user in users"
-      :key="user"
-    >
+    <ul class="admin-list" v-for="user in users" :key="user">
       <li class="admin-list_item">
         <span class="admin-list_id">
           <strong> uuid:</strong> {{ user.uuid }} <br />
