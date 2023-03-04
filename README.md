@@ -1,10 +1,9 @@
 # YannisOuldAbderrahmane_7_08102022
 
 Réseau Social Groupomania 
-(afin d'ameliore la visibilité le site n'a pas encore subit de compression de texte)
 
-Projet Vue 3 , Nodes Js.
-Base de données Mysql gérée par l'API à l'aide de l'orm Sequelize.
+Projet:
+Vue 3 , Nodes Js, Mysql, ORM Sequelize.
 
 AVANT DE COMMENCER !!! 
 Une fois le repository cloné 
@@ -29,4 +28,6 @@ ADMINPASS // mot de pase de l'administrateur du site
 
 lancer le server à l'aide la commande npm run start
 lancer l'application à l'aide la commande npm run dev 
+
+(le projet n'a pas encore subit de compression afin d'ameliorer la visibilité)
 
