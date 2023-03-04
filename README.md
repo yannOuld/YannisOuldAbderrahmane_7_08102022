@@ -37,8 +37,12 @@ Afin de crée le User possédant les droits d'administrateur du site:
 
         - rendez vous dans le fichier 20230301140258-admin-user.js du dossier seeder 
         - remplacez l'email dans la promise User.create à la ligne 18 par celui de votre choix
-        - dans le terminal server rentrer la ligne de code suivante:
+        - dans le terminal server rentrer la ligne de code suivante afin de créée la le User:
                            npx sequelize-cli db:seed:all
+        -par default l'email et le mot de passe seront: 
+                           email: example@example.com
+                           mot de passe:  ADMINPASS
+                           
         
 ( Rappel:  le projet n'a pas encore subit de compression afin d'ameliorer la visibilité de la version developpement)
  
