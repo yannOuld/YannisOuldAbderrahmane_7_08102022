@@ -5,8 +5,6 @@ Réseau Social Groupomania
 Projet:
 Vue 3 , Nodes Js, Mysql, ORM Sequelize.
 
- 
-Une fois le repository cloné:
 A l'installation du projet créer un fichier environnement contenant les variables suivantes:
 
          PORT
