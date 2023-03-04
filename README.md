@@ -27,9 +27,9 @@ DB_DIALECT = mysql
 ADMINPASS // mot de pase de l'administrateur du site
 
 lancer le server à l'aide la commande:
-          npm run start
+            -npm run start
 lancer l'application à l'aide la commande:
-            npm run dev 
+            -npm run dev 
 
 (le projet n'a pas encore subit de compression afin d'ameliorer la visibilité)
 
