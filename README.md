@@ -35,7 +35,7 @@ Ouvrir deux terminals et installer les dépendances des dossiers server et group
         
         cd groupomania
         npm install
-        npm run dev
+        npm run preview
 
 Afin de crée le User possédant les droits d'administrateur du site:
 
