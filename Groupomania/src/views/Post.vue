@@ -35,7 +35,7 @@
 <template>
   <div class="container">
     <navigation-links></navigation-links>
-    <h1>Post</h1>
+
     <div class="w-full">
       <post-utils v-if="user?.uuid == post?.owner.uuid || authAdmin" />
       <!-- Post component -->
