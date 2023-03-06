@@ -37,6 +37,7 @@
     @submit.prevent="submit()"
   >
     <base-input
+      label="titre"
       v-model="title"
       placeholder="titre"
       name="title"
@@ -44,6 +45,7 @@
     ></base-input>
 
     <base-textarea
+      label="message"
       v-model="content"
       placeholder="message"
       maxlength="500"

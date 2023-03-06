@@ -45,7 +45,6 @@ async function getLikeState(req, res, next) {
   const user_id = req.auth.id;
   const post = await Post.findOne({ where: { uuid } });
   if (!post) throw new Error("Post not found");
-
   try {
     let liked;
     const like = await Like.findOne({ where: { post_uuid: uuid } });
@@ -61,17 +60,15 @@ async function getLikeState(req, res, next) {
 };
 
 async function getLikes(req, res, next) {
-  const post_uuid = req.params.uuid;
-  try {
-    const allLikes = await Like.findAll({
-      post_uuid,
-      include: "user",
-    });
-    const likes = allLikes.filter((like) => { return like.post_uuid == post_uuid })
-    return res.status(200).json(likes);
-  } catch (err) {
-    return res.status(400).json({ err });
-  }
+  const uuid = req.params.uuid;
+
+  const allLikes = await Like.findAll({
+    where: { post_uuid: uuid },
+    include: "user",
+  }).catch(err => console.log(err));
+  const likes = allLikes.filter((like) => { return like.post_uuid == uuid })
+  return res.status(200).json(likes);
+
 };
 
 module.exports = { getLikes, getLikeState, addLike }

@@ -40,7 +40,8 @@
     <p class="comment_date">{{ comment.createdAt }}</p>
     <div v-if="(owner.uuid = user.uuid || authAdmin == true)">
       <button class="comment-btn_delete" @click="suppComment()">
-       <font-awesome-icon icon="fa-solid fa-circle-xmark" />
+        suppr
+        <font-awesome-icon icon="fa-solid fa-circle-xmark" />
       </button>
     </div>
   </div>

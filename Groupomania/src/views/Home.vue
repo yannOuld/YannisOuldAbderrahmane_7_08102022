@@ -29,7 +29,7 @@
 <template>
   <div class="container">
     <navigation-links v-once />
-
+    <h1>Accueil</h1>
     <div class="w-full">
       <post-form v-once />
       <scroll-top />

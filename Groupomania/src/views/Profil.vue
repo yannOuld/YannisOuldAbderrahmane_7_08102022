@@ -38,8 +38,11 @@
 </script>
 
 <template>
+
+
   <div class="w-full">
     <navigation-links v-once></navigation-links>
+    <h1>Profil</h1>
     <div class="self-start profil limit relative" v-if="mode.state == 'read'">
       <button class="profil-btn_switch absolute" @click="switchModify()">
         modifier &nbsp;<font-awesome-icon icon="fa-solid fa-gear" />

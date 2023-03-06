@@ -136,7 +136,7 @@
     @apply w-full;
   }
   .comment-form {
-    @apply my-3 py-3 rounded-2xl font-extrabold;
+    @apply contrast-150 my-3 py-3 rounded-2xl font-extrabold;
   }
   .comment-form_btn {
     @apply hover:-translate-y-1 hover:scale-90 hover:bg-gray-300 duration-300;
@@ -193,7 +193,7 @@
     @apply border-solid border-black border-2 w-10 h-10 rounded-full;
   }
   .navigation-btn {
-    @apply text-xs sm:text-base text-white border-0 rounded m-1 contrast-125  py-1 px-3 h-12 transition ease-in-out delay-150;
+    @apply text-xs sm:text-base text-white border-0 rounded m-1 contrast-150 py-1 px-3 h-12 transition ease-in-out delay-150;
   }
   .navigation-btn_icon {
     @apply w-4 mr-2;
@@ -241,7 +241,7 @@
     @apply my-0  sm:mt-8 mb-1;
   }
   .postcard-img {
-    @apply object-fill mb-3 border-black w-full h-64 sm:h-72 md:h-[400px];
+    @apply object-contain bg-gray-400 mb-3 border-black w-full h-64 sm:h-72 md:h-[400px];
   }
   .postcard-user {
     @apply justify-start sm:mt-4  mb-2 h-14 absolute top-4 left-4 flex-row;
@@ -268,7 +268,7 @@
     @apply hidden  sm:flex sm:w-3 sm:ml-2;
   }
   .post-form_create {
-    @apply mt-8 pt-4 max-w-2xl w-full rounded-3xl;
+    @apply mt-8 pt-4 max-w-2xl w-full contrast-150 rounded-3xl;
   }
   .preview {
     @apply relative border-dashed border-white border-4 rounded-lg my-3 w-52 h-44 sm:w-96 sm:h-72;

@@ -61,7 +61,6 @@ export const usePostStore = defineStore("post", () => {
     liked.value = await fetchWrapper
       .get(`http://localhost:3000/api/post/${uuid}/like`)
       .catch((err) => console.log(err.message));
-    post.value.likesCounter = post.value.likesCounter + like.value;
   }
 
   async function getLikes(uuid) {
